@@ -1,0 +1,5 @@
+C:\Users\edangol\Documents\Visual Studio 2017\Projects\LiquorShop\LiquorShop\bin\Release
+C:\Users\edangol\Documents\Visual Studio 2017\Projects\LiquorShop\packages
+C:\Users\edangol\Documents\Visual Studio 2017\Projects\LiquorShop\TescoWineShopSql\bin\Release
+C:\Users\edangol\Documents\Visual Studio 2017\Projects\LiquorShop\LiquorShopService\bin\Release
+C:\Users\edangol\Documents\Visual Studio 2017\Projects\LiquorShop\LiquorShop\bin\Debug

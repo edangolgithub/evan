@@ -1,0 +1,487 @@
+﻿<UserControl
+    x:Class="LiquorShop.Views.Purchases.PurchaseListView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:Custom="http://metro.mahapps.com/winfx/xaml/controls"
+    xmlns:agif="http://wpfanimatedgif.codeplex.com"
+    xmlns:control="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+    xmlns:conv="clr-namespace:TescoWine.Converters"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:glb="clr-namespace:System.Globalization;assembly=mscorlib"
+    xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:sys="clr-namespace:System;assembly=mscorlib"
+    mc:Ignorable="d">
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding LoadedCommand}" />
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+    <UserControl.Resources>
+        <conv:DueDateConverter x:Key="c" />
+        <conv:duetobool x:Key="db" />
+        <conv:MetricToStringConverter x:Key="mts" />
+        <conv:AnonIntConverter x:Key="anon" />
+    </UserControl.Resources>
+    <ScrollViewer ScrollViewer.HorizontalScrollBarVisibility="Auto">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0" Visibility="{Binding IsDataLoaded, Converter={StaticResource bool2VisibilityConverter}}">
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="auto" />
+                </Grid.ColumnDefinitions>
+                <Grid Grid.Row="0" Grid.Column="0">
+                    <StackPanel>
+                        <GroupBox Header="Purchases">
+                            <StackPanel>
+                                <StackPanel Orientation="Horizontal">
+                                    <!--<ComboBox
+                                        MinWidth="250"
+                                        DisplayMemberPath="Name"
+                                        IsEditable="True"
+                                        IsReadOnly="True"
+                                        ItemsSource="{Binding Beverages, UpdateSourceTrigger=PropertyChanged}"
+                                        SelectedItem="{Binding SearchPurchase}"
+                                        Text="Search By Beverge" />-->
+                                    <TextBox
+                                        x:Name="Invoicetxt"
+                                        Margin="3"
+                                        Custom:TextBoxHelper.Watermark="Search Invoice"
+                                        Text="{Binding InvoiceNumber}" />
+                                    <Button
+                                        x:Name="Invoicefindbtn"
+                                        Command="{Binding GetInvoiceInfoCommand}"
+                                        Content="Find Invoice" />
+
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal">
+                                    <Label Content="Start Date" />
+                                    <DatePicker
+                                        x:Name="startdatepicker"
+                                        DisplayDateStart="2015/01/01"
+                                        SelectedDate="{Binding StartDatePurchase, Converter={StaticResource c}}" />
+                                    <Label Content="End Date" />
+                                    <DatePicker x:Name="enddatepicker" SelectedDate="{Binding EndDatePurchase, Converter={StaticResource c}, TargetNullValue={x:Static sys:DateTime.Today}}" />
+                                    <Button
+                                        Margin="3"
+                                        Command="{Binding GetPurchasesByDateCommand}"
+                                        Content="Search Date" />
+                                </StackPanel>
+                                <ScrollViewer MaxHeight="500">
+                                    <DataGrid
+                                        Name="JournalListGrid"
+                                        Margin="5"
+                                        AutoGenerateColumns="False"
+                                        IsReadOnly="True"
+                                        ItemsSource="{Binding InvoiceRVIew}"
+                                        MouseDoubleClick="JournalListGrid_PreviewMouseDoubleClick"
+                                        SelectedItem="{Binding SelectedInvoiceNumber, Converter={StaticResource anon}}">
+
+                                        <DataGrid.GroupStyle>
+                                            <GroupStyle>
+                                                <GroupStyle.HeaderTemplate>
+                                                    <DataTemplate>
+                                                        <StackPanel>
+                                                            <!--<TextBlock Text="{Binding Path=RDate}" FontWeight="Bold" Padding="3"/>-->
+                                                        </StackPanel>
+                                                    </DataTemplate>
+                                                </GroupStyle.HeaderTemplate>
+                                                <GroupStyle.ContainerStyle>
+                                                    <Style TargetType="{x:Type GroupItem}">
+                                                        <Setter Property="Template">
+                                                            <Setter.Value>
+                                                                <ControlTemplate TargetType="{x:Type GroupItem}">
+                                                                    <Expander Margin="1">
+                                                                        <Expander.Header>
+                                                                            <StackPanel>
+                                                                                <StackPanel Background="#DADCD9" Orientation="Horizontal">
+                                                                                    <Label Content="Supplier : " Foreground="#071C2E" />
+                                                                                    <TextBlock
+                                                                                        VerticalAlignment="Center"
+                                                                                        Foreground="#071C2E"
+                                                                                        Text="{Binding Items[0].SupplierName}" />
+
+                                                                                    <Label
+                                                                                        Margin="20,3,0,0"
+                                                                                        Content="Date : "
+                                                                                        Foreground="#071C2E" />
+                                                                                    <TextBlock
+                                                                                        VerticalAlignment="Center"
+                                                                                        Foreground="#071C2E"
+                                                                                        Text="{Binding Items[0].InvoiceDate, StringFormat=D}" />
+
+                                                                                    <Label
+                                                                                        Margin="20,3,0,0"
+                                                                                        Content="Invoice No. : "
+                                                                                        Foreground="#071C2E" />
+                                                                                    <TextBlock
+                                                                                        VerticalAlignment="Center"
+                                                                                        Foreground="#071C2E"
+                                                                                        Text="{Binding Items[0].InvoiceNumber}" />
+
+                                                                                    <control:Underline />
+                                                                                </StackPanel>
+
+
+
+                                                                            </StackPanel>
+                                                                        </Expander.Header>
+
+
+                                                                        <ItemsPresenter />
+
+                                                                    </Expander>
+                                                                </ControlTemplate>
+                                                            </Setter.Value>
+                                                        </Setter>
+                                                    </Style>
+                                                </GroupStyle.ContainerStyle>
+                                            </GroupStyle>
+                                        </DataGrid.GroupStyle>
+                                        <DataGrid.Columns>
+
+                                            <DataGridTextColumn Binding="{Binding BeverageName, UpdateSourceTrigger=PropertyChanged}" Header="Beverage" />
+                                            <DataGridTextColumn
+                                                MinWidth="100"
+                                                Binding="{Binding Quantity, UpdateSourceTrigger=PropertyChanged}"
+                                                Header="Account" />
+                                            <DataGridTextColumn
+                                                MinWidth="50"
+                                                Binding="{Binding Metric, UpdateSourceTrigger=PropertyChanged}"
+                                                Header="Metric" />
+
+                                            <DataGridTextColumn
+                                                MinWidth="130"
+                                                Binding="{Binding Rate}"
+                                                Header="Rate" />
+
+                                            <DataGridTextColumn
+                                                MinWidth="130"
+                                                Binding="{Binding Amount}"
+                                                Header="Amount" />
+
+
+                                        </DataGrid.Columns>
+                                    </DataGrid>
+                                </ScrollViewer>
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="auto" />
+                                        <RowDefinition Height="auto" />
+                                        <RowDefinition Height="auto" />
+                                        <RowDefinition Height="auto" />
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="auto" />
+                                        <ColumnDefinition Width="auto" />
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock
+                                        Grid.Row="0"
+                                        Grid.Column="0"
+                                        FontSize="20"
+                                        Foreground="#083408"
+                                        Text="Total Amount" />
+                                    <TextBlock
+                                        Grid.Row="0"
+                                        Grid.Column="1"
+                                        FontSize="20"
+                                        Foreground="Green"
+                                        Text="{Binding TotalInvoiceAmount, StringFormat=C, ConverterCulture={x:Static glb:CultureInfo.CurrentCulture}}" />
+                                    <!--<TextBlock
+                                    Grid.Row="1"
+                                    Grid.Column="0"
+                                    FontSize="20"
+                                    Foreground="#083408"
+                                    Text="TotalVatAmount" />
+                                    <TextBlock
+                                    Grid.Row="1"
+                                    Grid.Column="1"
+                                    FontSize="20"
+                                    Foreground="Green"
+                                    Text="{Binding TotalVatAmount, StringFormat=C, ConverterCulture={x:Static glb:CultureInfo.CurrentCulture}}" />
+                                    <TextBlock
+                                    Grid.Row="2"
+                                    Grid.Column="0"
+                                    FontSize="20"
+                                    Foreground="#083408"
+                                    Text="Discount" />
+                                    <TextBlock
+                                    Grid.Row="2"
+                                    Grid.Column="1"
+                                    FontSize="20"
+                                    Foreground="Green"
+                                    Text="{Binding TotalDiscountAmount, StringFormat=C, ConverterCulture={x:Static glb:CultureInfo.CurrentCulture}}" />
+                                    <TextBlock
+                                    Grid.Row="3"
+                                    Grid.Column="0"
+                                    FontSize="20"
+                                    Foreground="#083408"
+                                    Text="Actual Amount" />
+                                    <TextBlock
+                                    Grid.Row="3"
+                                    Grid.Column="1"
+                                    FontSize="20"
+                                    Foreground="Green"
+                                    Text="{Binding TotalActualAmount, StringFormat=C, ConverterCulture={x:Static glb:CultureInfo.CurrentCulture}}" />-->
+
+
+
+                                </Grid>
+                                <StackPanel Name="pp">
+                                    <StackPanel Orientation="Horizontal">
+                                        <Button
+                                            Margin="3"
+                                            VerticalAlignment="Top"
+                                            Content="Purchase Report" />
+
+
+                                    </StackPanel>
+
+                                </StackPanel>
+                            </StackPanel>
+                        </GroupBox>
+                        <!--<GroupBox Header="Purchase Info">
+
+                        </GroupBox>-->
+                    </StackPanel>
+                </Grid>
+
+                <Grid Grid.Row="0" Grid.Column="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                    </Grid.RowDefinitions>
+                    <Grid Grid.Row="0" DataContext="{Binding SelectedInvoice, UpdateSourceTrigger=PropertyChanged}">
+                        <GroupBox Header="Purchase Details">
+                            <StackPanel Orientation="Horizontal">
+                                <StackPanel.Resources>
+                                    <DataTemplate x:Key="HorizontalHeader">
+                                        <ItemsControl ItemsSource="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Expander}}, Path=Header}" />
+                                    </DataTemplate>
+
+                                </StackPanel.Resources>
+
+                                <Grid>
+
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="auto" />
+                                        <ColumnDefinition Width="auto" />
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="auto" />
+                                        <RowDefinition Height="auto" />
+                                        <RowDefinition Height="auto" />
+                                        <RowDefinition Height="auto" />
+                                        <RowDefinition Height="auto" />
+                                        <RowDefinition Height="auto" />
+                                        <RowDefinition Height="auto" />
+                                        <RowDefinition Height="auto" />
+                                        <RowDefinition Height="auto" />
+                                        <RowDefinition Height="auto" />
+                                        <RowDefinition Height="auto" />
+                                        <RowDefinition Height="auto" />
+                                        <RowDefinition Height="auto" />
+                                        <RowDefinition Height="auto" />
+                                    </Grid.RowDefinitions>
+
+                                    <Label
+                                        Grid.Row="0"
+                                        Grid.Column="0"
+                                        Content="Invoice Id" />
+                                    <TextBox
+                                        Grid.Row="0"
+                                        Grid.Column="1"
+                                        IsEnabled="False"
+                                        Text="{Binding invoiceId}" />
+                                    <Label
+                                        Grid.Row="1"
+                                        Grid.Column="0"
+                                        Content="Invoice" />
+                                    <TextBox
+                                        Grid.Row="1"
+                                        Grid.Column="1"
+                                        Text="{Binding InvoiceNumber}" />
+                                    <Label
+                                        Grid.Row="2"
+                                        Grid.Column="0"
+                                        Content="Supplier" />
+                                    <ComboBox
+                                        Grid.Row="2"
+                                        Grid.Column="1"
+                                        DisplayMemberPath="SupplierName"
+                                        IsEditable="True"
+                                        ItemsSource="{Binding DataContext.Suppliers, RelativeSource={RelativeSource AncestorType={x:Type UserControl}, Mode=FindAncestor}}"
+                                        SelectedItem="{Binding Supplier, UpdateSourceTrigger=PropertyChanged}" />
+
+                                    <Label
+                                        Grid.Row="3"
+                                        Grid.Column="0"
+                                        Content="Date" />
+                                    <DatePicker
+                                        Grid.Row="3"
+                                        Grid.Column="1"
+                                        SelectedDate="{Binding Date, Converter={StaticResource c}, Mode=TwoWay, TargetNullValue={x:Static sys:DateTime.Now}, UpdateSourceTrigger=PropertyChanged}"
+                                        SelectedDateFormat="Long" />
+
+                                    <Label
+                                        Grid.Row="4"
+                                        Grid.Column="0"
+                                        Content="Total" />
+                                    <TextBox
+                                        Grid.Row="4"
+                                        Grid.Column="1"
+                                        Text="{Binding Total, UpdateSourceTrigger=PropertyChanged}" />
+                                    <Label
+                                        Grid.Row="5"
+                                        Grid.Column="0"
+                                        Content="AmountPaid" />
+                                    <Label
+                                        Grid.Row="6"
+                                        Grid.Column="0"
+                                        Content="Due" />
+                                    <TextBox
+                                        Grid.Row="6"
+                                        Grid.Column="1"
+                                        Text="{Binding Due, UpdateSourceTrigger=PropertyChanged}" />
+                                    <TextBox
+                                        Grid.Row="5"
+                                        Grid.Column="1"
+                                        Text="{Binding Total, UpdateSourceTrigger=PropertyChanged}" />
+                                    <Label
+                                        Grid.Row="7"
+                                        Grid.Column="0"
+                                        Content="Discount" />
+                                    <TextBox
+                                        Name="discounttxt"
+                                        Grid.Row="7"
+                                        Grid.Column="1"
+                                        Text="{Binding Discount, UpdateSourceTrigger=PropertyChanged}" />
+                                    <Label
+                                        Grid.Row="8"
+                                        Grid.Column="0"
+                                        Content="Vat" />
+                                    <TextBox
+                                        x:Name="vattxt"
+                                        Grid.Row="8"
+                                        Grid.Column="1"
+                                        IsReadOnly="True"
+                                        Text="{Binding VatAmount}" />
+
+
+                                    <StackPanel
+                                        Grid.Row="11"
+                                        Grid.Column="1"
+                                        DataContext="{Binding DataContext, RelativeSource={RelativeSource AncestorType={x:Type UserControl}, Mode=FindAncestor}}"
+                                        Orientation="Horizontal">
+
+                                        <Button
+                                            Width="50"
+                                            Margin="5"
+                                            Padding="2"
+                                            Command="{Binding UpdatePurchaseCommand}"
+                                            Content="Save" />
+                                        <Button
+                                            Width="60"
+                                            Margin="5"
+                                            Padding="2"
+                                            Command="{Binding DeletePurchaseCommand}"
+                                            Content="Delete" />
+                                        <Button
+                                            Width="60"
+                                            Margin="5"
+                                            Padding="2"
+                                            Command="{Binding PopupOpenCommand}"
+                                            Content="Details" />
+
+                                    </StackPanel>
+                                    <StackPanel Grid.Row="12">
+                                        <Popup
+                                            Name="p"
+                                            IsOpen="{Binding DataContext.PopUpOpen, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}}"
+                                            Placement="Bottom"
+                                            PlacementTarget="{Binding ElementName=Invoicetxt}">
+                                            <StackPanel Background="#D96161">
+                                                <Button
+                                                    HorizontalAlignment="Right"
+                                                    Click="Button_Click"
+                                                    Content="close" />
+                                                <DataGrid AutoGenerateColumns="False" ItemsSource="{Binding Purchases}">
+                                                    <DataGrid.Columns>
+
+                                                        <DataGridTextColumn Binding="{Binding Beverage.Name, UpdateSourceTrigger=PropertyChanged}" Header="Beverage" />
+                                                        <DataGridTextColumn
+                                                            MinWidth="100"
+                                                            Binding="{Binding Quantity, UpdateSourceTrigger=PropertyChanged}"
+                                                            Header="Quantity" />
+                                                        <DataGridTextColumn
+                                                            MinWidth="50"
+                                                            Binding="{Binding Metric, UpdateSourceTrigger=PropertyChanged}"
+                                                            Header="Metric" />
+
+                                                        <DataGridTextColumn
+                                                            MinWidth="130"
+                                                            Binding="{Binding Rate}"
+                                                            Header="Rate" />
+
+                                                        <DataGridTextColumn
+                                                            MinWidth="130"
+                                                            Binding="{Binding Amount}"
+                                                            Header="Amount" />
+
+
+                                                    </DataGrid.Columns>
+                                                </DataGrid>
+                                            </StackPanel>
+                                        </Popup>
+
+                                    </StackPanel>
+                                </Grid>
+                            </StackPanel>
+                        </GroupBox>
+                    </Grid>
+                    <Grid Grid.Row="1">
+                        <GroupBox Header="Stock Info">
+                            <StackPanel>
+                                <Button
+                                    Margin="3"
+                                    Command="{Binding GetStockCommand}"
+                                    CommandParameter="{Binding ElementName=scombo, Path=SelectedItem}"
+                                    Content="Get Stock Info" />
+                                <TextBlock
+                                    FontSize="14"
+                                    Foreground="{Binding stockcolor}"
+                                    Text="{Binding TotalStock}" />
+                            </StackPanel>
+                        </GroupBox>
+                    </Grid>
+                </Grid>
+
+
+            </Grid>
+            <Grid Grid.Row="1">
+
+
+
+                <StackPanel Visibility="{Binding IsDataNotLoaded, Converter={StaticResource bool2VisibilityConverter}}">
+                    <Image
+                        Width="300"
+                        Height="300"
+                        agif:ImageBehavior.AnimatedSource="/LiquorShop;component/Images/loading_apple.gif" />
+                    <TextBlock Style="{StaticResource InfoTextBlock}" Text="Please Wait While System Is Fetching R Data..........." />
+                </StackPanel>
+
+            </Grid>
+        </Grid>
+    </ScrollViewer>
+</UserControl>

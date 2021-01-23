@@ -1,0 +1,802 @@
+﻿<Controls:MetroWindow
+    x:Class="Rms.Views.Restaurant.Sales"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+    xmlns:ControlzEx="clr-namespace:ControlzEx;assembly=MahApps.Metro"
+    xmlns:agif="http://wpfanimatedgif.codeplex.com"
+    xmlns:behaviors="clr-namespace:WPFTextBoxAutoComplete;assembly=WPFTextBoxAutoComplete"
+    xmlns:conv="clr-namespace:TescoWine.Converters"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:dc="clr-namespace:Rms.ViewModels"
+    xmlns:extra="clr-namespace:Rms.Extra"
+    xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+  
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:my="http://schemas.microsoft.com/wpf/2008/toolkit"
+    xmlns:sysglb="clr-namespace:System.Globalization;assembly=mscorlib"
+    xmlns:syx="clr-namespace:System;assembly=mscorlib"
+    xmlns:v="clr-namespace:Rms.Views.Restaurant"
+    xmlns:val="clr-namespace:Rms.Validations"
+    xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+    Name="saleswindow"
+    Title="Sales"
+    Width="{x:Static SystemParameters.PrimaryScreenWidth}"
+    Height="{x:Static SystemParameters.PrimaryScreenWidth}"
+    WindowState="Maximized"
+    mc:Ignorable="d">
+
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding LoadedCommand}" />
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+    <Controls:MetroWindow.Resources>
+        <LinearGradientBrush x:Key="Flat3DBorderBrush" StartPoint="0.499,0" EndPoint="0.501,1">
+            <GradientStop Offset="0" Color="#FFF" />
+            <GradientStop Offset="0.01" Color="#DDD" />
+            <GradientStop Offset="0.99" Color="#AAA" />
+            <GradientStop Offset="1" Color="#888" />
+        </LinearGradientBrush>
+        <conv:ImagePathConverter x:Key="imconv" />
+        <!--<conv:StringToBoolConverter x:Key="sbool" />
+
+        <conv:DecimalConverter x:Key="decimalconverter" />-->
+
+        <extra:TileView x:Key="extra" />
+    </Controls:MetroWindow.Resources>
+    <Grid>
+
+        <Grid>
+
+            <TabControl Name="tb" FontFamily="times new roman">
+                <TabItem Name="salestab" Header="">
+                    <Grid>
+
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="4*" />
+                            <ColumnDefinition Width="5*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto" />
+                            <RowDefinition Height="auto" />
+                            <RowDefinition Height="auto" />
+                            <RowDefinition Height="auto" />
+                        </Grid.RowDefinitions>
+                        <Grid
+                            Grid.Row="2"
+                            Grid.Column="0"
+                            Margin="5">
+                            <StackPanel>
+                                <StackPanel Orientation="Horizontal">
+                                    <Label Style="{StaticResource HeadingLabel}">
+                                        <TextBlock>
+                                            <Run Text="Order Details For Table :" />
+                                            <Run FontSize="18" Text="{Binding SelectedRestaurantTable.TableNumber}" />
+                                        </TextBlock>
+                                    </Label>
+                                    <TextBlock Style="{StaticResource InfoTextBlock}" Visibility="{Binding TotBill}">
+                                        <Run Text="Total Bill: " />
+
+                                        <!--<Run Text="{Binding TotBill, StringFormat={}{0:C}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ConverterCulture={x:Static sysglb:CultureInfo.CurrentCulture}}" />-->
+
+                                    </TextBlock>
+                                    <TextBox
+                                        Width="100"
+                                        MinWidth="50"
+                                        GotFocus="tb1_GotFocus_1"
+                                        Text="{Binding TotBill, StringFormat={}{0:C}, UpdateSourceTrigger=PropertyChanged, ConverterCulture={x:Static sysglb:CultureInfo.CurrentCulture}}" />
+                                    <Button Content="Save" Command="{Binding BillAmtChangeCmd}" />
+                                </StackPanel>
+
+                                <DataGrid
+                                    x:Name="dataGrid"
+                                    Grid.Row="1"
+                                    Grid.Column="1"
+                                    MaxWidth="500"
+                                    MaxHeight="390"
+                                    Padding="5"
+                                    HorizontalAlignment="Left"
+                                    AutoGenerateColumns="False"
+                                    Background="Transparent"
+                                    CanUserAddRows="False"
+                                    ColumnHeaderStyle="{StaticResource DatagridColumnHeaderCustomTemplateStyle}"
+                                    ItemsSource="{Binding ItemsOrdered}"
+                                    RowStyle="{StaticResource datagridrowstyle}">
+
+
+                                    <DataGrid.Columns>
+                                        <DataGridTextColumn
+                                            Binding="{Binding ItemId}"
+                                            Header="ItemId"
+                                            Visibility="Hidden" />
+                                        <!--<DataGridTextColumn
+                                    Width="200"
+                                    Binding="{Binding Item}"
+                                    Header="Item" />-->
+                                        <DataGridTemplateColumn Width="180" Header="Item">
+                                            <DataGridTemplateColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <StackPanel Height="30" Orientation="Horizontal">
+                                                        <TextBlock Style="{StaticResource InfoTextBlock}" Text="{Binding Item}" />
+                                                        <Border
+                                                            Margin="1"
+                                                            Padding="0"
+                                                            Style="{StaticResource borderstyle}">
+                                                            <Image Source="{Binding ImagePath, Converter={StaticResource imconv}}" Stretch="UniformToFill" />
+                                                        </Border>
+                                                    </StackPanel>
+                                                </DataTemplate>
+                                            </DataGridTemplateColumn.CellTemplate>
+                                        </DataGridTemplateColumn>
+                                        <DataGridTextColumn
+                                            Width="90"
+                                            Binding="{Binding Price}"
+                                            Header="Price" />
+                                        <DataGridTextColumn Binding="{Binding Quantity, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Header="Quantity" />
+                                        <DataGridTemplateColumn Width="40" Header="Add">
+                                            <DataGridTemplateColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <Button
+                                                        x:Name="AddItemButton"
+                                                        Click="AddItemButton_Click"
+                                                        CommandParameter="{Binding ItemId}"
+                                                        Content="+"
+                                                        FontSize="15"
+                                                        FontWeight="UltraBold"
+                                                        Foreground="Green"
+                                                        Tag="add" />
+                                                </DataTemplate>
+                                            </DataGridTemplateColumn.CellTemplate>
+                                        </DataGridTemplateColumn>
+                                        <DataGridTemplateColumn Header="Remove">
+                                            <DataGridTemplateColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <Button
+                                                        x:Name="RemoveItemButton"
+                                                        Click="RemoveItemButton_Click"
+                                                        CommandParameter="{Binding ItemId}"
+                                                        Content="-"
+                                                        FontSize="15"
+                                                        FontWeight="UltraBold"
+                                                        Foreground="Red"
+                                                        Tag="add" />
+                                                </DataTemplate>
+                                            </DataGridTemplateColumn.CellTemplate>
+                                        </DataGridTemplateColumn>
+                                    </DataGrid.Columns>
+                                </DataGrid>
+                                <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
+                                    <Button
+                                        HorizontalAlignment="Right"
+                                        Background="Green"
+                                        Click="SaveOrder_Click"
+                                        Content="Save Order"
+                                        Foreground="White" />
+                                    <Button
+                                        HorizontalAlignment="Right"
+                                        Background="#F1AA2C"
+                                        Command="{Binding PrintBillCommand}"
+                                        Content="Print Bill"
+                                        Foreground="White" />
+                                    <Button
+                                        Name="pp"
+                                        HorizontalAlignment="Right"
+                                        Background="Red"
+                                        Command="{Binding TransferTableCommand}"
+                                        Content="Transfer Table"
+                                        Foreground="White" />
+                                    <Popup
+                                        Name="historyPopup"
+                                        Grid.Row="0"
+                                        AllowsTransparency="True"
+                                        IsOpen="{Binding ElementName=hitrybtn,Path=IsMouseOver,Mode=OneWay}"
+                                        Placement="Right"
+                                        
+                                        PlacementTarget="{Binding ElementName=hitrybtn}"
+                                        PopupAnimation="Slide"
+                                        StaysOpen="False">
+                                        <Border
+                                            Padding="5"
+                                            BorderBrush="#F4AF1D"
+                                            BorderThickness="2"
+                                            CornerRadius="2">
+                                            <StackPanel Background="#F4AF1D">
+                                                <TextBlock Margin="5">Table History :</TextBlock>
+                                                <ListBox Padding="5" Background="Black" Foreground="AntiqueWhite"  ItemsSource="{Binding TableHistory1}" />
+                                                
+                                            </StackPanel>
+                                        </Border>
+                                    </Popup>
+                                    <Button
+                                        Name="hitrybtn"
+                                        HorizontalAlignment="Right"
+                                        Background="#4C1947"
+                                        
+                                        Content="Table History"
+                                        Foreground="White" MouseEnter="hitrybtn_MouseEnter" PreviewMouseMove="hitrybtn_PreviewMouseMove" >
+                                       
+                                    </Button>
+                                    <Popup
+                                        Name="PresetPopup"
+                                        Grid.Row="0"
+                                        AllowsTransparency="True"
+                                        IsOpen="{Binding PopUpShow}"
+                                        Placement="Right"
+                                        PlacementTarget="{Binding ElementName=pp}"
+                                        PopupAnimation="Slide"
+                                        StaysOpen="False">
+                                        <Border
+                                            Padding="0"
+                                            BorderBrush="#F4AF1D"
+                                            BorderThickness="2"
+                                            CornerRadius="5">
+                                            <StackPanel Background="#F4D18A">
+                                                <!--<ListBox ItemsSource="{Binding tables}" SelectedItem="{Binding data}">-->
+                                                <!--<ListBox.Items>
+                        <ListBoxItem>table 1</ListBoxItem>
+                        <ListBoxItem>table 1</ListBoxItem>
+                        <ListBoxItem>table 1</ListBoxItem>
+                        <ListBoxItem>table 1</ListBoxItem>
+                        <ListBoxItem>table 1</ListBoxItem>
+                    </ListBox.Items>-->
+                                                <!--</ListBox>-->
+                                                <TextBlock Margin="5">Transfer This Table To :</TextBlock>
+                                                <TextBox
+                                                    Name="transfertabletxt"
+                                                    Margin="3"
+                                                    Text="{Binding data}" />
+                                                <Button Command="{Binding PostTransferTableCommand}" Content="Transfer" />
+                                            </StackPanel>
+                                        </Border>
+                                    </Popup>
+                                    
+                                    <Button
+                                        Name="paymentbutton"
+                                        HorizontalAlignment="Right"
+                                        Background="#001BFF"
+                                        Click="paymentbutton_Click"
+                                        Content="Payment"
+                                        Foreground="White" />
+
+                                </StackPanel>
+
+                            </StackPanel>
+                        </Grid>
+                        <Grid
+                            Grid.Row="2"
+                            Grid.Column="1"
+                            HorizontalAlignment="Left">
+                            <StackPanel>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Style="{StaticResource InfoTextBlock}" Text="{Binding OrderDate, StringFormat=D}" />
+                                    <TextBlock Style="{StaticResource InfoTextBlock}" Text="Logged In User : " />
+                                    <TextBlock Style="{StaticResource InfoTextBlock}" Text="{Binding CurrentUser.UserName}" />
+                                </StackPanel>
+
+                                <!--<TextBox
+                                    Height="25"
+                                    Controls:TextBoxHelper.ClearTextButton="True"
+                                    Controls:TextBoxHelper.Watermark="search Menu ...."
+                                    Controls:TextBoxHelper.WatermarkAlignment="Center"
+                                    behaviors:AutoCompleteBehavior.AutoCompleteItemsSource="{Binding Items}"
+                                    behaviors:AutoCompleteBehavior.AutoCompleteStringComparison="InvariantCultureIgnoreCase"
+                                    Text="{Binding SearchItem, UpdateSourceTrigger=PropertyChanged}" />-->
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="auto" />
+                                        <ColumnDefinition Width="auto" />
+                                    </Grid.ColumnDefinitions>
+
+                                    <Grid Grid.Column="0">
+
+                                        <ListView
+                                            Width="150"
+                                            MaxHeight="650"
+                                            Margin="2"
+                                            ItemsSource="{Binding ItemCategories}"
+                                            SelectedItem="{Binding SelectedItemCategory}">
+                                            <ListView.View>
+                                                <extra:TileView>
+                                                    <extra:TileView.ItemTemplate>
+                                                        <DataTemplate>
+
+                                                            <StackPanel Width="140" Cursor="Hand">
+                                                                <TextBlock
+                                                                    Margin="0"
+                                                                    Padding="2"
+                                                                    HorizontalAlignment="Stretch"
+                                                                    Background="#F7E8D2"
+                                                                    FontFamily="Times New Roman"
+                                                                    FontSize="12"
+                                                                    FontWeight="ExtraBold"
+                                                                    Foreground="#167206"
+                                                                    Text="{Binding CategoryName}" />
+                                                            </StackPanel>
+
+                                                        </DataTemplate>
+                                                    </extra:TileView.ItemTemplate>
+                                                </extra:TileView>
+                                            </ListView.View>
+
+                                        </ListView>
+                                        <!--</ScrollViewer>-->
+                                    </Grid>
+
+
+                                    <Grid Grid.Column="1" DataContext="{Binding}">
+                                        <ListView
+                                            x:Name="lstitems"
+                                            Width="450"
+                                            MaxHeight="650"
+                                            Margin="5,0,0,0"
+                                            Padding="5"
+                                            ItemsSource="{Binding Items}"
+                                            MouseDown="lstitems_MouseLeftButtonDown"
+                                            MouseLeftButtonDown="lstitems_MouseLeftButtonDown">
+                                            <ListView.View>
+                                                <extra:TileView>
+                                                    <extra:TileView.ItemTemplate>
+                                                        <DataTemplate>
+
+                                                            <StackPanel
+                                                                Width="75"
+                                                                Height="100"
+                                                                Margin="4"
+                                                                Cursor="Hand"
+                                                                MouseDown="lstitems_MouseLeftButtonDown">
+                                                                <Border
+                                                                    Padding="2"
+                                                                    HorizontalAlignment="Center"
+                                                                    VerticalAlignment="Center"
+                                                                    BorderBrush="{StaticResource Flat3DBorderBrush}"
+                                                                    BorderThickness="1"
+                                                                    CornerRadius="5">
+                                                                    <Image
+                                                                        Name="MyImage"
+                                                                        Width="50"
+                                                                        Height="50"
+                                                                        Source="{Binding ItemImage, Converter={StaticResource imconv}}"
+                                                                        Stretch="UniformToFill" />
+                                                                </Border>
+                                                                <Label
+                                                                    HorizontalAlignment="Center"
+                                                                    Content="{Binding ItemId}"
+                                                                    FontWeight="Bold"
+                                                                    Visibility="Collapsed" />
+                                                                <TextBlock
+                                                                    HorizontalAlignment="Center"
+                                                                    FontWeight="Bold"
+                                                                    Text="{Binding ItemName, Converter={StaticResource only8}}"
+                                                                    TextWrapping="Wrap" />
+                                                                <TextBlock HorizontalAlignment="Center" Text="{Binding Price, StringFormat=\{0:C\}, ConverterCulture={x:Static sysglb:CultureInfo.CurrentCulture}}" />
+
+                                                            </StackPanel>
+
+
+
+                                                        </DataTemplate>
+                                                    </extra:TileView.ItemTemplate>
+
+                                                </extra:TileView>
+                                            </ListView.View>
+
+                                        </ListView>
+
+
+                                    </Grid>
+
+                                </Grid>
+                            </StackPanel>
+
+                        </Grid>
+                    </Grid>
+                </TabItem>
+                <TabItem
+                    Name="paymenttab"
+                    Header=""
+                    Loaded="paymenttab_Loaded">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="auto" />
+                            <ColumnDefinition Width="auto" />
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Grid.Column="0">
+
+                            <DataGrid
+                                x:Name="dataGrid1"
+                                Grid.Row="1"
+                                Grid.Column="1"
+                                MinWidth="400"
+                                MaxHeight="445"
+                                Padding="5"
+                                AutoGenerateColumns="False"
+                                Background="Transparent"
+                                CanUserAddRows="False"
+                                ColumnHeaderStyle="{StaticResource DatagridColumnHeaderCustomTemplateStyle}"
+                                ItemsSource="{Binding ItemsOrdered}"
+                                RowStyle="{StaticResource datagridrowstyle}">
+
+
+                                <DataGrid.Columns>
+                                    <DataGridTextColumn
+                                        Binding="{Binding ItemId}"
+                                        Header="ItemId"
+                                        Visibility="Hidden" />
+                                    <DataGridTextColumn
+                                        Width="200"
+                                        Binding="{Binding Item}"
+                                        Header="Item" />
+                                    <DataGridTextColumn
+                                        Width="100"
+                                        Binding="{Binding Price}"
+                                        Header="Price" />
+                                    <DataGridTextColumn Binding="{Binding Quantity, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Header="Quantity" />
+                                    <DataGridTextColumn Binding="{Binding TableId, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Header="Table Number" />
+                                    <DataGridTextColumn
+                                        MinWidth="150"
+                                        Binding="{Binding TimeOfOrder, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                        Header="Order Time" />
+                                    <DataGridTextColumn Binding="{Binding Staff, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Header="Order Staff" />
+
+                                </DataGrid.Columns>
+                            </DataGrid>
+                            <Button
+                                HorizontalAlignment="Right"
+                                Command="{Binding PrintBillCommand}"
+                                Content="Print Bill" />
+                        </StackPanel>
+
+                        <GroupBox
+                            Grid.Column="1"
+                            VerticalAlignment="Top"
+                            Header="Payment">
+                            <StackPanel>
+
+                                <TextBlock
+                                    FontSize="20"
+                                    FontWeight="ExtraBold"
+                                    Foreground="Red"
+                                    Style="{StaticResource InfoTextBlock}"
+                                    Visibility="{Binding IsChangeAvailable, Converter={StaticResource bool2VisibilityConverter}}">
+                                    <Run Text="Change: " />
+                                    <Run Text="{Binding ElementName=tb2, Path=Text, StringFormat={}{0:C}, ConverterCulture={x:Static sysglb:CultureInfo.CurrentCulture}}" />
+
+                                </TextBlock>
+                                <TextBlock
+                                    HorizontalAlignment="Right"
+                                    Style="{StaticResource InfoTextBlock}"
+                                    Visibility="{Binding TotBill}">
+                                    <Run Text="Total Bill: " />
+                                    <Run Text="{Binding TotBill, StringFormat={}{0:C}, ConverterCulture={x:Static sysglb:CultureInfo.CurrentCulture}}" />
+                                </TextBlock>
+                                <GroupBox
+                                    Name="billgrid"
+                                    Header="Billing Info"
+                                    IsEnabled="{Binding HasPaid}">
+                                    <Grid Background="{StaticResource TextBackGroundColor}">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="auto" />
+                                            <RowDefinition Height="auto" />
+                                            <RowDefinition Height="auto" />
+                                            <RowDefinition Height="auto" />
+                                            <RowDefinition Height="auto" />
+                                            <RowDefinition Height="auto" />
+                                            <RowDefinition Height="auto" />
+                                            <RowDefinition Height="auto" />
+                                            <RowDefinition Height="auto" />
+                                            <RowDefinition Height="auto" />
+                                        </Grid.RowDefinitions>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="auto" />
+                                            <ColumnDefinition Width="auto" />
+                                            <ColumnDefinition Width="auto" />
+                                        </Grid.ColumnDefinitions>
+                                        <Label
+                                            Grid.Row="0"
+                                            Grid.Column="0"
+                                            Content="Amount" />
+                                        <TextBox
+                                            Grid.Row="0"
+                                            Grid.Column="1"
+                                            HorizontalContentAlignment="Right"
+                                            IsReadOnly="True"
+                                            Text="{Binding Path=Amount, StringFormat='C', ConverterCulture={x:Static sysglb:CultureInfo.CurrentCulture}}" />
+                                        <Label
+                                            Grid.Row="1"
+                                            Grid.Column="0"
+                                            Content="Discount" />
+                                        <TextBox
+                                            Name="DiscountTextBox"
+                                            Grid.Row="1"
+                                            Grid.Column="1"
+                                            HorizontalContentAlignment="Right"
+                                            Controls:TextBoxHelper.ButtonCommand="{Binding DiscountCancelCommand}"
+                                            Controls:TextBoxHelper.ClearTextButton="True"
+                                            GotFocus="DiscountTextBox_GotFocus"
+                                            TextChanged="DiscountTextBox_TextChanged">
+                                            <TextBox.Style>
+                                                <Style BasedOn="{StaticResource {x:Type TextBox}}" TargetType="{x:Type TextBox}">
+                                                    <Setter Property="Text" Value="{Binding Discount, TargetNullValue='', UpdateSourceTrigger=PropertyChanged, ConverterCulture={x:Static sysglb:CultureInfo.CurrentCulture}}" />
+                                                    <Style.Triggers>
+                                                        <Trigger Property="IsKeyboardFocusWithin" Value="True">
+                                                            <Setter Property="Text">
+                                                                <Setter.Value>
+                                                                    <Binding Path="Discount" UpdateSourceTrigger="PropertyChanged">
+                                                                        <Binding.ValidationRules>
+                                                                            <val:MoneyValidationRule />
+                                                                        </Binding.ValidationRules>
+                                                                    </Binding>
+
+                                                                </Setter.Value>
+                                                            </Setter>
+                                                        </Trigger>
+                                                    </Style.Triggers>
+                                                </Style>
+                                            </TextBox.Style>
+
+                                        </TextBox>
+
+
+                                        <Label
+                                            Grid.Row="2"
+                                            Grid.Column="0"
+                                            Content="Service Charge" />
+                                        <TextBox
+                                            Name="servicecharge"
+                                            Grid.Row="2"
+                                            Grid.Column="1"
+                                            HorizontalContentAlignment="Right"
+                                            IsReadOnly="True"
+                                            Text="{Binding ServiceCharge, StringFormat={}{0:C}, ConverterCulture={x:Static sysglb:CultureInfo.CurrentCulture}}" />
+                                        <Label
+                                            Grid.Row="3"
+                                            Grid.Column="0"
+                                            Content="Tax" />
+                                        <TextBox
+                                            Name="a"
+                                            Grid.Row="3"
+                                            Grid.Column="1"
+                                            HorizontalContentAlignment="Right"
+                                            IsReadOnly="True"
+                                            Text="{Binding Tax, StringFormat={}{0:C}, ConverterCulture={x:Static sysglb:CultureInfo.CurrentCulture}}" />
+
+                                        <Label
+                                            Grid.Row="4"
+                                            Grid.Column="0"
+                                            Content="TotalAmount" />
+                                        <TextBox
+                                            Name="totalamounttextbox"
+                                            Grid.Row="4"
+                                            Grid.Column="1"
+                                            HorizontalContentAlignment="Right"
+                                            FontWeight="ExtraBold"
+                                            Foreground="#412905"
+                                            IsReadOnly="True"
+                                            Text="{Binding TotalAmount, StringFormat={}{0:C}, ConverterCulture={x:Static sysglb:CultureInfo.CurrentCulture}}" />
+                                        <Label
+                                            Grid.Row="5"
+                                            Grid.Column="0"
+                                            Content="Paid" />
+                                        <TextBox
+                                            x:Name="tb1"
+                                            Grid.Row="5"
+                                            Grid.Column="1"
+                                            HorizontalContentAlignment="Right"
+                                            Controls:TextBoxHelper.ClearTextButton="True"
+                                            Controls:TextBoxHelper.Watermark="Enter Amount"
+                                            Controls:TextBoxHelper.WatermarkAlignment="Right"
+                                            GotFocus="tb1_GotFocus_1"
+                                            TextChanged="tb1_TextChanged_1">
+                                            <TextBox.Style>
+                                                <Style BasedOn="{StaticResource {x:Type TextBox}}" TargetType="{x:Type TextBox}">
+                                                    <Setter Property="Text" Value="{Binding AmountPaid, TargetNullValue=''}" />
+                                                    <Style.Triggers>
+                                                        <Trigger Property="IsKeyboardFocusWithin" Value="True">
+                                                            <Setter Property="Text">
+                                                                <Setter.Value>
+                                                                    <Binding Path="AmountPaid" UpdateSourceTrigger="PropertyChanged">
+                                                                        <Binding.ValidationRules>
+                                                                            <val:MoneyValidationRule />
+                                                                        </Binding.ValidationRules>
+                                                                    </Binding>
+                                                                </Setter.Value>
+                                                            </Setter>
+                                                        </Trigger>
+                                                    </Style.Triggers>
+                                                </Style>
+                                            </TextBox.Style>
+                                        </TextBox>
+                                        <!--
+                                            GotFocus="tb1_GotFocus"
+                                            TextChanged="tb1_TextChanged"
+                                        -->
+                                        <Label
+                                            Grid.Row="6"
+                                            Grid.Column="0"
+                                            Content="Change" />
+
+                                        <TextBox
+                                            x:Name="tb2"
+                                            Grid.Row="6"
+                                            Grid.Column="1"
+                                            HorizontalContentAlignment="Right"
+                                            FontWeight="ExtraBold"
+                                            Foreground="#412905"
+                                            IsEnabled="False"
+                                            Text="{Binding Change, StringFormat=C, ConverterCulture={x:Static sysglb:CultureInfo.CurrentCulture}}" />
+                                        <Label Grid.Row="7" Content="Date" />
+                                        <DatePicker
+                                            Grid.Row="7"
+                                            Grid.Column="1"
+                                            SelectedDate="{Binding OrderDate}" />
+
+                                        <Label
+                                            Grid.Row="8"
+                                            Grid.Column="0"
+                                            Content="Customer" />
+                                        <ComboBox
+                                            Grid.Row="8"
+                                            Grid.Column="1"
+                                            HorizontalAlignment="Stretch"
+                                            DisplayMemberPath="CustomerName"
+                                            ItemsSource="{Binding Customers}"
+                                            SelectedItem="{Binding SelectedCustomer}" />
+
+                                    </Grid>
+                                </GroupBox>
+                                <WrapPanel
+                                    Name="buttonwrap"
+                                    Width="320"
+                                    Margin="5">
+                                    <WrapPanel.Resources>
+                                        <Style BasedOn="{StaticResource MetroButton}" TargetType="Button">
+                                            <Setter Property="Height" Value="50" />
+                                            <Setter Property="Width" Value="50" />
+                                            <Setter Property="Margin" Value="1" />
+                                            <Setter Property="Background" Value="Wheat" />
+                                            <Setter Property="FontSize" Value="28" />
+                                        </Style>
+                                    </WrapPanel.Resources>
+                                    <Button
+                                        Width="75"
+                                        Content="50"
+                                        FontWeight="ExtraBold"
+                                        Foreground="BlueViolet"
+                                        Tag="sp" />
+                                    <Button
+                                        Width="75"
+                                        Content="1"
+                                        Tag="1" />
+                                    <Button
+                                        Width="75"
+                                        Content="2"
+                                        Tag="2" />
+                                    <Button
+                                        Width="75"
+                                        Content="3"
+                                        Tag="3" />
+                                    <Button
+                                        Width="75"
+                                        Content="100"
+                                        FontWeight="ExtraBold"
+                                        Foreground="BlueViolet"
+                                        Tag="sp" />
+                                    <Button
+                                        Width="75"
+                                        Content="4"
+                                        Tag="4" />
+                                    <Button
+                                        Width="75"
+                                        Content="5"
+                                        Tag="5" />
+                                    <Button
+                                        Width="75"
+                                        Content="6"
+                                        Tag="6" />
+                                    <Button
+                                        Width="75"
+                                        Content="500"
+                                        FontWeight="ExtraBold"
+                                        Foreground="BlueViolet"
+                                        Tag="sp" />
+                                    <Button
+                                        Width="75"
+                                        Content="7"
+                                        Tag="7" />
+                                    <Button
+                                        Width="75"
+                                        Content="8"
+                                        Tag="8" />
+                                    <Button
+                                        Width="75"
+                                        Content="9"
+                                        Tag="9" />
+                                    <Button
+                                        Width="75"
+                                        Content="1000"
+                                        FontWeight="ExtraBold"
+                                        Foreground="BlueViolet"
+                                        Tag="sp" />
+                                    <Button
+                                        Width="75"
+                                        Content="."
+                                        Tag="." />
+                                    <Button
+                                        Width="75"
+                                        Content="0"
+                                        Tag="0" />
+                                    <Button
+                                        Width="75"
+                                        Content="C"
+                                        Tag="C" />
+
+                                    <Button
+                                        Width="75"
+                                        Background="Black"
+                                        Command="{Binding AllCommand}"
+                                        Content="All"
+                                        FontSize="15"
+                                        Foreground="Wheat"
+                                        MouseEnter="Button_MouseEnter"
+                                        MouseLeave="Button_MouseLeave" />
+
+                                    <Button
+                                        Name="PayBillBtn"
+                                        Width="75"
+                                        Background="Green"
+                                        Click="PayBillBtn_Click"
+                                        Command="{Binding PayBillCommand}"
+                                        CommandParameter="{Binding ElementName=billgrid}"
+                                        Content="PayBill"
+                                        FontSize="15"
+                                        Foreground="Wheat"
+                                        MouseEnter="Button_MouseEnter"
+                                        MouseLeave="Button_MouseLeave" />
+
+                                    <Button
+                                        Width="75"
+                                        HorizontalAlignment="Center"
+                                        Background="Red"
+                                        Command="{Binding FreeCommand}"
+                                        Content="Free"
+                                        FontSize="15"
+                                        Foreground="Wheat"
+                                        MouseEnter="Button_MouseEnter"
+                                        MouseLeave="Button_MouseLeave" />
+                                    <Button
+                                        Width="75"
+                                        HorizontalAlignment="Center"
+                                        Background="#172DEC"
+                                        Command="{Binding CloseCommand}"
+                                        CommandParameter="{Binding ElementName=saleswindow}"
+                                        Content="Close"
+                                        FontSize="15"
+                                        Foreground="Wheat"
+                                        MouseEnter="Button_MouseEnter"
+                                        MouseLeave="Button_MouseLeave" />
+                                </WrapPanel>
+                            </StackPanel>
+                        </GroupBox>
+
+                    </Grid>
+                </TabItem>
+            </TabControl>
+            <!--<Image
+            Height="300"
+            agif:ImageBehavior.AnimatedSource="../../Images/loading.gif"
+            Visibility="{Binding IsDataLoaded, Converter={StaticResource bool2VisibilityConverter}}" />-->
+        </Grid>
+        <!--<Grid Grid.Row="1" Visibility="{Binding IsDataNotLoaded, Converter={StaticResource bool2VisibilityConverter}}">
+            <ContentControl Content="{Binding CurrentViewModel}" />
+            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Top">
+                <Image
+                    Width="300"
+                    Height="300"
+                    agif:ImageBehavior.AnimatedSource="/Rms;component/Images/loading_apple.gif" />
+                <TextBlock Style="{StaticResource InfoTextBlock}" Text="Please Wait While System Is Loading Table Order..........." />
+            </StackPanel>
+        </Grid>-->
+    </Grid>
+</Controls:MetroWindow>

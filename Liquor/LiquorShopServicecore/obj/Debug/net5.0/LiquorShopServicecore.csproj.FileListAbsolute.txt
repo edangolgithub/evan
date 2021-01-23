@@ -1,0 +1,5 @@
+/home/ec2-user/evan/Liquor/LiquorShopServicecore/obj/Debug/net5.0/LiquorShopServicecore.csprojAssemblyReference.cache
+/home/ec2-user/evan/Liquor/LiquorShopServicecore/obj/Debug/net5.0/LiquorShopServicecore.GeneratedMSBuildEditorConfig.editorconfig
+/home/ec2-user/evan/Liquor/LiquorShopServicecore/obj/Debug/net5.0/LiquorShopServicecore.AssemblyInfoInputs.cache
+/home/ec2-user/evan/Liquor/LiquorShopServicecore/obj/Debug/net5.0/LiquorShopServicecore.AssemblyInfo.cs
+/home/ec2-user/evan/Liquor/LiquorShopServicecore/obj/Debug/net5.0/LiquorShopServicecore.csproj.CoreCompileInputs.cache

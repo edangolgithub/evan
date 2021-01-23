@@ -1,0 +1,164 @@
+﻿<controls:MetroWindow
+    x:Class="Rms.Views.SplashScreenView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:agif="http://wpfanimatedgif.codeplex.com"
+    xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:ic="http://metro.mahapps.com/winfx/xaml/iconpacks"
+    xmlns:local="clr-namespace:Rms.Views"
+    xmlns:mg="http://materialdesigninxaml.net/winfx/xaml/themes"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Title="RIva's Is Starting"
+    Height="300"
+    Background="{DynamicResource MaterialDesignPaper}"
+    FontFamily="pack://application:,,,/MaterialDesignThemes.Wpf;component/Resources/Roboto/#Roboto"
+    ResizeMode="NoResize"
+    ShowInTaskbar="False"
+    TextElement.FontSize="14"
+    TextElement.FontWeight="Medium"
+    TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+    WindowStartupLocation="CenterScreen"
+    WindowStyle="None"
+    mc:Ignorable="d">
+    <Window.Resources>
+        <Style BasedOn="{StaticResource MaterialDesignComboBox}" TargetType="ComboBox">
+            <Setter Property="Background" Value="Black" />
+            <!--<Setter Property="Height" Value="20" />-->
+            <Setter Property="Width" Value="200" />
+        </Style>
+    </Window.Resources>
+    <Grid>
+        <Border
+            Margin="0,0,10,10"
+            Padding="10"
+            Background="#101010 "
+            BorderBrush="LightGray"
+            BorderThickness="1"
+            CornerRadius="0"
+            SnapsToDevicePixels="True">
+            <Border.Effect>
+                <DropShadowEffect BlurRadius="10" Color="Gray" />
+            </Border.Effect>
+            <StackPanel>
+                <Grid>
+                    <Label
+                        Name="pop"
+                        Margin="0,15,0,0"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Top"
+                        Content="Wine Shop "
+                        FontSize="25"
+                        FontWeight="Bold"
+                        Foreground="White" />
+                    <Button
+                        HorizontalAlignment="Right"
+                        Background="Black"
+                        BorderBrush="Black"
+                        Click="Button_Click"
+                        Style="{StaticResource MaterialDesignFloatingActionDarkButton}">
+                        <ic:PackIconModern Kind="Close" />
+                    </Button>
+                </Grid>
+                <StackPanel Margin="10,10,10,0" Orientation="Horizontal">
+                    <StackPanel>
+                        <Label
+                            Margin="5"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Top"
+                            Content="Select Company "
+                            FontSize="14"
+                            FontWeight="Bold"
+                            Foreground="White" />
+
+                        <ComboBox
+                            Margin="0,5,0,0"
+                            Background="Gray"
+                            DisplayMemberPath="Company"
+                            Foreground="white" SelectedIndex="1"
+                            ItemsSource="{Binding CompanyJsons}"
+                            SelectedItem="{Binding SelectedCompanyJson}" />
+                    </StackPanel>
+                    <StackPanel>
+                        <Label
+                            Margin="5"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Top"
+                            Content="Password"
+                            FontSize="14"
+                            FontWeight="Bold"
+                            Foreground="White" />
+                        <TextBox
+                            Name="passwordbox"
+                            Height="30"
+                            MinWidth="100"
+                            MaxWidth="50"
+                            Margin="5"
+                            Background="Gray"
+                            
+                            mg:HintAssist.Hint="Password is a"
+                            Foreground="White"
+                            
+                            Text="{Binding Pass}" />
+                    </StackPanel>
+
+                    <Button
+                        Name="okbtn"
+                        Width="50"
+                        Margin="0,30,0,0"
+                        Background="Gray"
+                        BorderBrush="Transparent"
+                        Click="okbtn_Click"
+                        Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}">
+                        <ic:PackIconMaterial Kind="Check" />
+                    </Button>
+                    <TextBlock
+                        Margin="10,40,0,0"
+                        FontWeight="UltraBold"
+                        Foreground="Green"
+                        Text="OK"
+                        Visibility="{Binding IsValid, Converter={StaticResource bool2VisibilityConverter}}" />
+                    <TextBlock
+                        Margin="10,40,0,0"
+                        FontWeight="UltraBold"
+                        Foreground="Red"
+                        Text="Company Or Password Is Incorrect"
+                        Visibility="{Binding IsNotValid, Converter={StaticResource bool2VisibilityConverter}}" />
+                </StackPanel>
+
+                <!--<Image Width="308" Height="80">
+                    <Image.Source>
+                        <BitmapImage UriSource="Images/loading_apple.gif" />
+                    </Image.Source>
+                </Image>-->
+                <Label
+                    x:Name="lblProgress"
+                    Margin="10"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
+                    Content="Loading."
+                    FontWeight="Bold"
+                    Foreground="White"
+                    Visibility="{Binding IsValid, Converter={StaticResource bool2VisibilityConverter}}" />
+                <Label
+                    x:Name="dlllabel"
+                    Margin="10"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
+                    Content="{Binding DllString}"
+                    FontWeight="Bold"
+                    Foreground="#8D97E9"
+                    Visibility="{Binding IsValid, Converter={StaticResource bool2VisibilityConverter}}" />
+                <ProgressBar
+                    Height="10"
+                    Margin="10,20,0,10"
+                    HorizontalAlignment="Stretch"
+                    Background="White"
+                    Foreground="Gray"
+                    IsIndeterminate="True"
+                    Visibility="{Binding IsValid, Converter={StaticResource bool2VisibilityConverter}}" />
+            </StackPanel>
+        </Border>
+    </Grid>
+
+</controls:MetroWindow>

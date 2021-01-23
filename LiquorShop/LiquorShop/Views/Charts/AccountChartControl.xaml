@@ -1,0 +1,58 @@
+﻿<UserControl
+    x:Class="Rms.UserControls.Charts.AccountChartControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:chartingToolkit="clr-namespace:System.Windows.Controls.DataVisualization.Charting;assembly=System.Windows.Controls.DataVisualization.Toolkit"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
+    xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+    xmlns:local="clr-namespace:Rms.UserControls.Charts"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:vm="clr-namespace:Rms.ViewModels.Charts"
+    xmlns:oxy="http://oxyplot.org/wpf"
+    xmlns:agif="http://wpfanimatedgif.codeplex.com"
+    mc:Ignorable="d">
+  
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding LoadedCommand}" CommandParameter="{Binding ElementName=oxy}" />
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <StackPanel Margin="40 0 0 0" Grid.Row="0" Orientation="Horizontal" Visibility="{Binding IsDataLoaded, Converter={StaticResource bool2VisibilityConverter}}">
+                <StackPanel>
+                    <TextBlock Style="{StaticResource InfoTextBlock}" Text="Account" />
+                    <ComboBox
+                x:Name="accountcombo"
+                Width="250"
+                Margin="10"
+                HorizontalAlignment="Left"
+                DisplayMemberPath="AccountName"
+                ItemsSource="{Binding LedgerAccounts}"
+                SelectedItem="{Binding SelectedLedgerAccount}"
+                SelectionChanged="accountcombo_SelectionChanged" />
+                </StackPanel>
+                <Button Content="All" Margin="10 20 0 0" Width="50" Click="Button_Click" />
+            </StackPanel>
+
+            <oxy:PlotView
+           
+            Name="oxy"
+            Grid.Row="1"
+            Height="500"
+            Model="{Binding PlotModel}" />
+            <Grid Grid.Row="1" Visibility="{Binding IsDataNotLoaded,Converter={StaticResource bool2VisibilityConverter}}" >
+
+                <StackPanel  HorizontalAlignment="Center" VerticalAlignment="Center" >
+                    <Image Height="300" Width="300" agif:ImageBehavior.AnimatedSource="/LiquorShop;component/Images/loading_apple.gif"
+                  />
+                    <TextBlock Style="{StaticResource InfoTextBlock}" Text="Please Wait While System Is Fetching Settings Data..........." />
+                </StackPanel>
+            </Grid>
+
+        </Grid>
+</UserControl>

@@ -1,0 +1,94 @@
+﻿<UserControl
+    x:Class="LiquorShop.Views.Reports.GeneralLedgerReportView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:Viewer="clr-namespace:SAPBusinessObjects.WPF.Viewer;assembly=SAPBusinessObjects.WPF.Viewer"
+    xmlns:agif="http://wpfanimatedgif.codeplex.com"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+    xmlns:local="clr-namespace:LiquorShop.Views.Reports"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:vm="clr-namespace:LiquorShop.ViewModels.Reports"
+    mc:Ignorable="d">
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding LoadedCommand}" />
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0" Visibility="{Binding IsDataLoaded, Converter={StaticResource bool2VisibilityConverter}}">
+            <StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <ComboBox
+                        Name="accountcombo"
+                        Width="200"
+                        Margin="5"
+                        HorizontalAlignment="Left"
+                        DisplayMemberPath="AccountName"
+                        ItemsSource="{Binding LedgerAccounts}"
+                        SelectedItem="{Binding SelectedLedgerAccount}"
+                        SelectionChanged="accountcombo_SelectionChanged" />
+                    <TextBlock Style="{StaticResource InfoTextBlock}" Text="From" />
+                    <DatePicker
+                        Name="fromdatepicker"
+                        Width="150"
+                        Height="25"
+                        SelectedDate="{Binding FromDate}" />
+                    <TextBlock Style="{StaticResource InfoTextBlock}" Text="To" />
+                    <DatePicker
+                        Name="todatepicker"
+                        Width="150"
+                        Height="25"
+                        SelectedDate="{Binding ToDate}" />
+                    <Button
+                        Background="Chocolate"
+                        Click="Button_Click"
+                        Command="{Binding GetLedgerCommand}"
+                        Content="Search" />
+
+                </StackPanel>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+                    <Grid Grid.Row="0" Visibility="{Binding IsReportLoaded}">
+                        <Viewer:CrystalReportsViewer Name="ReportViewr" ToggleSidePanel="None" />
+                    </Grid>
+                    <Grid Grid.Row="1" Visibility="{Binding IsReportNotLoaded, Converter={StaticResource bool2VisibilityConverter}}">
+
+                        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                            <Image
+                                Width="300"
+                                Height="300"
+                                agif:ImageBehavior.AnimatedSource="/LiquorShop;component/Images/loading_apple.gif" />
+                            <TextBlock Style="{StaticResource InfoTextBlock}" Text="Please Wait While System Is Bringing Ledger Report ..........." />
+                        </StackPanel>
+                    </Grid>
+                </Grid>
+
+                <!--  reporthelper:ReportSourceBehaviour.ReportSource="{Binding  Path=DataContext.LedgerReport, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=FrameworkElement}}" />  -->
+
+            </StackPanel>
+        </Grid>
+        <Grid Grid.Row="1" Visibility="{Binding IsDataNotLoaded, Converter={StaticResource bool2VisibilityConverter}}">
+            <ContentControl Content="{Binding CurrentViewModel}" />
+            <StackPanel
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Visibility="{Binding IsBusy, Converter={StaticResource bool2VisibilityConverter}}">
+                <Image
+                    Width="400"
+                    Height="400"
+                    agif:ImageBehavior.AnimatedSource="/LiquorShop;component/Images/loading_apple.gif" />
+                <TextBlock Style="{StaticResource InfoTextBlock}" Text="Please Wait While System Is Initializing Report Window..........." />
+            </StackPanel>
+        </Grid>
+    </Grid>
+
+</UserControl>

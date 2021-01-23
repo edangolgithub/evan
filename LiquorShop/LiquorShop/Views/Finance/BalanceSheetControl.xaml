@@ -1,0 +1,192 @@
+﻿<UserControl
+    x:Class="Rms.UserControls.Accounts.BalanceSheetControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:conv="clr-namespace:TescoWine.Converters"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:sysglb="clr-namespace:System.Globalization;assembly=mscorlib"
+    mc:Ignorable="d">
+    <UserControl.Resources>
+        <conv:ZeroToEmptyConverter x:Key="ztoe" />
+    </UserControl.Resources>
+    <Grid>
+        <StackPanel HorizontalAlignment="Center" TextBlock.FontFamily="Times New Roman">
+            <StackPanel Orientation="Horizontal">
+                <Label Content="Select Date" Style="{StaticResource HeadingLabel}" />
+                <DatePicker
+                    Margin="5"
+                    SelectedDate="{Binding BalanceSheetDate}"
+                    SelectedDateFormat="Long" />
+                <Button
+                    Width="200"
+                    Command="{Binding GetBalanceSheetCommand}"
+                    Content="Get Balance Sheet" />
+                <Button
+                    Name="ExportBtn"
+                    Click="ExportBtn_Click"
+                    Content="Export To Excel" />
+            </StackPanel>
+            <ScrollViewer VerticalScrollBarVisibility="Auto" MaxHeight="700" Padding="50 0 50 0">
+                <StackPanel>
+                    <DataGrid
+                        Name="d1"
+                        Background="White" ColumnHeaderStyle="{StaticResource datagridcolstyle1}"
+                        GridLinesVisibility="All"
+                        RowHeight="20">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Width="400" Header="Assets" />
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    <DataGrid
+                        Name="d2"
+                        AutoGenerateColumns="False"
+                        CanUserAddRows="False"
+                        ColumnHeaderStyle="{StaticResource DatagridColumnHeaderCustomTemplateStyle}"
+                        GridLinesVisibility="None"
+                        HeadersVisibility="None"
+                        IsReadOnly="True"
+                        ItemsSource="{Binding Assets}">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn
+                                Width="200"
+                                Binding="{Binding LedgerAccountName}"
+                                Header="Account" />
+                            <DataGridTextColumn
+                                Width="200"
+                                Binding="{Binding Amount, StringFormat=C, ConverterCulture={x:Static sysglb:CultureInfo.CurrentCulture}, Converter={StaticResource ztoe}}"
+                                Header="Amount" />
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    <DataGrid
+                        Name="d3"
+                        AutoGenerateColumns="False"
+                        CanUserAddRows="False"
+                        ColumnHeaderStyle="{StaticResource DatagridColumnHeaderCustomTemplateStyle}"
+                        FontWeight="UltraBold"
+                        Foreground="{DynamicResource TotalMainBrush}"
+                        HeadersVisibility="None"
+                        IsReadOnly="True"
+                        ItemsSource="{Binding TotalAssetsRows}"
+                        Style="{StaticResource d}">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Width="200" Binding="{Binding LedgerAccountName}" />
+                            <DataGridTextColumn Width="200" Binding="{Binding Amount, StringFormat=C, ConverterCulture={x:Static sysglb:CultureInfo.CurrentCulture}, Converter={StaticResource ztoe}}" />
+
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    <DataGrid
+                        Name="d4"
+                        Background="White" ColumnHeaderStyle="{StaticResource datagridcolstyle1}"
+                        GridLinesVisibility="All">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Width="400" Header="Liabilities" />
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    <DataGrid
+                        Name="d5"
+                        AutoGenerateColumns="False"
+                        CanUserAddRows="False"
+                        ColumnHeaderStyle="{StaticResource DatagridColumnHeaderCustomTemplateStyle}"
+                        GridLinesVisibility="None"
+                        HeadersVisibility="None"
+                        IsReadOnly="True"
+                        ItemsSource="{Binding Liabilities}">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn
+                                Width="200"
+                                Binding="{Binding LedgerAccountName}"
+                                Header="Account" />
+                            <DataGridTextColumn
+                                Width="200"
+                                Binding="{Binding Amount, StringFormat=C, ConverterCulture={x:Static sysglb:CultureInfo.CurrentCulture}, Converter={StaticResource ztoe}}"
+                                Header="Amount" />
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    <DataGrid
+                        Name="d6"
+                        AutoGenerateColumns="False"
+                        CanUserAddRows="False"
+                        ColumnHeaderStyle="{StaticResource DatagridColumnHeaderCustomTemplateStyle}"
+                        FontWeight="UltraBold"
+                        Foreground="{DynamicResource TotalBrush}"
+                        HeadersVisibility="None"
+                        IsReadOnly="True"
+                        ItemsSource="{Binding TotalLiabilitiesRows}">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Width="200" Binding="{Binding LedgerAccountName}" />
+                            <DataGridTextColumn Width="200" Binding="{Binding Amount, StringFormat=C, ConverterCulture={x:Static sysglb:CultureInfo.CurrentCulture}, Converter={StaticResource ztoe}}" />
+
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    <DataGrid
+                        Name="d7"
+                        Background="White" ColumnHeaderStyle="{StaticResource datagridcolstyle1}"
+                        GridLinesVisibility="All">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Width="400" Header="Equity" />
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    <DataGrid
+                        Name="d8"
+                        AutoGenerateColumns="False"
+                        CanUserAddRows="False"
+                        ColumnHeaderStyle="{StaticResource DatagridColumnHeaderCustomTemplateStyle}"
+                        GridLinesVisibility="None"
+                        HeadersVisibility="None"
+                        IsReadOnly="True"
+                        ItemsSource="{Binding Equities}">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn
+                                Width="200"
+                                Binding="{Binding LedgerAccountName}"
+                                Header="Account" />
+                            <DataGridTextColumn
+                                Width="200"
+                                Binding="{Binding Amount, StringFormat=C, ConverterCulture={x:Static sysglb:CultureInfo.CurrentCulture}, Converter={StaticResource ztoe}}"
+                                Header="Amount" />
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    <DataGrid
+                        Name="d9"
+                        AutoGenerateColumns="False"
+                        CanUserAddRows="False"
+                        ColumnHeaderStyle="{StaticResource DatagridColumnHeaderCustomTemplateStyle}"
+                        FontWeight="UltraBold"
+                        Foreground="{DynamicResource TotalBrush}"
+                        HeadersVisibility="None"
+                        IsReadOnly="True"
+                        ItemsSource="{Binding TotalEquitiesRows}">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Width="200" Binding="{Binding LedgerAccountName}" />
+                            <DataGridTextColumn Width="200" Binding="{Binding Amount, StringFormat=C, ConverterCulture={x:Static sysglb:CultureInfo.CurrentCulture}, Converter={StaticResource ztoe}}" />
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    <DataGrid
+                        Name="d10"
+                        Background="White" ColumnHeaderStyle="{StaticResource datagridcolstyle1}"
+                        GridLinesVisibility="All">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Width="400" Header="Liabilities And Equity" />
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    <DataGrid
+                        Name="d11"
+                        AutoGenerateColumns="False"
+                        CanUserAddRows="False"
+                        FontWeight="UltraBold"
+                        Foreground="{DynamicResource TotalMainBrush}"
+                        HeadersVisibility="None"
+                        IsReadOnly="True"
+                        ItemsSource="{Binding LiabilitiesAndEquity}">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Width="200" Binding="{Binding LedgerAccountName}" />
+                            <DataGridTextColumn Width="200" Binding="{Binding Amount, StringFormat=C, ConverterCulture={x:Static sysglb:CultureInfo.CurrentCulture}, Converter={StaticResource ztoe}}" />
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </StackPanel>
+            </ScrollViewer>
+        </StackPanel>
+
+    </Grid>
+</UserControl>

@@ -1,0 +1,550 @@
+﻿<UserControl
+    x:Class="LiquorShop.Views.Purchases.PurchaseEntryView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:agif="http://wpfanimatedgif.codeplex.com"
+    xmlns:control="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+    xmlns:conv="clr-namespace:TescoWine.Converters"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:glb="clr-namespace:System.Globalization;assembly=mscorlib"
+    xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+    xmlns:ic="http://metro.mahapps.com/winfx/xaml/iconpacks"
+    xmlns:local="clr-namespace:LiquorShop.Views.Purchases"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:sys="clr-namespace:System;assembly=mscorlib"
+    xmlns:val="clr-namespace:Rms.Validations"
+    mc:Ignorable="d">
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding LoadedCommand}" />
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+    <UserControl.Resources>
+        <conv:DueDateConverter x:Key="c" />
+        <conv:duetobool x:Key="db" />
+        <conv:MetricToStringConverter x:Key="mts" />
+    </UserControl.Resources>
+    <ScrollViewer HorizontalScrollBarVisibility="Auto">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0" Visibility="{Binding IsDataLoaded, Converter={StaticResource bool2VisibilityConverter}}">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition Width="auto" />
+                </Grid.ColumnDefinitions>
+                <Grid Grid.Row="0" DataContext="{Binding SelectedPurchaseVm, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto" />
+                        <ColumnDefinition Width="auto" />
+                    </Grid.ColumnDefinitions>
+                    <GroupBox Grid.Row="0" Header="Purchase Details">
+                        <StackPanel>
+                            <StackPanel.Resources>
+                                <!--<Style BasedOn="{StaticResource MaterialDesignTextBox}" TargetType="TextBox">
+                                <Setter Property="MinWidth" Value="300" />
+                                <Setter Property="Margin" Value="1" />
+                            </Style>-->
+                                <!--<Style BasedOn="{StaticResource MaterialDesignComboBox}" TargetType="ComboBox">
+                                <Setter Property="MinWidth" Value="300" />
+                                <Setter Property="Margin" Value="1" />
+                            </Style>-->
+                                <!--<Style TargetType="Label">
+                                <Setter Property="MinWidth" Value="95" />
+                                <Setter Property="Margin" Value="1" />
+                            </Style>-->
+                            </StackPanel.Resources>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="auto" />
+                                    <ColumnDefinition Width="auto" />
+                                    <ColumnDefinition Width="auto" />
+                                    <ColumnDefinition Width="auto" />
+                                    <ColumnDefinition Width="auto" />
+                                    <ColumnDefinition Width="auto" />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="auto" />
+                                    <RowDefinition Height="auto" />
+                                    <RowDefinition Height="auto" />
+                                    <RowDefinition Height="auto" />
+                                    <RowDefinition Height="auto" />
+                                    <RowDefinition Height="auto" />
+                                    <RowDefinition Height="auto" />
+                                    <RowDefinition Height="auto" />
+                                    <RowDefinition Height="auto" />
+                                    <RowDefinition Height="auto" />
+                                    <RowDefinition Height="auto" />
+                                    <RowDefinition Height="auto" />
+                                    <RowDefinition Height="auto" />
+                                    <RowDefinition Height="auto" />
+                                    <RowDefinition Height="auto" />
+                                    <RowDefinition Height="auto" />
+                                    <RowDefinition Height="auto" />
+                                    <RowDefinition Height="auto" />
+                                    <RowDefinition Height="auto" />
+                                </Grid.RowDefinitions>
+
+
+                                <Label
+                                    Grid.Row="0"
+                                    Grid.Column="0"
+                                    Content="PurchaseId" />
+                                <TextBox
+                                    Grid.Row="0"
+                                    Grid.Column="1"
+                                    IsEnabled="False"
+                                    Text="{Binding PurchaseVmId}" />
+                                <Label
+                                    Grid.Row="1"
+                                    Grid.Column="0"
+                                    Content="Invoice" />
+                                <TextBox
+                                    Grid.Row="1"
+                                    Grid.Column="1"
+                                    Text="{Binding InvoiceNumber}" />
+                                <Label
+                                    Grid.Row="2"
+                                    Grid.Column="0"
+                                    Content="Supplier" />
+                                <ComboBox
+                                    Grid.Row="2"
+                                    Grid.Column="1"
+                                    DisplayMemberPath="SupplierName"
+                                    IsEditable="True"
+                                    ItemsSource="{Binding DataContext.Suppliers, RelativeSource={RelativeSource AncestorType={x:Type UserControl}, Mode=FindAncestor}}"
+                                    SelectedItem="{Binding Supplier, UpdateSourceTrigger=PropertyChanged}" />
+
+                                <Label
+                                    Grid.Row="3"
+                                    Grid.Column="0"
+                                    Content="Date" />
+                                <DatePicker
+                                    Grid.Row="3"
+                                    Grid.Column="1"
+                                    SelectedDate="{Binding Date, Converter={StaticResource c}, ConverterCulture={x:Static glb:CultureInfo.DefaultThreadCurrentCulture}, Mode=TwoWay, TargetNullValue={x:Static sys:DateTime.Now}, UpdateSourceTrigger=PropertyChanged}"
+                                    SelectedDateFormat="Long" />
+
+                                <Label
+                                    Grid.Row="0"
+                                    Grid.Column="2"
+                                    Content="Discount" />
+                                <TextBox
+                                    Name="discounttxt"
+                                    Grid.Row="0"
+                                    Grid.Column="3"
+                                    GotFocus="SelectTextBoxText"
+                                    Text="{Binding Discount, UpdateSourceTrigger=PropertyChanged}"
+                                    TextChanged="calculateinvoicetotaldiscount" />
+
+                                <Label
+                                    Grid.Row="1"
+                                    Grid.Column="2"
+                                    Content="Vat" />
+                                <TextBox
+                                    x:Name="vattxt"
+                                    Grid.Row="1"
+                                    Grid.Column="3"
+                                    GotFocus="SelectTextBoxText"
+                                    Text="{Binding VatAmount}"
+                                    TextChanged="calculateinvoicetotalvat" />
+
+                                <Label
+                                    Grid.Row="2"
+                                    Grid.Column="2"
+                                    Content="Total" />
+                                <TextBox
+                                    Grid.Row="2"
+                                    Grid.Column="3"
+                                    IsReadOnly="True"
+                                    GotFocus="SelectTextBoxText"
+                                    Text="{Binding DataContext.PurchaseSubTotal, RelativeSource={RelativeSource AncestorType={x:Type UserControl}, Mode=FindAncestor}}" />
+                                <Label
+                                    Grid.Row="3"
+                                    Grid.Column="2"
+                                    Content="Amount Paid" />
+                                <TextBox
+                                    Grid.Row="3"
+                                    Grid.Column="3"
+                                    GotFocus="SelectTextBoxText"
+                                    Text="{Binding AmountPaid}" />
+                                <Label
+                                    Grid.Row="4"
+                                    Grid.Column="2"
+                                    Content="Due" />
+                                <TextBox
+                                    Grid.Row="4"
+                                    Grid.Column="3"
+                                    GotFocus="SelectTextBoxText"
+                                    Text="{Binding Due}" />
+
+
+                                <GroupBox
+                                    Grid.Row="0"
+                                    Grid.RowSpan="10"
+                                    Grid.Column="4"
+                                    Grid.ColumnSpan="3"
+                                    Width="200"
+                                    Margin="5,0,5,0"
+                                    FontSize="10"
+                                    Visibility="{Binding ElementName=aach, Path=IsChecked, Converter={StaticResource bool2VisibilityConverter}}">
+                                    <StackPanel>
+                                        
+                                        <StackPanel Orientation="Horizontal">
+                                            <RadioButton Content="Cash" IsChecked="{Binding DataContext.IsCash, RelativeSource={RelativeSource AncestorType={x:Type UserControl}, Mode=FindAncestor}}" />
+                                            <RadioButton Content="Credit" IsChecked="{Binding DataContext.IsCredit, RelativeSource={RelativeSource AncestorType={x:Type UserControl}, Mode=FindAncestor}}" />
+                                            <RadioButton
+                                                Name="bankradio"
+                                                Content="Bank/Cheque"
+                                                IsChecked="{Binding DataContext.IsBank, RelativeSource={RelativeSource AncestorType={x:Type UserControl}, Mode=FindAncestor}}" />
+                                        </StackPanel>
+                                        <StackPanel Name="bankstkpnl" Visibility="{Binding ElementName=bankradio, Path=IsChecked, Converter={StaticResource bool2VisibilityConverter}}">
+                                            <Label Margin="0" Content="Bank" />
+                                            <ComboBox
+                                                DisplayMemberPath="AccountName"
+                                                ItemsSource="{Binding DataContext.Banks, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}}"
+                                                SelectedItem="{Binding DataContext.SelectedBankAccount, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}}" />
+                                            <Label Margin="0" Content="Cheque No." />
+                                            <TextBox Margin="0" />
+                                        </StackPanel>
+                                        <StackPanel>
+                                            <TextBlock Text="Narration" />
+                                            <TextBox
+                                                MinWidth="150"
+                                                VerticalContentAlignment="Top"
+                                                AcceptsReturn="True"
+                                                MaxLines="10"
+                                                MinLines="2"
+                                                Text="{Binding DataContext.PurchaseNarration, RelativeSource={RelativeSource AncestorType={x:Type UserControl}, Mode=FindAncestor}}"
+                                                TextWrapping="Wrap" />
+                                        </StackPanel>
+                                        <StackPanel
+                                    Grid.Row="3"
+                                    Grid.Column="2"
+                                    Grid.ColumnSpan="2"
+                                    Orientation="Horizontal">
+                                            <Label
+                                        Margin="60,0,0,0"
+                                        VerticalAlignment="Center"
+                                        Content="Post to Ledger"
+                                        IsEnabled="False" />
+                                            <CheckBox Name="acch" IsEnabled="{Binding DataContext.PostLedgerCheckEnabled,
+                                                RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}}" 
+                                                      IsChecked="{Binding DataContext.PostPurchaseToLedger,
+                                                RelativeSource={RelativeSource AncestorType={x:Type UserControl},
+                                                Mode=FindAncestor}}" />
+
+                                            <Button Command="{Binding DataContext.SavePurchasesCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}}" Content="Save" />
+                                        </StackPanel>
+                                    </StackPanel>
+                                </GroupBox>
+                            </Grid>
+
+                            <GroupBox>
+                                <Grid HorizontalAlignment="Left" DataContext="{Binding DataContext.NewPurchase, RelativeSource={RelativeSource AncestorType={x:Type UserControl}, Mode=FindAncestor}}">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="auto" />
+                                        <ColumnDefinition Width="auto" />
+                                        <ColumnDefinition Width="auto" />
+                                        <ColumnDefinition Width="auto" />
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="auto" />
+                                        <RowDefinition Height="auto" />
+                                        <RowDefinition Height="auto" />
+                                        <RowDefinition Height="auto" />
+                                        <RowDefinition Height="auto" />
+                                        <RowDefinition Height="auto" />
+
+                                    </Grid.RowDefinitions>
+                                    <Grid.Resources>
+                                        <!--<Style BasedOn="{StaticResource MaterialDesignTextBox}" TargetType="TextBox">
+                                        <Setter Property="Width" Value="300" />
+                                        <Setter Property="Margin" Value="1" />
+                                    </Style>
+                                    <Style BasedOn="{StaticResource MaterialDesignComboBox}" TargetType="ComboBox">
+                                        <Setter Property="Width" Value="300" />
+                                        <Setter Property="Margin" Value="1" />
+                                    </Style>
+                                    <Style TargetType="Label">
+                                        <Setter Property="MinWidth" Value="95" />
+                                        <Setter Property="Margin" Value="1" />
+                                    </Style>-->
+                                    </Grid.Resources>
+
+                                    <!--<Label
+                                Grid.Row="0"
+                                Grid.Column="0"
+                                Content="PurchaseId" />
+                            <TextBox
+                                Grid.Row="0"
+                                Grid.Column="1"
+                                IsEnabled="False"
+                                Text="{Binding PurchaseId}" />-->
+
+                                    <Label
+                                        Grid.Row="0"
+                                        Grid.Column="0"
+                                        Content="Beverage" />
+                                    <ComboBox
+                                        x:Name="scombo"
+                                        Grid.Row="0"
+                                        Grid.Column="1"
+                                        DisplayMemberPath="Name"
+                                        IsEditable="True"
+                                        ItemsSource="{Binding DataContext.Beverages, RelativeSource={RelativeSource AncestorType={x:Type UserControl}, Mode=FindAncestor}}"
+                                        SelectedItem="{Binding Beverage}"
+                                        SelectionChanged="scombo_SelectionChanged" />
+                                    <Label
+                                        Grid.Row="1"
+                                        Grid.Column="0"
+                                        Content="Metric" />
+                                    <ComboBox
+                                        Grid.Row="1"
+                                        Grid.Column="1"
+                                        ItemsSource="{Binding DataContext.Metrics, RelativeSource={RelativeSource AncestorType={x:Type UserControl}, Mode=FindAncestor}}"
+                                        SelectedItem="{Binding DataContext.SelectedMetric, UpdateSourceTrigger=PropertyChanged, RelativeSource={RelativeSource AncestorType={x:Type UserControl}, Mode=FindAncestor}, Converter={StaticResource mts}}" />
+
+
+                                    <Label
+                                        Grid.Row="2"
+                                        Grid.Column="0"
+                                        Content="Quantity" />
+                                    <TextBox
+                                        Name="quantitytxt"
+                                        Grid.Row="2"
+                                        Grid.Column="1"
+                                        GotFocus="SelectTextBoxText"
+                                        Text="{Binding MetricQuantity, UpdateSourceTrigger=PropertyChanged}"
+                                        TextChanged="quantitytxt_TextChanged" />
+                                    <Label
+                                        Grid.Row="3"
+                                        Grid.Column="0"
+                                        Content="Actual Quantity" />
+
+                                    <TextBox
+                                        Grid.Row="3"
+                                        Grid.Column="1"
+                                        Text="{Binding DataContext.UnitQuantity, UpdateSourceTrigger=PropertyChanged, RelativeSource={RelativeSource AncestorType={x:Type UserControl}, Mode=FindAncestor}}" />
+
+
+                                    <Label
+                                        Grid.Row="0"
+                                        Grid.Column="2"
+                                        Content="Rate" />
+                                    <TextBox
+                                        Name="ratetextbox"
+                                        Grid.Row="0"
+                                        Grid.Column="3"
+                                        GotFocus="SelectTextBoxText"
+                                        Text="{Binding DataContext.RateString, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}, UpdateSourceTrigger=PropertyChanged}"
+                                        TextChanged="ratetextbox_TextChanged" />
+                                    <Label
+                                        Grid.Row="1"
+                                        Grid.Column="2"
+                                        Content="Amount" />
+                                    <TextBox
+                                        Grid.Row="1"
+                                        Grid.Column="3"
+                                        Text="{Binding LineTotalAmount, StringFormat=C, ConverterCulture={x:Static glb:CultureInfo.CurrentCulture}, UpdateSourceTrigger=PropertyChanged}" />
+
+                                    <!--<Label
+                                Grid.Row="2"
+                                Grid.Column="2"
+                                Content="Actual Quantity" />
+
+                            <TextBox
+                                Grid.Row="2"
+                                Grid.Column="3"
+                                Text="{Binding DataContext.UnitQuantity, UpdateSourceTrigger=PropertyChanged, RelativeSource={RelativeSource AncestorType={x:Type UserControl}, Mode=FindAncestor}}" />-->
+
+                                    <Label
+                                        Grid.Row="2"
+                                        Grid.Column="2"
+                                        Content="Unit Price" />
+                                    <TextBox
+                                        Name="unitpricetxt"
+                                        Grid.Row="2"
+                                        Grid.Column="3"
+                                        Text="{Binding UnitPrice, StringFormat=C, ConverterCulture={x:Static glb:CultureInfo.CurrentCulture}, UpdateSourceTrigger=PropertyChanged}" />
+
+                                    <StackPanel
+                                        Grid.Row="3"
+                                        Grid.Column="3"
+                                        Height="28"
+                                        VerticalAlignment="Center"
+                                        DataContext="{Binding DataContext, RelativeSource={RelativeSource AncestorType={x:Type UserControl}, Mode=FindAncestor}}"
+                                        Orientation="Horizontal">
+
+                                        <Button
+                                            Width="50"
+                                            Height="20"
+                                            Margin="5"
+                                            Padding="0"
+                                            Command="{Binding DataContext.SavePurchaseCommand, RelativeSource={RelativeSource AncestorType={x:Type UserControl}, Mode=FindAncestor}}"
+                                            Content="Add" />
+
+                                        <Button
+                                            Width="50"
+                                            Height="20"
+                                            Margin="5"
+                                            Padding="0"
+                                            Command="{Binding DataContext.CancelPurchaseCommand, RelativeSource={RelativeSource AncestorType={x:Type UserControl}, Mode=FindAncestor}}"
+                                            Content="Cancel" />
+
+                                    </StackPanel>
+
+                                </Grid>
+                            </GroupBox>
+
+
+                            <GroupBox Grid.Row="6">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="auto" />
+                                        <ColumnDefinition Width="auto" />
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="auto" />
+                                        <RowDefinition Height="auto" />
+                                        <RowDefinition Height="auto" />
+                                        <RowDefinition Height="auto" />
+
+                                    </Grid.RowDefinitions>
+                                    <DataGrid
+                                        Name="dg"
+                                        Grid.Row="0"
+                                        Grid.Column="0"
+                                        AutoGenerateColumns="False"
+                                        CanUserAddRows="False"
+                                        ColumnHeaderStyle="{StaticResource DatagridColumnHeaderCustomTemplateStyle}"
+                                        IsReadOnly="True"
+                                        ItemsSource="{Binding Purchases}"
+                                        SelectedItem="{Binding SelectedPurchaseEntry, UpdateSourceTrigger=PropertyChanged, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}}"
+                                        Style="{StaticResource DatGrid300}">
+
+                                        <DataGrid.Columns>
+                                            <!--<DataGridTextColumn
+                                                IsReadOnly="True"
+                                                Binding="{Binding InvoiceNumber,UpdateSourceTrigger=PropertyChanged, StringFormat=D}" Header="Invoice" />-->
+                                            <!--<DataGridTextColumn
+                                                Width="150"
+                                                Binding="{Binding PurchaseDate, StringFormat=d}"
+                                                Header="PurchaseDate" />-->
+                                            <DataGridTextColumn
+                                                Width="150"
+                                                Binding="{Binding Beverage.Name}"
+                                                Header="Bevearge"
+                                                IsReadOnly="True" />
+                                            <DataGridTextColumn
+                                                Width="55"
+                                                Binding="{Binding MetricQuantity}"
+                                                Header="Qty" />
+                                            <DataGridTextColumn
+                                                Binding="{Binding Metric, Converter={StaticResource mts}}"
+                                                Header="Metric"
+                                                IsReadOnly="True" />
+                                            <DataGridTextColumn Binding="{Binding Quantity}" Header="Actual Qty" />
+                                            <DataGridTextColumn
+                                                Width="100"
+                                                Binding="{Binding Rate}"
+                                                Header="Rate" />
+                                            <DataGridTextColumn
+                                                Width="150"
+                                                Binding="{Binding UnitPrice, StringFormat=C, ConverterCulture={x:Static glb:CultureInfo.CurrentCulture}}"
+                                                Header="UnitPrice" />
+                                            <DataGridTextColumn
+                                                Width="150"
+                                                Binding="{Binding LineTotalAmount, StringFormat=C, ConverterCulture={x:Static glb:CultureInfo.CurrentCulture}}"
+                                                Header="Amount" />
+                                            <DataGridTemplateColumn>
+                                                <DataGridTemplateColumn.CellTemplate>
+                                                    <DataTemplate>
+                                                        <StackPanel>
+                                                            <Button Command="{Binding DataContext.RemovePurchaseCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}}" CommandParameter="{Binding CurrentItem, ElementName=dg}">
+                                                                <Button.Content>
+                                                                    <ic:Material Kind="Delete" />
+                                                                </Button.Content>
+                                                            </Button>
+                                                        </StackPanel>
+                                                    </DataTemplate>
+                                                </DataGridTemplateColumn.CellTemplate>
+                                            </DataGridTemplateColumn>
+                                        </DataGrid.Columns>
+                                    </DataGrid>
+                                    <Grid Grid.Row="1">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="auto" />
+                                            <ColumnDefinition Width="auto" />
+                                        </Grid.ColumnDefinitions>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="auto" />
+                                            <RowDefinition Height="auto" />
+                                            <RowDefinition Height="auto" />
+                                            <RowDefinition Height="auto" />
+
+                                        </Grid.RowDefinitions>
+                                        <StackPanel Grid.Row="1" Grid.Column="0" />
+                                    </Grid>
+                                </Grid>
+
+                            </GroupBox>
+
+                        </StackPanel>
+
+                    </GroupBox>
+
+                </Grid>
+                <Grid Grid.Row="1" Grid.Column="0">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto" />
+                            <ColumnDefinition Width="auto" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto" />
+                            <RowDefinition Height="auto" />
+                            <RowDefinition Height="auto" />
+                            <RowDefinition Height="auto" />
+
+                        </Grid.RowDefinitions>
+                        <!--<StackPanel Grid.Row="0" Grid.Column="0">
+
+                        <Button Click="Button_Click" Content="View Purchases" />
+                    </StackPanel>-->
+                    </Grid>
+                </Grid>
+            </Grid>
+            <Grid Grid.Row="1">
+                <Grid>
+                    <ContentControl Content="{Binding CurrentViewModel}" />
+
+                    <StackPanel
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Visibility="{Binding IsDataNotLoaded, Converter={StaticResource bool2VisibilityConverter}}">
+                        <Image
+                            Width="300"
+                            Height="300"
+                            agif:ImageBehavior.AnimatedSource="/LiquorShop;component/Images/loading_apple.gif" />
+                        <TextBlock Style="{StaticResource InfoTextBlock}" Text="Please Wait While System Is Fetching R Data..........." />
+                    </StackPanel>
+                </Grid>
+            </Grid>
+        </Grid>
+    </ScrollViewer>
+</UserControl>

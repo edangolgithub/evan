@@ -1,0 +1,331 @@
+﻿<UserControl
+    x:Class="Rms.UserControls.Accounts.ChartOfAccounts"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:conv="clr-namespace:Rms.Converters"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:gif="http://wpfanimatedgif.codeplex.com"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:vm="clr-namespace:Rms.ViewModels"
+    xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+    mc:Ignorable="d">
+    <UserControl.Resources>
+        <conv:AccountClassEnableConverter x:Key="AccountClassEnableConverter" />
+    </UserControl.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto" />
+            <ColumnDefinition Width="auto" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="0" Orientation="Horizontal">
+            <Border Grid.Column="0" Style="{StaticResource borderstyle}">
+                <StackPanel>
+                    <Label Content="Charts Of Accounts" Style="{StaticResource HeadingLabel}" />
+                    <Grid>
+
+                        <DataGrid
+                            x:Name="dataGrid"
+                            Height="270"
+                            AutoGenerateColumns="False"
+                            CanUserAddRows="False"
+                           
+                            FontSize="12"
+                            ItemsSource="{Binding LedgerAccounts}"
+                           
+                            SelectedItem="{Binding SelectedLedgerAccount}"
+                            Visibility="{Binding IsGridVisible}">
+
+                            <DataGrid.Columns>
+                                <DataGridTextColumn
+                                    MinWidth="50"
+                                    Binding="{Binding LedgerAccountId}"
+                                    Header="Account Id" />
+                                <DataGridTextColumn
+                                    MinWidth="150"
+                                    Binding="{Binding AccountName}"
+                                    Header="Account Name" />
+
+                                <DataGridTextColumn
+                                    MinWidth="100"
+                                    Binding="{Binding AccountClass.Name}"
+                                    Header="Account Class"
+                                    IsReadOnly="True" />
+                                <DataGridTextColumn
+                                    MinWidth="150"
+                                    Binding="{Binding parentLedgerAccount.AccountName}"
+                                    Header="Parent Account" />
+                                <DataGridTextColumn Binding="{Binding SortOrder}" Header="Sort Order" />
+                                <DataGridCheckBoxColumn Binding="{Binding ShowInChart}" Header="Chart" />
+                            </DataGrid.Columns>
+                        </DataGrid>
+
+                    </Grid>
+                </StackPanel>
+
+
+            </Border>
+            <Border
+                Grid.Column="1"
+                MinWidth="350"
+                Style="{StaticResource borderstyle}">
+                <StackPanel>
+                    <ComboBox
+                        Grid.Row="3"
+                        Grid.Column="1"
+                        DisplayMemberPath="LedgerAccountName"
+                        ItemsSource="{Binding DataContext.LedgerAccounts, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type UserControl}}}"
+                        SelectedItem="{Binding parentLedgerAccount}" />
+                    <Label Content="Add Or edit" Style="{StaticResource HeadingLabel}" />
+                    <Grid Grid.Column="1" DataContext="{Binding SelectedLedgerAccount}">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto" />
+                            <ColumnDefinition Width="auto" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto" />
+                            <RowDefinition Height="auto" />
+                            <RowDefinition Height="auto" />
+                            <RowDefinition Height="auto" />
+                            <RowDefinition Height="auto" />
+                            <RowDefinition Height="auto" />
+                            <RowDefinition Height="auto" />
+                            <RowDefinition Height="auto" />
+                            <RowDefinition Height="auto" />
+                        </Grid.RowDefinitions>
+                        <Label
+                            Grid.Row="0"
+                            Grid.Column="0"
+                            Content="Account Id" />
+                        <TextBox
+                            Grid.Row="0"
+                            Grid.Column="1"
+                            IsReadOnly="True"
+                            Text="{Binding LedgerAccountId}" />
+                        <Label
+                            Grid.Row="1"
+                            Grid.Column="0"
+                            Content="Account Name" />
+                        <TextBox
+                            Grid.Row="1"
+                            Grid.Column="1"
+                            Text="{Binding AccountName}" />
+                        <Label
+                            Grid.Row="2"
+                            Grid.Column="0"
+                            Content="Account Category" />
+                        <ComboBox
+                            Grid.Row="2"
+                            Grid.Column="1"
+                            DisplayMemberPath="Name"
+                            ItemsSource="{Binding DataContext.AccountClasses, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type UserControl}}}"
+                            SelectedItem="{Binding AccountClass}" />
+                        <Label
+                            Grid.Row="3"
+                            Grid.Column="0"
+                            Content="Parent Account" />
+                        <ComboBox
+                            Grid.Row="3"
+                            Grid.Column="1"
+                            DisplayMemberPath="AccountName"
+                            ItemsSource="{Binding DataContext.LedgerAccounts, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type UserControl}}}"
+                            SelectedItem="{Binding parentLedgerAccount}" />
+                        <!--<Label
+                            Grid.Row="4"
+                            Grid.Column="0"
+                            Content="Sort Order" />
+                        <TextBox
+                            Grid.Row="4"
+                            Grid.Column="1"
+                            Text="{Binding SortOrder}" />-->
+                        <Label
+                            Grid.Row="5"
+                            Grid.Column="0"
+                            Content="Description" />
+                        <TextBox
+                            Grid.Row="5"
+                            Grid.Column="1"
+                            Text="{Binding Description}" />
+                        <Label
+                            Grid.Row="6"
+                            Grid.Column="0"
+                            Content="Show In Chart" />
+                        <CheckBox
+                            Grid.Row="6"
+                            Grid.Column="1"
+                            Margin="2"
+                            IsChecked="{Binding ShowInChart, UpdateSourceTrigger=PropertyChanged}" />
+                        <StackPanel
+                            Grid.Row="7"
+                            Grid.Column="3"
+                            Grid.ColumnSpan="2"
+                            DataContext="{Binding DataContext, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}}"
+                            Orientation="Horizontal">
+                            <Button
+                                x:Name="coaaddbtn"
+                                HorizontalAlignment="Left"
+                                Command="{Binding NewCommand}"
+                                Content="New" />
+                            <Button
+                                x:Name="coasavebtn"
+                                HorizontalAlignment="Left"
+                                Command="{Binding SaveCommand}"
+                                Content="Save" />
+                            <Button
+                                x:Name="coadeletebtn"
+                                HorizontalAlignment="Left"
+                                Command="{Binding DeleteCommand}"
+                                Content="Delete" />
+
+                        </StackPanel>
+                    </Grid>
+                </StackPanel>
+            </Border>
+        </StackPanel>
+        <StackPanel Grid.Row="1" Orientation="Horizontal">
+            <Border Grid.Column="0" Style="{StaticResource borderstyle}">
+                <StackPanel>
+                    <Label Content="Account Categories" Style="{StaticResource HeadingLabel}" />
+                    <Grid>
+
+                        <DataGrid
+                            x:Name="accountclassgrid"
+                            Width="500"
+                            Height="270"
+                            AutoGenerateColumns="False"
+                            CanUserAddRows="False"
+                            CanUserDeleteRows="False"
+
+                            FontSize="12"
+                            IsReadOnly="True"
+                            ItemsSource="{Binding AccountClasses}"
+                            RowStyle="{StaticResource datagridrowstyle}"
+                            SelectedItem="{Binding SelectedAccountClass}"
+                            Visibility="{Binding IsGridVisible}">
+
+                            <DataGrid.Columns>
+                                <DataGridTextColumn
+                                    MinWidth="100"
+                                    Binding="{Binding AccountClassId}"
+                                    Header="Account Class Id" />
+                                <DataGridTextColumn
+                                    MinWidth="150"
+                                    Binding="{Binding Name}"
+                                    Header="Account Category" />
+
+                                <DataGridTextColumn
+                                    MinWidth="200"
+                                    Binding="{Binding Description}"
+                                    Header="Description" />
+                            </DataGrid.Columns>
+                        </DataGrid>
+
+                    </Grid>
+                </StackPanel>
+
+
+            </Border>
+            <Border
+                Grid.Column="1"
+                Width="350"
+                Style="{StaticResource borderstyle}">
+                <StackPanel>
+                    <Label Content="Add Or edit" Style="{StaticResource HeadingLabel}" />
+                    <Grid Grid.Column="1" DataContext="{Binding SelectedAccountClass}">
+                        <!--<Grid.Style>
+                            <Style TargetType="Grid">
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding DataContext,RelativeSource={RelativeSource Self},Converter={StaticResource AccountClassEnableConverter}}" Value="true">
+                                        <Setter Property="IsEnabled" Value="False" />
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Grid.Style>-->
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto" />
+                            <ColumnDefinition Width="auto" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto" />
+                            <RowDefinition Height="auto" />
+                            <RowDefinition Height="auto" />
+                            <RowDefinition Height="auto" />
+                            <RowDefinition Height="auto" />
+                            <RowDefinition Height="auto" />
+                        </Grid.RowDefinitions>
+                        <Label
+                            Grid.Row="0"
+                            Grid.Column="0"
+                            Content="Account Id" />
+                        <TextBox
+                            Grid.Row="0"
+                            Grid.Column="1"
+                            IsReadOnly="True"
+                            Text="{Binding AccountClassId}" />
+                        <Label
+                            Grid.Row="1"
+                            Grid.Column="0"
+                            Content="Account Name" />
+                        <TextBox
+                            Grid.Row="1"
+                            Grid.Column="1"
+                            Text="{Binding Name}">
+                            <TextBox.Style>
+                                <Style BasedOn="{StaticResource textboxstyle}" TargetType="TextBox">
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding DataContext, RelativeSource={RelativeSource Self}, Converter={StaticResource AccountClassEnableConverter}}" Value="true">
+                                            <Setter Property="IsReadOnly" Value="True" />
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBox.Style>
+                        </TextBox>
+                        <Label
+                            Grid.Row="2"
+                            Grid.Column="0"
+                            Content="Description" />
+                        <TextBox
+                            Grid.Row="2"
+                            Grid.Column="1"
+                            Text="{Binding Description}" />
+                        <!--<Label
+                    Grid.Row="3"
+                    Grid.Column="0"
+                    Content="Show In Chart" />
+                        <CheckBox
+
+                    Grid.Row="3"
+                    Grid.Column="1"
+                    IsChecked="{Binding ShowInChart, UpdateSourceTrigger=PropertyChanged}" />-->
+                        <StackPanel
+                            Grid.Row="4"
+                            Grid.Column="3"
+                            Grid.ColumnSpan="2"
+                            DataContext="{Binding DataContext, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}}"
+                            Orientation="Horizontal">
+                            <Button
+                                x:Name="AddAccountClassBtn"
+                                HorizontalAlignment="Left"
+                                Command="{Binding NewAccountClassCommand}"
+                                Content="New" />
+                            <Button
+                                x:Name="SaveAccountClassBtn"
+                                HorizontalAlignment="Left"
+                                Command="{Binding SaveAccountClassCommand}"
+                                Content="Save" />
+                            <Button
+                                x:Name="DeleteAccountClassBtn"
+                                HorizontalAlignment="Left"
+                                Command="{Binding DeleteAccountClassCommand}"
+                                Content="Delete" />
+
+                        </StackPanel>
+                    </Grid>
+                </StackPanel>
+            </Border>
+        </StackPanel>
+    </Grid>
+</UserControl>

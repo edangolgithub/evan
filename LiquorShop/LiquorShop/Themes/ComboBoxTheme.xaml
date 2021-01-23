@@ -1,0 +1,12 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="clr-namespace:Rms.Themes">
+    <Style BasedOn="{StaticResource MaterialDesignComboBox}" TargetType="ComboBox">
+        <Setter Property="Background" Value="{DynamicResource TextBackGroundColor}" />
+        <Setter Property="FontFamily" Value="Times New Roman" />
+        <Setter Property="MinWidth" Value="200" />
+        <Setter Property="Margin" Value="3" />
+    </Style>
+
+</ResourceDictionary>

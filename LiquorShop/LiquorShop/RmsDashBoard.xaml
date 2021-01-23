@@ -1,0 +1,414 @@
+﻿<controls:MetroWindow
+    x:Class="Rms.Views.RmsDashBoard"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:agif="http://wpfanimatedgif.codeplex.com"
+    xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+   
+    xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:mg="http://materialdesigninxaml.net/winfx/xaml/themes"
+    xmlns:vm="clr-namespace:LiquorShop.ViewModels.Beverages"
+    AllowsTransparency="True"
+    FocusManager.FocusedElement="{Binding ElementName=username}"
+    ResizeMode="NoResize"
+    ShowCloseButton="True"
+    ShowTitleBar="False"
+    SizeToContent="Height"
+    WindowStyle="None"
+    mc:Ignorable="d">
+    <!--<i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding LoadedCommand}" />
+        </i:EventTrigger>
+    </i:Interaction.Triggers>-->
+    <!--<Window.Background>
+        <ImageBrush ImageSource="/Images/BackGround1.jpg" />
+    </Window.Background>-->
+    <Window.Resources>
+
+        <Style TargetType="controls:Tile">
+            <Setter Property="Cursor" Value="Hand" />
+            <Setter Property="HorizontalTitleAlignment" Value="Center" />
+            <Setter Property="Width" Value="80" />
+            <Setter Property="Height" Value="80" />
+            <Setter Property="Background">
+                <Setter.Value>
+                    <LinearGradientBrush StartPoint="0.1,0.1" EndPoint="1,1">
+                        <GradientStop Offset="0" Color="#DED980" />
+                        <GradientStop Offset="1" Color="#FF9A9CC9" />
+
+                    </LinearGradientBrush>
+
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#B3F10D" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
+    <Grid Margin="0,0,0, 0">
+        <Grid.Background>
+            <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                <GradientStop Offset="0" Color="#F7F7FC" />
+                <GradientStop Offset="1" Color="#FFE6E4F7" />
+            </LinearGradientBrush>
+        </Grid.Background>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid
+            Name="hgrid"
+            Grid.Row="0"
+            Grid.ColumnSpan="2">
+            <mg:Card Margin="5" >
+                <StackPanel Height="170" Margin="0,0,0,10">
+                    <Grid>
+                        <Label Content="Wine Software" Style="{StaticResource HeaderLabel}" />
+                        <!--<Button
+                            Name="closebtn"
+                            HorizontalAlignment="Right"
+                            Background="#FCF8D4"
+                            BorderBrush="Transparent"
+                            Click="closebtn_Click"
+                            Foreground="Black"
+                            Style="{StaticResource MaterialDesignFloatingActionDarkButton}">
+                            <iconPacks:PackIconModern Kind="Close" />
+                        </Button>-->
+                    </Grid>
+                    <StackPanel
+                        Width="500"
+                        Height="120"
+                        VerticalAlignment="Bottom">
+                        <StackPanel.Background>
+                            <ImageBrush ImageSource="Images/wbanner.png" />
+                        </StackPanel.Background>
+
+                    </StackPanel>
+
+                </StackPanel>
+            </mg:Card>
+        </Grid>
+        <ScrollViewer
+            Grid.Row="1"
+            Width="250"
+            HorizontalAlignment="Left"
+            ScrollViewer.VerticalScrollBarVisibility="Auto">
+
+            <StackPanel
+                Name="TileMenu"
+                Margin="5"
+                MouseDown="TileMenu_MouseDown">
+                <StackPanel.Resources>
+                    <Style TargetType="Rectangle">
+                        <Setter Property="Width" Value="30" />
+                        <Setter Property="Height" Value="30" />
+                    </Style>
+                </StackPanel.Resources>
+                <mg:Card Padding="5" >
+                <UniformGrid Columns="3" IsEnabled="{Binding IsUserLoggedIn}">
+                    <controls:Tile
+                        x:Name="FinanceTile"
+                        Title="Finance"
+                        Margin="3"
+                        Command="{Binding TileCLickCommand}"
+                        CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Title}"
+                        TitleFontSize="10">
+
+                        <Rectangle HorizontalAlignment="Center" >
+                            <Rectangle.Fill >
+                                <!--<ImageBrush ImageSource="/Images/finance.png" />-->
+                                <VisualBrush  Visual="{iconPacks:Modern Kind=CalendarDollar}" />
+                                
+                            </Rectangle.Fill>
+                        </Rectangle>
+                    </controls:Tile>
+                    <controls:Tile
+                        x:Name="RestaurantTile"
+                        Title="Beverages"
+                        Margin="3"
+                        Command="{Binding TileCLickCommand}"
+                        CommandParameter="{Binding Path=Title, RelativeSource={RelativeSource Self}}"
+                        TitleFontSize="10">
+                        <Rectangle>
+                            <Rectangle.Fill>
+                                <VisualBrush Visual="{iconPacks:Material Kind=GlassWine, Spin=True}" />
+                                
+                            </Rectangle.Fill>
+                        </Rectangle>
+                    </controls:Tile>
+                    <controls:Tile
+                        x:Name="SettingsTile"
+                        Title="Purchases"
+                        Margin="3"
+                        Command="{Binding TileCLickCommand}"
+                        CommandParameter="{Binding Path=Title, RelativeSource={RelativeSource Self}}"
+                        TitleFontSize="10">
+                        <Rectangle>
+                            <Rectangle.Fill>
+                                <VisualBrush Visual="{iconPacks:Modern Kind=BoxLayered, Spin=True}" />
+                            </Rectangle.Fill>
+                        </Rectangle>
+                    </controls:Tile>
+                    <controls:Tile
+                        x:Name="ItemsTile"
+                        Title="Sales"
+                        Margin="3"
+                        Command="{Binding TileCLickCommand}"
+                        CommandParameter="{Binding Path=Title, RelativeSource={RelativeSource Self}}"
+                        HorizontalTitleAlignment="Center"
+                        TitleFontSize="10">
+                        <Rectangle>
+                            <Rectangle.Fill>
+                                <VisualBrush Visual="{iconPacks:FontAwesome Kind=HandHoldingUsdSolid}" />
+                            </Rectangle.Fill>
+                        </Rectangle>
+                    </controls:Tile>
+                    <controls:Tile
+                        x:Name="InventoryTile"
+                        Title="Users"
+                        Margin="3"
+                        Command="{Binding TileCLickCommand}"
+                        CommandParameter="{Binding Path=Title, RelativeSource={RelativeSource Self}}"
+                        TitleFontSize="10">
+                        <Rectangle>
+                            <Rectangle.Fill>
+                                <!--<ImageBrush ImageSource="/Images/InventoryTile.png" />-->
+                                <VisualBrush Visual="{iconPacks:Material Kind=Account}" />
+                            </Rectangle.Fill>
+                        </Rectangle>
+                    </controls:Tile>
+                    <controls:Tile
+                        x:Name="BackupTile"
+                        Title="Settings"
+                        Margin="3"
+                        Command="{Binding TileCLickCommand}"
+                        CommandParameter="{Binding Path=Title, RelativeSource={RelativeSource Self}}"
+                        TitleFontSize="10">
+                        <Rectangle>
+                            <Rectangle.Fill>
+                                <VisualBrush Visual="{iconPacks:Material Kind=Settings}" />
+                            </Rectangle.Fill>
+                        </Rectangle>
+                    </controls:Tile>
+                    <controls:Tile
+                        x:Name="SupplierTile"
+                        Title="Suppliers"
+                        Margin="3"
+                        Command="{Binding TileCLickCommand}"
+                        CommandParameter="{Binding Path=Title, RelativeSource={RelativeSource Self}}"
+                        TitleFontSize="10">
+                        <Rectangle>
+                            <Rectangle.Fill>
+                                <VisualBrush Visual="{iconPacks:Material Kind=TruckDelivery}" />
+                            </Rectangle.Fill>
+                        </Rectangle>
+                    </controls:Tile>
+                    <controls:Tile
+                        x:Name="ReportTile"
+                        Title="Reports"
+                        Margin="3"
+                        Command="{Binding TileCLickCommand}"
+                        CommandParameter="{Binding Path=Title, RelativeSource={RelativeSource Self}}"
+                        TitleFontSize="10">
+                        <Rectangle>
+                            <Rectangle.Fill>
+                                <VisualBrush Visual="{iconPacks:Modern Kind=ClipboardVariantText}" />
+                            </Rectangle.Fill>
+                        </Rectangle>
+                    </controls:Tile>
+                    <controls:Tile
+                        x:Name="ChartTile"
+                        Title="About"
+                        Margin="3"
+                        Command="{Binding TileCLickCommand}"
+                        CommandParameter="{Binding Path=Title, RelativeSource={RelativeSource Self}}"
+                        TitleFontSize="10">
+                        <Rectangle>
+                            <Rectangle.Fill>
+                                <VisualBrush Visual="{iconPacks:FontAwesome Kind=WindowsBrands}" />
+                            </Rectangle.Fill>
+                        </Rectangle>
+                    </controls:Tile>
+                    <controls:Tile
+                        x:Name="UserTile"
+                        Title="Charts"
+                        Margin="3"
+                        Command="{Binding TileCLickCommand}"
+                        CommandParameter="{Binding Path=Title, RelativeSource={RelativeSource Self}}"
+                        TitleFontSize="10">
+                        <Rectangle>
+                            <Rectangle.Fill>
+                                <VisualBrush Visual="{iconPacks:Material Kind=Finance, Height=2, Width=2}" />
+                            </Rectangle.Fill>
+                        </Rectangle>
+                    </controls:Tile>
+                    <controls:Tile
+                        x:Name="AdministTrationTile"
+                        Title="Customers"
+                        Margin="3"
+                        Command="{Binding TileCLickCommand}"
+                        CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Title}"
+                        TitleFontSize="10">
+                        <Rectangle>
+                            <Rectangle.Fill>
+                                <VisualBrush Visual="{iconPacks:Modern Kind=PeopleMultiple}" />
+                            </Rectangle.Fill>
+                        </Rectangle>
+                    </controls:Tile>
+                    <controls:Tile
+                        x:Name="AboutSoftwareTile"
+                        Title="Information"
+                        Margin="3"
+                        Command="{Binding TileCLickCommand}"
+                        CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Title}"
+                        TitleFontSize="10">
+                        <Rectangle>
+                            <Rectangle.Fill>
+                                <VisualBrush Visual="{iconPacks:FontAwesome Kind=InfoCircleSolid}" />
+                            </Rectangle.Fill>
+                        </Rectangle>
+                    </controls:Tile>
+                </UniformGrid>
+                </mg:Card>
+            </StackPanel>
+        </ScrollViewer>
+        <!--<StackPanel
+            Grid.Row="1"
+            Grid.Column="1"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Visibility="{Binding IsDataNotLoaded, Converter={StaticResource bool2VisibilityConverter}}">
+            <Image
+                Width="300"
+                Height="300"
+                agif:ImageBehavior.AnimatedSource="/LiquorShop;component/Images/loading_apple.gif" />
+            <TextBlock Style="{StaticResource InfoTextBlock}" Text="Please Wait While DashBoard Is Loading.........." />
+        </StackPanel>-->
+        <StackPanel
+            Grid.Row="1"
+            Grid.Column="1"
+            Margin="50"
+            Visibility="{Binding IsDataLoaded}">
+
+            <StackPanel Visibility="{Binding IsUserLoggedIn, Converter={StaticResource bool2VisibilityConverter}}">
+
+                <TextBlock
+                    Name="logintb"
+                    FontSize="15"
+                    FontWeight="UltraBold"
+                    Foreground="Green"
+                    Text="{Binding LoginText}" />
+            </StackPanel>
+            <StackPanel Name="authstack" Visibility="{Binding IsAuthenticating, Converter={StaticResource bool2VisibilityConverter}}">
+                <Image
+                    Width="300"
+                    Height="100"
+                    agif:ImageBehavior.AnimatedSource="/LiquorShop;component/Images/loading_apple.gif" />
+                <TextBlock
+                    Foreground="#0E2903"
+                    Style="{StaticResource InfoTextBlock}"
+                    Text="Authenticating User Please Wait .........." />
+            </StackPanel>
+            <StackPanel IsEnabled="{Binding IsNotAuthenticating}" Visibility="{Binding IsUserNotLoggedIn, Converter={StaticResource bool2VisibilityConverter}}">
+                <TextBlock
+                    FontSize="15"
+                    FontWeight="UltraBold"
+                    Foreground="#38065A"
+                    Text="Please Login To Continue"
+                    Visibility="{Binding IsNotAuth, Converter={StaticResource bool2VisibilityConverter}}" />
+                <Grid DataContext="{Binding UserVm}">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                    </Grid.RowDefinitions>
+                    <Popup
+                        IsOpen="{Binding DataContext.IsOpen, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}}"
+                        Placement="AbsolutePoint"
+                        PlacementTarget="{Binding ElementName=hgrid}">
+                        <StackPanel
+                            Width="400"
+                            Height="200"
+                            Background="Black">
+                            <TextBlock
+                                VerticalAlignment="Center"
+                                FontSize="30"
+                                Foreground="Red"
+                                Text="Database is being deleted please wait.........................."
+                                TextWrapping="Wrap" />
+                            <TextBlock
+                                Margin="0,50,0,0"
+                                HorizontalAlignment="Center"
+                                FontSize="15"
+                                Foreground="#2FF10D"
+                                Text="Program will Automatically Restart Don't Do Anything"
+                                TextWrapping="Wrap" />
+
+                        </StackPanel>
+                    </Popup>
+                    <TextBox
+                        Name="username"
+                        Grid.Row="0"
+                        Width="300"
+                        HorizontalAlignment="Left"
+                        mg:HintAssist.Hint="User Name Is 'a'"
+                        Foreground="#2705A3"
+                        mg:HintAssist.IsFloating="True"
+                        Style="{StaticResource MaterialDesignTextBox}"
+                        Text="{Binding name, UpdateSourceTrigger=PropertyChanged}"
+                        Visibility="{Binding IsUserNotLoggedIn}" />
+                    <PasswordBox
+                        Name="password"
+                        Grid.Row="1"
+                        Margin="1"
+                        Width="300"
+                        Foreground="#2705A3"
+                        HorizontalAlignment="Left"                       
+                        mg:HintAssist.Hint="Password  Is 'a'"
+                        mg:HintAssist.IsFloating="True"
+                        PasswordChar="#"
+                        Visibility="{Binding IsUserNotLoggedIn}" />
+                    <Button
+                        x:Name="btnLogin"
+                        Grid.Row="5"
+                        Margin="5"
+                        HorizontalAlignment="Left"
+                        BorderThickness="1"
+                        Command="{Binding DataContext.LoginCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}}"
+                        CommandParameter="{Binding ElementName=password}"
+                        Content="Login"
+                        FontSize="15"
+                        Foreground="Gray" Background="#C3C1A2"
+                        IsDefault="True"
+                        Style="{StaticResource MaterialDesignRaisedLightButton}"
+                        Visibility="{Binding IsUserNotLoggedIn}" />
+                </Grid>
+            </StackPanel>
+            <StackPanel Visibility="{Binding IsUserLoggedIn, Converter={StaticResource bool2VisibilityConverter}}">
+                <Button
+                    x:Name="btnLogout"
+                    Grid.Row="5"
+                    Margin="5"
+                    HorizontalAlignment="Left"
+                    BorderThickness="1" Background="#C3C1A2"
+                    Command="{Binding DataContext.LogOutCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}}"
+                    Content="Log Out"
+                    FontSize="15"
+                    Foreground="Gray"
+                    Style="{StaticResource MaterialDesignRaisedLightButton}" />
+            </StackPanel>
+
+        </StackPanel>
+    </Grid>
+</controls:MetroWindow>

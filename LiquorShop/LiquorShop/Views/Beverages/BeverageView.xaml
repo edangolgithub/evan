@@ -1,0 +1,393 @@
+﻿<UserControl
+    x:Class="LiquorShop.Views.Beverages.BeverageView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:agif="http://wpfanimatedgif.codeplex.com"
+    xmlns:conv="clr-namespace:TescoWine.Converters"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding LoadedCommand}" />
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+
+    <UserControl.Resources>
+        <conv:duetobool x:Key="db" />
+        <conv:ImagePathConverter x:Key="imconv" />
+        <conv:EnumToStringConverter x:Key="ets" />
+
+    </UserControl.Resources>
+
+    <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0" Visibility="{Binding IsDataLoaded, Converter={StaticResource bool2VisibilityConverter}}">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="2*" />
+                        <ColumnDefinition Width="1*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                    </Grid.RowDefinitions>
+
+                    <Grid Grid.Row="0" Grid.Column="0">
+                        <GroupBox Header="Beverage Data">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="auto" />
+                                    <RowDefinition Height="auto" />
+                                    <RowDefinition Height="auto" />
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="auto" />
+                                    <ColumnDefinition Width="auto" />
+                                </Grid.ColumnDefinitions>
+
+                                <ComboBox
+                                    x:Name="dcombo"
+                                    Grid.Row="0"
+                                    Width="150"
+                                    Height="30"
+                                    Margin="5"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Top"
+                                    IsEditable="True"
+                                    IsReadOnly="True"
+                                    DisplayMemberPath="BeverageCategoryName"
+                                    ItemsSource="{Binding BeverageCategories}"
+                                    SelectedItem="{Binding SelectedBeverageCategory}"
+                                    Text="Select Drink Type">
+                                    <!--<ComboBox.ItemsSource>
+                                        <CompositeCollection>
+                                            <ComboBoxItem Content=" Select Team " />
+                                            <CollectionContainer Collection="{Binding DrinkTypes}" />
+                                        </CompositeCollection>
+                                    </ComboBox.ItemsSource>-->
+                                </ComboBox>
+                                <Button
+                                    Grid.Row="0"
+                                    Grid.Column="1"
+                                    Height="30"
+                                    Margin="5"
+                                    VerticalAlignment="Top"
+                                    Click="Button_Click"
+                                    Content="Report" />
+                                <ScrollViewer
+                                    Grid.Row="1"
+                                    Grid.ColumnSpan="2"
+                                    Height="300"
+                                    HorizontalScrollBarVisibility="Auto"
+                                    VerticalScrollBarVisibility="Auto">
+                                    <DataGrid
+                                        x:Name="dgrid"
+                                        AutoGenerateColumns="False"
+                                        Background="Transparent"
+                                        CanUserAddRows="False"
+                                        ItemsSource="{Binding Beverages}"
+                                        SelectedItem="{Binding SelectedBeverage}"
+                                        SelectionChanged="dgrid_SelectionChanged">
+
+
+                                        <DataGrid.Columns>
+                                            <DataGridTextColumn
+                                                Width="50"
+                                                Binding="{Binding BeverageId}"
+                                                Header="Id" />
+                                            <DataGridTextColumn
+                                                Width="200"
+                                                Binding="{Binding Name}"
+                                                Header="Name" />
+                                            <DataGridTextColumn
+                                                Width="150"
+                                                Binding="{Binding BeverageCategory.BeverageCategoryName}"
+                                                Header="Drink Type" />
+                                            <DataGridTextColumn
+                                                Width="100"
+                                                Binding="{Binding Volume}"
+                                                Header="Volume" />
+                                            <DataGridTextColumn
+                                                Width="100"
+                                                Binding="{Binding Country}"
+                                                Header="Country" />
+
+                                        </DataGrid.Columns>
+                                    </DataGrid>
+                                </ScrollViewer>
+
+                                <StackPanel
+                                    Grid.Row="2"
+                                    Grid.Column="0"
+                                    Grid.ColumnSpan="2">
+                                    <ScrollViewer>
+                                        <GroupBox Header="Beverage Info">
+                                            <StackPanel>
+                                                <Button
+                                                    Command="{Binding ShowMoreBeverageInfoCmd}"
+                                                    Content="Show More Info"
+                                                    Visibility="{Binding ShowBtn}" />
+                                                <TextBlock
+                                                    FontSize="12"
+                                                    Foreground="{Binding stockcolor}"
+                                                    Text="{Binding TotalStock}" />
+                                                <TextBlock
+                                                    FontSize="12"
+                                                    Foreground="Green"
+                                                    Text="{Binding TotalSale}" />
+                                                <StackPanel Visibility="{Binding sh}">
+                                                    <TextBlock
+                                                        FontSize="12"
+                                                        Foreground="Green"
+                                                        Text="{Binding TotalIncomeB}" />
+                                                    <TextBlock
+                                                        FontSize="12"
+                                                        Foreground="Green"
+                                                        Text="{Binding TotalExpenseB}" />
+                                                    <!--<TextBlock  FontSize="15" Foreground="Green" Text="{Binding TotalDueB}" />-->
+                                                    <TextBlock
+                                                        FontSize="12"
+                                                        Foreground="Green"
+                                                        Text="Due For This Beverage" />
+                                                    <DataGrid
+                                                        Height="100"
+                                                        AutoGenerateColumns="False"
+                                                        ItemsSource="{Binding duecus}">
+                                                        <DataGrid.Columns>
+                                                            <DataGridTextColumn Binding="{Binding SaleDate, StringFormat=D}" Header="SaleDate" />
+                                                            <DataGridTextColumn Binding="{Binding Due, Mode=OneWay}" Header="Due" />
+                                                            <DataGridTextColumn Binding="{Binding Customer.CustomerName}" Header="Customer" />
+                                                            <DataGridTextColumn Binding="{Binding Beverage.Name}" Header="Beverage" />
+                                                        </DataGrid.Columns>
+
+                                                    </DataGrid>
+                                                </StackPanel>
+                                            </StackPanel>
+                                        </GroupBox>
+                                    </ScrollViewer>
+                                </StackPanel>
+                            </Grid>
+                        </GroupBox>
+                    </Grid>
+                    <Grid Grid.Column="1">
+
+                        <GroupBox Header="Beverage Details">
+
+                            <Grid DataContext="{Binding SelectedBeverage, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="auto" />
+                                    <RowDefinition Height="auto" />
+                                    <RowDefinition Height="auto" />
+                                    <RowDefinition Height="auto" />
+                                    <RowDefinition Height="auto" />
+                                    <RowDefinition Height="auto" />
+                                    <RowDefinition Height="auto" />
+                                    <RowDefinition Height="auto" />
+                                    <RowDefinition Height="auto" />
+                                    <RowDefinition Height="auto" />
+                                    <RowDefinition Height="auto" />
+                                    <RowDefinition Height="auto" />
+                                    <RowDefinition Height="auto" />
+                                    <RowDefinition Height="auto" />
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="auto" />
+                                    <ColumnDefinition Width="auto" />
+                                    <ColumnDefinition Width="auto" />
+                                    <ColumnDefinition Width="auto" />
+                                </Grid.ColumnDefinitions>
+
+
+                                <Label
+                                    Grid.Row="0"
+                                    Grid.Column="0"
+                                    Content="BeverageId" />
+                                <TextBox
+                                    Grid.Row="0"
+                                    Grid.Column="1"
+                                    IsEnabled="False"
+                                    Text="{Binding BeverageId}" />
+                                <Label
+                                    Grid.Row="1"
+                                    Grid.Column="0"
+                                    Content="Beverage Name" />
+                                <TextBox
+                                    Name="bevtxt"
+                                    Grid.Row="1"
+                                    Grid.Column="1"
+                                    Text="{Binding Name}" />
+                                <Label
+                                    Grid.Row="2"
+                                    Grid.Column="0"
+                                    Content="Drink Type" />
+                                <ComboBox
+                                    Grid.Row="2"
+                                    Grid.Column="1"
+                                    Width="150"
+                                    Height="30"
+                                    Margin="0"
+                                    DisplayMemberPath="BeverageCategoryName"
+                                    ItemsSource="{Binding DataContext.BeverageCategories, RelativeSource={RelativeSource AncestorType=UserControl, Mode=FindAncestor}}"
+                                    SelectedItem="{Binding BeverageCategory}" />
+                                <Label
+                                    Grid.Row="4"
+                                    Grid.Column="0"
+                                    Content="Price" />
+                                <TextBox
+                                    Grid.Row="4"
+                                    Grid.Column="1"
+                                    Text="{Binding Price, UpdateSourceTrigger=PropertyChanged}" />
+                                <Label
+                                    Grid.Row="3"
+                                    Grid.Column="0"
+                                    Content="Volume" />
+                                <TextBox
+                                    Grid.Row="3"
+                                    Grid.Column="1"
+                                    Text="{Binding Volume, UpdateSourceTrigger=PropertyChanged}" />
+
+                                <Label
+                                    Grid.Row="5"
+                                    Grid.Column="0"
+                                    Content="Country" />
+                                <TextBox
+                                    Grid.Row="5"
+                                    Grid.Column="1"
+                                    Text="{Binding Country, UpdateSourceTrigger=PropertyChanged}" />
+                                <Label
+                                    Grid.Row="6"
+                                    Grid.Column="0"
+                                    Content="Show In Chart" />
+                                <CheckBox
+                                    Grid.Row="6"
+                                    Grid.Column="1"
+                                    IsChecked="{Binding ShowInChart, UpdateSourceTrigger=PropertyChanged}" />
+                                <Label
+                                    Grid.Row="7"
+                                    Grid.Column="0"
+                                    Content="Is It Popular" />
+                                <CheckBox
+                                    Grid.Row="7"
+                                    Grid.Column="1"
+                                    IsChecked="{Binding IsPopular, UpdateSourceTrigger=PropertyChanged}" />
+
+                                <StackPanel
+                                    Grid.Row="8"
+                                    Grid.Column="1"
+                                    Grid.ColumnSpan="4"
+                                    DataContext="{Binding DataContext, RelativeSource={RelativeSource AncestorType={x:Type UserControl}, Mode=FindAncestor}}"
+                                    Orientation="Horizontal">
+                                    <Button
+                                        Name="newbtn"
+                                        Width="50"
+                                        Margin="5"
+                                        Padding="2"
+                                        Click="newbtn_Click"
+                                        Command="{Binding NewBeverageCommand}"
+                                        Content="New" />
+                                    <Button
+                                        Width="50"
+                                        Margin="5"
+                                        Padding="2"
+                                        Command="{Binding SaveBeverageCommand}"
+                                        Content="Save" />
+                                    <Button
+                                        Width="60"
+                                        Margin="5"
+                                        Padding="2"
+                                        Command="{Binding DeleteBeverageCommand}"
+                                        Content="Delete" />
+                                </StackPanel>
+
+                                <!--<StackPanel Grid.Row="5"
+                                Grid.ColumnSpan="4"
+                                DataContext="{Binding DataContext,
+                                                      RelativeSource={RelativeSource AncestorType={x:Type Window},
+                                                                                     Mode=FindAncestor}}">
+                            <TextBlock FontSize="15" Foreground="Blue">Sales</TextBlock>
+                            <DataGrid Height="200"
+                                  HorizontalAlignment="Left"
+                                  AutoGenerateColumns="False"
+                                  ItemsSource="{Binding Sales}">
+                                <DataGrid.RowStyle>
+                                    <Style TargetType="{x:Type DataGridRow}">
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding Due, Converter={StaticResource db}}" Value="false">
+                                                <Setter Property="Background" Value="Pink" />
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </DataGrid.RowStyle>
+                                <DataGrid.Columns>
+                                    <DataGridTextColumn Binding="{Binding SaleDate, StringFormat=d}" Header="SaleDate" />
+                                    <DataGridTextColumn Binding="{Binding Beverage.Name}" Header="Bevearge" />
+                                    <DataGridTextColumn Binding="{Binding UnitPrice}" Header="Unit Price" />
+                                    <DataGridTextColumn Binding="{Binding Quantity}" Header="Quantity" />
+                                    <DataGridTextColumn Binding="{Binding Discount}" Header="Discount" />
+                                    <DataGridTextColumn Binding="{Binding Paid}" Header="Paid" />
+                                    <DataGridTextColumn Binding="{Binding Due, Mode=OneWay}" Header="Due" />
+                                    <DataGridTextColumn Binding="{Binding Customer.CustomerName}" Header="Customer" />
+                                </DataGrid.Columns>
+                            </DataGrid>
+                            <TextBlock FontSize="15" Foreground="Blue">Purchases</TextBlock>
+                            <DataGrid x:Name="purchasegrid"
+                                  Height="200"
+                                  MaxHeight="500"
+                                  HorizontalAlignment="Left"
+                                  AutoGenerateColumns="False"
+                                  ItemsSource="{Binding Purchases}"
+                                  SelectedItem="{Binding SelectedPurchase}">
+                                <DataGrid.RowStyle>
+                                    <Style TargetType="{x:Type DataGridRow}">
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding Due, Converter={StaticResource db}}" Value="false">
+                                                <Setter Property="Background" Value="Pink" />
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </DataGrid.RowStyle>
+                                <DataGrid.Columns>
+                                    <DataGridTextColumn Binding="{Binding PurchaseDate, StringFormat=d}" Header="PurchaseDate" />
+                                    <DataGridTextColumn Binding="{Binding Beverage.Name}" Header="Bevearge" />
+                                    <DataGridTextColumn Binding="{Binding UnitPrice}" Header="Unit Price" />
+                                    <DataGridTextColumn Binding="{Binding Quantity}" Header="Quantity" />
+                                    <DataGridTextColumn Binding="{Binding Supplier.SupplierName}" Header="Supplier" />
+                                </DataGrid.Columns>
+                            </DataGrid>
+                            <TextBlock Text="{Binding BeverageDue}" />
+                        </StackPanel>-->
+
+                            </Grid>
+
+
+                        </GroupBox>
+                    </Grid>
+                </Grid>
+
+            </Grid>
+            <Grid Grid.Row="1">
+                <Grid>
+                    <ContentControl Content="{Binding CurrentViewModel}" />
+
+                    <StackPanel
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Visibility="{Binding IsDataNotLoaded, Converter={StaticResource bool2VisibilityConverter}}">
+                        <Image
+                            Width="300"
+                            Height="300"
+                            agif:ImageBehavior.AnimatedSource="/LiquorShop;component/Images/loading_apple.gif" />
+                        <TextBlock Style="{StaticResource InfoTextBlock}" Text="Please Wait While System Is Fetching R Data..........." />
+                    </StackPanel>
+                </Grid>
+            </Grid>
+        </Grid>
+
+    </ScrollViewer>
+</UserControl>

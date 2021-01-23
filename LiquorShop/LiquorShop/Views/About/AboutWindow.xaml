@@ -1,0 +1,22 @@
+﻿<Window x:Class="LiquorShop.Views.About.AboutWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:LiquorShop.Views.About"
+        mc:Ignorable="d"
+        Topmost="True"
+        WindowStartupLocation="CenterScreen"
+        WindowStyle="ToolWindow"
+         Height="200" Width="500">
+    <StackPanel>
+        <StackPanel.Background>
+            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                <GradientStop Color="#FFEC8D1C" Offset="0"/>
+                <GradientStop Color="#FFC18CDA" Offset="1"/>
+            </LinearGradientBrush>
+        </StackPanel.Background>
+        <TextBlock HorizontalAlignment="Center" Foreground="#8A065A" Margin="0 40 0 20" FontSize="30" Text="Wine Software" />
+        <TextBlock HorizontalAlignment="Center"  FontSize="10" Foreground="#8A065A" Text="Evan Dangol 2018" />
+    </StackPanel>
+</Window>

@@ -1,0 +1,110 @@
+﻿<Window
+    x:Class="Rms.Views.Restaurant.InvoiceView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:Rms.Views.Restaurant"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Title="Invoice"
+    Width="370"
+    SizeToContent="Height"
+    WindowStartupLocation="CenterScreen"
+    mc:Ignorable="d">
+    <Grid>
+        <StackPanel>
+            <FlowDocumentScrollViewer Name="view" ScrollViewer.VerticalScrollBarVisibility="Auto">
+
+                <FlowDocument
+                    Name="document"
+                    FontFamily="Times New Roman"
+                    FontSize="15"
+                    TextAlignment="Left">
+
+                    <Paragraph TextAlignment="Center" Margin="0" Foreground="#B63F13">
+                        <TextBlock Name="cn" Text="{Binding CompanyName}" />
+                    </Paragraph>
+                    <Paragraph TextAlignment="Center" Margin="0" Foreground="#B63F13">
+                        <TextBlock Name="ca" Text="{Binding CompanyAddress}" />
+                    </Paragraph>
+                    <Paragraph TextAlignment="Center" Margin="0" Foreground="#B63F13" >
+                        <TextBlock Name="cc" Text="{Binding CompanyCity}" />
+                    </Paragraph>
+                    <Paragraph TextAlignment="Center" Margin="0" Foreground="#B63F13">Tel.
+                        <TextBlock Name="cp" Text="{Binding CompanyPhone}" />
+                    </Paragraph>
+                    <Paragraph TextAlignment="Center" Margin="0 0 0 5" Foreground="#B63F13">Reg No.
+                        <TextBlock Name="cpn" Text="{Binding CompanyPanNumber}" />
+                    </Paragraph>
+                    <BlockUIContainer>
+                        <Rectangle
+                            Height="1"
+                            Stroke="Gray"
+                            StrokeThickness="1" />
+                    </BlockUIContainer>
+                    <Paragraph
+                        Margin="3"
+                        Foreground="#B63F13"
+                        TextAlignment="Center">
+                        Bill Invoice
+                    </Paragraph>
+
+                    <Paragraph>
+                        <Grid Width="350">
+                            <Grid.RowDefinitions>
+                                <RowDefinition />
+                                <RowDefinition />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <TextBlock
+                                Foreground="#000064"
+                                Text="Date: "
+                                TextAlignment="Right" />
+                            <TextBlock
+                                Name="date"
+                                Grid.Column="1"
+                                Foreground="#000064" />
+                            <TextBlock
+                                Name="invoicetext"
+                                Grid.Column="2"
+                                Grid.ColumnSpan="2"
+                                Foreground="#000064" />
+                            <TextBlock
+                                Name="tablenumber"
+                                Grid.Row="1"
+                                Grid.ColumnSpan="2"
+                                Margin="50,10,0,0"
+                                Foreground="#000064" />
+                            <TextBlock
+                                Name="usertxt"
+                                Grid.Row="1"
+                                Grid.Column="2"
+                                Grid.ColumnSpan="2"
+                                Margin="0,10,0,0"
+                                Foreground="#000064" />
+                        </Grid>
+
+                    </Paragraph>
+                    <BlockUIContainer>
+                        <Rectangle
+                            Height="1"
+                            Stroke="Gray"
+                            StrokeThickness="1" />
+                    </BlockUIContainer>
+                </FlowDocument>
+            </FlowDocumentScrollViewer>
+            <!--<Image
+                Name="i"
+                Width="350"
+                Height="50" />-->
+            <Button
+                HorizontalAlignment="Center"
+                Click="Button_Click"
+                Content="Print" />
+        </StackPanel>
+    </Grid>
+</Window>

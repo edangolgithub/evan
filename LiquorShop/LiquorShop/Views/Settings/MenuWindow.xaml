@@ -1,0 +1,76 @@
+﻿<Window
+    x:Class="LiquorShop.Views.Settings.MenuWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:agif="http://wpfanimatedgif.codeplex.com"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+    xmlns:local="clr-namespace:LiquorShop.Views.Settings"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Title="MenuWindow"
+    WindowState="Maximized"
+    WindowStyle="None"
+        mc:Ignorable="d">
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding LoadedCommand}" />
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+
+  
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+            </Grid.RowDefinitions>
+        <Grid Name="yes" Grid.Row="0" Visibility="{Binding IsDataLoaded,Converter={StaticResource bool2VisibilityConverter}}">
+            <StackPanel>
+                <TextBlock HorizontalAlignment="Center" FontSize="30" Foreground="Green" Text="All the beverages are saved in Database" />
+                <Button HorizontalAlignment="Right"
+                    Name="doneimportbtn"
+                    Width="100"
+                    Content="Close" Click="doneimportbtn_Click" />
+                <ScrollViewer VerticalScrollBarVisibility="Auto">
+                    <DataGrid MaxWidth="600" MaxHeight="700"
+                        Name="dg"
+                        />
+                </ScrollViewer>
+                
+            </StackPanel>
+        </Grid>
+
+        <Grid Name="no" Grid.Row="1" Visibility="{Binding IsDataNotLoaded, Converter={StaticResource bool2VisibilityConverter}}">
+                <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                  
+                    <TextBlock
+                        FontFamily="Times New roman"
+                        FontSize="30" HorizontalAlignment="Center"
+                        Foreground="#11329D">
+                        Please wait Your Excel File is being Parsed.
+                    </TextBlock>
+                    <TextBlock
+                        FontFamily="Times New roman"
+                        FontSize="30" HorizontalAlignment="Center"
+                        Foreground="#11329D">
+                        It May Take Few Minutes have Patient.
+                    </TextBlock>
+                    <TextBlock
+                        FontFamily="Times New roman"
+                        FontSize="40"
+                        Foreground="Red">
+                        Do Not Close This Window.
+                    </TextBlock>
+                <!--<Button HorizontalAlignment="Right"
+                    Name="cancelimport"
+                    Width="100" Click="cancelimport_Click"
+                    Content="Cancel" />-->
+                <Image
+                        Width="300"
+                        Height="300"
+                        agif:ImageBehavior.AnimatedSource="/liquorshop;component/Images/loading_apple.gif" />
+                    <TextBlock Style="{StaticResource InfoTextBlock}" Text="Please Wait While System Is Fetching Administrative Data..........." />
+                </StackPanel>
+            </Grid>
+                 </Grid>
+  
+</Window>

@@ -1,0 +1,86 @@
+﻿<Control:MetroWindow
+    x:Class="LiquorShop.Views.Charts.ChartsWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:Rms.Views"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:uc="clr-namespace:Rms.UserControls.Charts"
+     xmlns:Control="http://metro.mahapps.com/winfx/xaml/controls"
+    xmlns:vm="clr-namespace:Rms.ViewModels"
+    xmlns:vmc="clr-namespace:Rms.ViewModels.Charts"
+    Title="ChartsView"
+   
+    Loaded="Window_Loaded"
+    WindowState="Maximized"
+    mc:Ignorable="d" >
+    <Window.DataContext>
+        <vm:ChartsMainViewModel />
+    </Window.DataContext>
+    <Window.Resources>
+        <DataTemplate DataType="{x:Type vmc:ItemChartViewModel}">
+            <uc:ItemChartView />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type vmc:PurchaseChartViewModel}">
+            <uc:PurchaseChartControl />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type vmc:SalesChartViewModel}">
+            <uc:SalesChartView />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type vmc:ItemSalesChartViewModel}">
+            <uc:ItemSalesChart />
+        </DataTemplate>
+        <!--<DataTemplate DataType="{x:Type vmc:InventoryPurchaseChartViewModel}">
+            <uc:InventoryPurchaseChartControl />
+        </DataTemplate>-->
+        <DataTemplate DataType="{x:Type vmc:AccountChartViewModel}">
+            <uc:AccountChartControl />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type vmc:IncomeChartViewModel}">
+            <uc:IncomeChartControl />
+        </DataTemplate>
+
+
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0" Orientation="Horizontal">
+            <Button
+                Command="{Binding NavCommand}"
+                CommandParameter="itemschartparam"
+                Content="Items" />
+            <Button
+                Command="{Binding NavCommand}"
+                CommandParameter="PurchaseChartParam"
+                Content="Purchase" />
+            <Button
+                Command="{Binding NavCommand}"
+                CommandParameter="saleschartparam"
+                Content="Sales" />
+            <Button
+                Command="{Binding NavCommand}"
+                CommandParameter="ItemSalesChartParam"
+                Content="Item Sales" />
+            <Button
+                Command="{Binding NavCommand}"
+                CommandParameter="InventoryPurchaseChartParam"
+                Content="Inventory" />
+            <Button
+                Command="{Binding NavCommand}"
+                CommandParameter="accountchartparam"
+                Content="Account" />
+            <Button Content="Income" Command="{Binding NavCommand}"
+                CommandParameter="IncomeChartParam"
+                 />
+            <!--<Button Content="Expense" />
+            <Button Content="Profit" />-->
+        </StackPanel>
+        <StackPanel Grid.Row="1">
+            <ContentControl Content="{Binding CurrentViewModel}" />
+        </StackPanel>
+    </Grid>
+</Control:MetroWindow>
