@@ -1,0 +1,73 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<CodeSnippets  xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+	<CodeSnippet Format="1.0.0">
+		<Header>
+			<Title>mvvmc</Title>
+			<Shortcut>mvvmc</Shortcut>
+			<Description>Code snippet for an MVVM ICommand</Description>
+			<Author>Matthew Thomas</Author>
+			<SnippetTypes>
+				<SnippetType>Expansion</SnippetType>
+			</SnippetTypes>
+		</Header>
+		<Snippet>
+			<Declarations>
+                <Literal>
+                    <ID>defaultValue</ID>
+                    <ToolTip>Default value</ToolTip>
+                    <Default>String.Empty</Default>
+                </Literal>
+				<Literal>
+					<ID>commandName</ID>
+					<ToolTip>Property name</ToolTip>
+					<Default>MyProperty</Default>
+				</Literal>
+                <Literal>
+                    <ID>commandDescription</ID>
+                    <ToolTip>The command's description</ToolTip>
+                    <Default>The command's value</Default>
+                </Literal>
+			</Declarations>
+			<Code Language="csharp"><![CDATA[
+            #region $commandName$ Command
+            
+            /// <summary>
+            /// Private member backing variable for <see cref="$commandName$" />
+            /// </summary>
+            private RelayCommand _$commandName$ = null;
+            
+            /// <summary>
+            /// Gets the command which $commandDescription$
+            /// </summary>
+            public RelayCommand $commandName$
+            {
+                get
+                {
+                    if(_$commandName$ == null)
+                    { _$commandName$ = new RelayCommand($commandName$_Execute, $commandName$_CanExecute); }
+                    
+                    return _$commandName$;
+                }                
+            }
+            
+            /// <summary>
+            /// Implements the execution of <see cref="$commandName$" />
+            /// </summary>
+            private void $commandName$_Execute(object obj)
+            {
+            }
+            
+            /// <summary>
+            /// Determines if <see cref="$commandName$" /> is allowed to execute
+            /// </summary>
+            private Boolean $commandName$_CanExecute(object obj)
+            {
+                return true;
+            }
+            
+            #endregion
+            $end$]]>
+			</Code>
+		</Snippet>
+	</CodeSnippet>
+</CodeSnippets>
