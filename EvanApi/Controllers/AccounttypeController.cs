@@ -2,10 +2,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using interest.models;
+using EvanApi.models;
 using Microsoft.AspNetCore.Mvc;
 
-namespace interest.Controllers
+namespace EvanApi.Controllers
 {
     [Route("api/[controller]")]
     public class AccounttypeController : ControllerBase

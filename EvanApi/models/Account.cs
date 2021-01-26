@@ -1,7 +1,7 @@
 
 using System.Collections.Generic;
 
-namespace interest.models
+namespace EvanApi.models
 {
     public class Accounttype    {
         public string accounttypeid { get; set; } 

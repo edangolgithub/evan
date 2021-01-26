@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 
-namespace interest.Controllers
+namespace EvanApi.Controllers
 {
     [Route("api/[controller]")]
     public class ValuesController : ControllerBase
