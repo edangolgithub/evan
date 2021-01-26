@@ -3,3 +3,13 @@
 /home/ec2-user/evan/Liquor/LiquorShopServicecore/obj/Debug/net5.0/LiquorShopServicecore.AssemblyInfoInputs.cache
 /home/ec2-user/evan/Liquor/LiquorShopServicecore/obj/Debug/net5.0/LiquorShopServicecore.AssemblyInfo.cs
 /home/ec2-user/evan/Liquor/LiquorShopServicecore/obj/Debug/net5.0/LiquorShopServicecore.csproj.CoreCompileInputs.cache
+/home/ec2-user/evan/Liquor/LiquorShopServicecore/bin/Debug/net5.0/LiquorShopServicecore.deps.json
+/home/ec2-user/evan/Liquor/LiquorShopServicecore/bin/Debug/net5.0/LiquorShopServicecore.dll
+/home/ec2-user/evan/Liquor/LiquorShopServicecore/bin/Debug/net5.0/ref/LiquorShopServicecore.dll
+/home/ec2-user/evan/Liquor/LiquorShopServicecore/bin/Debug/net5.0/LiquorShopServicecore.pdb
+/home/ec2-user/evan/Liquor/LiquorShopServicecore/bin/Debug/net5.0/TescoWineShopSqlcore.dll
+/home/ec2-user/evan/Liquor/LiquorShopServicecore/bin/Debug/net5.0/TescoWineShopSqlcore.pdb
+/home/ec2-user/evan/Liquor/LiquorShopServicecore/obj/Debug/net5.0/LiquorShopServicecore.csproj.CopyComplete
+/home/ec2-user/evan/Liquor/LiquorShopServicecore/obj/Debug/net5.0/LiquorShopServicecore.dll
+/home/ec2-user/evan/Liquor/LiquorShopServicecore/obj/Debug/net5.0/ref/LiquorShopServicecore.dll
+/home/ec2-user/evan/Liquor/LiquorShopServicecore/obj/Debug/net5.0/LiquorShopServicecore.pdb
