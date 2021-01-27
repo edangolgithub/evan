@@ -16,13 +16,13 @@ namespace EvanApi.Controllers
         {
             _repository = repository;
         }
-        public async Task<IEnumerable<Accounttype>> Get()
+        public async Task<IEnumerable<AccountType>> Get()
         {
             return await _repository.Allaccounttype();
         }
 
         [HttpPost]
-        public async Task Post([FromBody]Accounttype model)
+        public async Task Post([FromBody]AccountType model)
         {
            if(model==null)
            {
@@ -31,7 +31,7 @@ namespace EvanApi.Controllers
             await _repository.Addaccounttype(model);
         }
         [HttpPut]
-        public async Task PutAsync([FromBody] Accounttype entity)
+        public async Task PutAsync([FromBody] AccountType entity)
         {
              await _repository.Updateaccounttype(entity);
         }

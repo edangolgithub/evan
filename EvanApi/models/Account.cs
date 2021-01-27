@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace EvanApi.models
 {
-    public class Accounttype    {
+    public class AccountType    {
         public string accounttypeid { get; set; } 
         public string accounttype { get; set; } 
         public string id { get; set; } 
@@ -15,7 +15,6 @@ namespace EvanApi.models
          public string email { get; set; } 
         public string phone { get; set; } 
         public string accountid { get; set; } 
-        public List<string> accounttype { get; set; } 
         public string id { get; set; } 
     }
 

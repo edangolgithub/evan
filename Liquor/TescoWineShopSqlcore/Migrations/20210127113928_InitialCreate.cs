@@ -12,11 +12,11 @@ namespace TescoWineShopSqlcore.Migrations
                 name: "AccountClasses",
                 columns: table => new
                 {
-                    AccountClassId = table.Column<int>(type: "int", nullable: false)
+                    AccountClassId = table.Column<int>(nullable: false)
                         .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
-                    Name = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: true),
-                    Description = table.Column<string>(type: "text", nullable: true),
-                    IsSystemAccount = table.Column<bool>(type: "tinyint(1)", nullable: false)
+                    Name = table.Column<string>(maxLength: 50, nullable: true),
+                    Description = table.Column<string>(nullable: true),
+                    IsSystemAccount = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -27,10 +27,10 @@ namespace TescoWineShopSqlcore.Migrations
                 name: "AccountGroups",
                 columns: table => new
                 {
-                    AccountGroupId = table.Column<int>(type: "int", nullable: false)
+                    AccountGroupId = table.Column<int>(nullable: false)
                         .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
-                    AccountGroupName = table.Column<string>(type: "text", nullable: true),
-                    AccountClassId = table.Column<int>(type: "int", nullable: false)
+                    AccountGroupName = table.Column<string>(nullable: true),
+                    AccountClassId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -41,10 +41,10 @@ namespace TescoWineShopSqlcore.Migrations
                 name: "Administration",
                 columns: table => new
                 {
-                    Administrationid = table.Column<int>(type: "int", nullable: false)
+                    Administrationid = table.Column<int>(nullable: false)
                         .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
-                    Key = table.Column<string>(type: "text", nullable: true),
-                    value = table.Column<string>(type: "text", nullable: true)
+                    Key = table.Column<string>(nullable: true),
+                    value = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -55,9 +55,9 @@ namespace TescoWineShopSqlcore.Migrations
                 name: "BeverageCategory",
                 columns: table => new
                 {
-                    BeverageCategoryId = table.Column<int>(type: "int", nullable: false)
+                    BeverageCategoryId = table.Column<int>(nullable: false)
                         .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
-                    BeverageCategoryName = table.Column<string>(type: "text", nullable: true)
+                    BeverageCategoryName = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -68,12 +68,12 @@ namespace TescoWineShopSqlcore.Migrations
                 name: "Customer",
                 columns: table => new
                 {
-                    CustomerId = table.Column<int>(type: "int", nullable: false)
+                    CustomerId = table.Column<int>(nullable: false)
                         .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
-                    CustomerName = table.Column<string>(type: "text", nullable: true),
-                    CustomerAddress = table.Column<string>(type: "text", nullable: true),
-                    CustomerPhone = table.Column<string>(type: "text", nullable: true),
-                    CustomerEmail = table.Column<string>(type: "text", nullable: true)
+                    CustomerName = table.Column<string>(nullable: true),
+                    CustomerAddress = table.Column<string>(nullable: true),
+                    CustomerPhone = table.Column<string>(nullable: true),
+                    CustomerEmail = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -84,11 +84,11 @@ namespace TescoWineShopSqlcore.Migrations
                 name: "FiscalYear",
                 columns: table => new
                 {
-                    FiscalYearId = table.Column<int>(type: "int", nullable: false)
+                    FiscalYearId = table.Column<int>(nullable: false)
                         .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
-                    FiscalYearDescription = table.Column<string>(type: "text", nullable: true),
-                    StartDate = table.Column<DateTime>(type: "datetime", nullable: false),
-                    EndDate = table.Column<DateTime>(type: "datetime", nullable: false)
+                    FiscalYearDescription = table.Column<string>(nullable: true),
+                    StartDate = table.Column<DateTime>(nullable: false),
+                    EndDate = table.Column<DateTime>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -99,13 +99,13 @@ namespace TescoWineShopSqlcore.Migrations
                 name: "Supplier",
                 columns: table => new
                 {
-                    SupplierId = table.Column<int>(type: "int", nullable: false)
+                    SupplierId = table.Column<int>(nullable: false)
                         .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
-                    SupplierName = table.Column<string>(type: "text", nullable: true),
-                    SupplierAddress = table.Column<string>(type: "text", nullable: true),
-                    SupplierPhone = table.Column<string>(type: "text", nullable: true),
-                    SupplierCity = table.Column<string>(type: "text", nullable: true),
-                    PanNumber = table.Column<string>(type: "text", nullable: true)
+                    SupplierName = table.Column<string>(nullable: true),
+                    SupplierAddress = table.Column<string>(nullable: true),
+                    SupplierPhone = table.Column<string>(nullable: true),
+                    SupplierCity = table.Column<string>(nullable: true),
+                    PanNumber = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -116,9 +116,9 @@ namespace TescoWineShopSqlcore.Migrations
                 name: "UserRole",
                 columns: table => new
                 {
-                    UserRoleId = table.Column<int>(type: "int", nullable: false)
+                    UserRoleId = table.Column<int>(nullable: false)
                         .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
-                    UserInRole = table.Column<int>(type: "int", nullable: false)
+                    UserInRole = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -129,9 +129,9 @@ namespace TescoWineShopSqlcore.Migrations
                 name: "Vat",
                 columns: table => new
                 {
-                    VatId = table.Column<int>(type: "int", nullable: false)
+                    VatId = table.Column<int>(nullable: false)
                         .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
-                    VatAmount = table.Column<decimal>(type: "decimal(18, 2)", nullable: false)
+                    VatAmount = table.Column<decimal>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -142,17 +142,17 @@ namespace TescoWineShopSqlcore.Migrations
                 name: "Beverage",
                 columns: table => new
                 {
-                    BeverageId = table.Column<int>(type: "int", nullable: false)
+                    BeverageId = table.Column<int>(nullable: false)
                         .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
-                    Name = table.Column<string>(type: "varchar(767)", nullable: true),
-                    DrinkType = table.Column<int>(type: "int", nullable: true),
-                    Volume = table.Column<int>(type: "int", nullable: true),
-                    Country = table.Column<string>(type: "text", nullable: true),
-                    Price = table.Column<decimal>(type: "decimal(18, 2)", nullable: true),
-                    Image = table.Column<string>(type: "text", nullable: true),
-                    ShowInChart = table.Column<bool>(type: "tinyint(1)", nullable: false),
-                    IsPopular = table.Column<bool>(type: "tinyint(1)", nullable: false),
-                    BeverageCategoryId = table.Column<int>(type: "int", nullable: false)
+                    Name = table.Column<string>(nullable: true),
+                    DrinkType = table.Column<int>(nullable: true),
+                    Volume = table.Column<int>(nullable: true),
+                    Country = table.Column<string>(nullable: true),
+                    Price = table.Column<decimal>(nullable: true),
+                    Image = table.Column<string>(nullable: true),
+                    ShowInChart = table.Column<bool>(nullable: false),
+                    IsPopular = table.Column<bool>(nullable: false),
+                    BeverageCategoryId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -169,15 +169,15 @@ namespace TescoWineShopSqlcore.Migrations
                 name: "SaleOrder",
                 columns: table => new
                 {
-                    SaleOrderId = table.Column<int>(type: "int", nullable: false)
+                    SaleOrderId = table.Column<int>(nullable: false)
                         .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
-                    TotalAmount = table.Column<decimal>(type: "decimal(18, 2)", nullable: false),
-                    AmountPaid = table.Column<decimal>(type: "decimal(18, 2)", nullable: false),
-                    Discount = table.Column<decimal>(type: "decimal(18, 2)", nullable: false),
-                    SaleDate = table.Column<DateTime>(type: "datetime", nullable: false),
-                    Due = table.Column<decimal>(type: "decimal(18, 2)", nullable: false),
-                    CustomerId = table.Column<int>(type: "int", nullable: true),
-                    AmountAfterDiscount = table.Column<decimal>(type: "decimal(18, 2)", nullable: false)
+                    TotalAmount = table.Column<decimal>(nullable: false),
+                    AmountPaid = table.Column<decimal>(nullable: false),
+                    Discount = table.Column<decimal>(nullable: false),
+                    SaleDate = table.Column<DateTime>(nullable: false),
+                    Due = table.Column<decimal>(nullable: false),
+                    CustomerId = table.Column<int>(nullable: true),
+                    AmountAfterDiscount = table.Column<decimal>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -194,17 +194,17 @@ namespace TescoWineShopSqlcore.Migrations
                 name: "Company",
                 columns: table => new
                 {
-                    CompanyId = table.Column<int>(type: "int", nullable: false)
+                    CompanyId = table.Column<int>(nullable: false)
                         .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
-                    CompanyName = table.Column<string>(type: "varchar(100)", maxLength: 100, nullable: true),
-                    CompanyAddress = table.Column<string>(type: "text", nullable: true),
-                    CompanyCity = table.Column<string>(type: "text", nullable: true),
-                    CompanyPhone = table.Column<string>(type: "text", nullable: true),
-                    CompanyPanNumber = table.Column<string>(type: "text", nullable: true),
-                    CompanyType = table.Column<string>(type: "text", nullable: true),
-                    IsActive = table.Column<bool>(type: "tinyint(1)", nullable: false),
-                    FiscalYearId = table.Column<int>(type: "int", nullable: true),
-                    CompanyPassword = table.Column<string>(type: "text", nullable: true)
+                    CompanyName = table.Column<string>(maxLength: 100, nullable: true),
+                    CompanyAddress = table.Column<string>(nullable: true),
+                    CompanyCity = table.Column<string>(nullable: true),
+                    CompanyPhone = table.Column<string>(nullable: true),
+                    CompanyPanNumber = table.Column<string>(nullable: true),
+                    CompanyType = table.Column<string>(nullable: true),
+                    IsActive = table.Column<bool>(nullable: false),
+                    FiscalYearId = table.Column<int>(nullable: true),
+                    CompanyPassword = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -221,17 +221,17 @@ namespace TescoWineShopSqlcore.Migrations
                 name: "Invoice",
                 columns: table => new
                 {
-                    InvoiceId = table.Column<int>(type: "int", nullable: false)
+                    InvoiceId = table.Column<int>(nullable: false)
                         .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
-                    Total = table.Column<decimal>(type: "decimal(18, 2)", nullable: false),
-                    TaxableAmount = table.Column<decimal>(type: "decimal(18, 2)", nullable: false),
-                    AmountPaid = table.Column<decimal>(type: "decimal(18, 2)", nullable: false),
-                    Due = table.Column<decimal>(type: "decimal(18, 2)", nullable: false),
-                    Date = table.Column<DateTime>(type: "datetime", nullable: false),
-                    Discount = table.Column<decimal>(type: "decimal(18, 2)", nullable: false),
-                    SupplierId = table.Column<int>(type: "int", nullable: false),
-                    Vat = table.Column<decimal>(type: "decimal(18, 2)", nullable: false),
-                    InvoiceNumber = table.Column<int>(type: "int", nullable: true)
+                    Total = table.Column<decimal>(nullable: false),
+                    TaxableAmount = table.Column<decimal>(nullable: false),
+                    AmountPaid = table.Column<decimal>(nullable: false),
+                    Due = table.Column<decimal>(nullable: false),
+                    Date = table.Column<DateTime>(nullable: false),
+                    Discount = table.Column<decimal>(nullable: false),
+                    SupplierId = table.Column<int>(nullable: false),
+                    Vat = table.Column<decimal>(nullable: false),
+                    InvoiceNumber = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -248,18 +248,18 @@ namespace TescoWineShopSqlcore.Migrations
                 name: "Users",
                 columns: table => new
                 {
-                    UserId = table.Column<int>(type: "int", nullable: false)
+                    UserId = table.Column<int>(nullable: false)
                         .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
-                    UserName = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: false),
-                    Password = table.Column<string>(type: "text", nullable: true),
-                    Menus = table.Column<string>(type: "text", nullable: true),
-                    UserEmail = table.Column<string>(type: "text", nullable: true),
-                    UserPhone = table.Column<string>(type: "text", nullable: true),
-                    UserAddress = table.Column<string>(type: "text", nullable: true),
-                    UserTole = table.Column<string>(type: "text", nullable: true),
-                    UserCity = table.Column<string>(type: "text", nullable: true),
-                    UserRoleId = table.Column<int>(type: "int", nullable: false),
-                    UserCreatedOn = table.Column<DateTime>(type: "datetime", nullable: false)
+                    UserName = table.Column<string>(maxLength: 50, nullable: false),
+                    Password = table.Column<string>(nullable: true),
+                    Menus = table.Column<string>(nullable: true),
+                    UserEmail = table.Column<string>(nullable: true),
+                    UserPhone = table.Column<string>(nullable: true),
+                    UserAddress = table.Column<string>(nullable: true),
+                    UserTole = table.Column<string>(nullable: true),
+                    UserCity = table.Column<string>(nullable: true),
+                    UserRoleId = table.Column<int>(nullable: false),
+                    UserCreatedOn = table.Column<DateTime>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -276,13 +276,13 @@ namespace TescoWineShopSqlcore.Migrations
                 name: "SalesReturn",
                 columns: table => new
                 {
-                    SalesReturnId = table.Column<int>(type: "int", nullable: false)
+                    SalesReturnId = table.Column<int>(nullable: false)
                         .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
-                    SaleId = table.Column<int>(type: "int", nullable: false),
-                    ReturnDate = table.Column<DateTime>(type: "datetime", nullable: false),
-                    Quantity = table.Column<int>(type: "int", nullable: false),
-                    ReturnAmount = table.Column<decimal>(type: "decimal(18, 2)", nullable: false),
-                    BeverageId = table.Column<int>(type: "int", nullable: true)
+                    SaleId = table.Column<int>(nullable: false),
+                    ReturnDate = table.Column<DateTime>(nullable: false),
+                    Quantity = table.Column<int>(nullable: false),
+                    ReturnAmount = table.Column<decimal>(nullable: false),
+                    BeverageId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -299,19 +299,19 @@ namespace TescoWineShopSqlcore.Migrations
                 name: "Sale",
                 columns: table => new
                 {
-                    SaleId = table.Column<int>(type: "int", nullable: false)
+                    SaleId = table.Column<int>(nullable: false)
                         .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
-                    SaleOrderId = table.Column<int>(type: "int", nullable: true),
-                    BeverageId = table.Column<int>(type: "int", nullable: false),
-                    SaleDate = table.Column<DateTime>(type: "datetime", nullable: false),
-                    UnitPrice = table.Column<decimal>(type: "decimal(18, 2)", nullable: false),
-                    Quantity = table.Column<int>(type: "int", nullable: false),
-                    Discount = table.Column<decimal>(type: "decimal(18, 2)", nullable: true),
-                    Due = table.Column<decimal>(type: "decimal(18, 2)", nullable: true),
-                    Paid = table.Column<decimal>(type: "decimal(18, 2)", nullable: true),
-                    Profit = table.Column<decimal>(type: "decimal(18, 2)", nullable: true),
-                    CustomerId = table.Column<int>(type: "int", nullable: true),
-                    DuePaying = table.Column<bool>(type: "tinyint(1)", nullable: false)
+                    SaleOrderId = table.Column<int>(nullable: true),
+                    BeverageId = table.Column<int>(nullable: false),
+                    SaleDate = table.Column<DateTime>(nullable: false),
+                    UnitPrice = table.Column<decimal>(nullable: false),
+                    Quantity = table.Column<int>(nullable: false),
+                    Discount = table.Column<decimal>(nullable: true),
+                    Due = table.Column<decimal>(nullable: true),
+                    Paid = table.Column<decimal>(nullable: true),
+                    Profit = table.Column<decimal>(nullable: true),
+                    CustomerId = table.Column<int>(nullable: true),
+                    DuePaying = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -340,17 +340,17 @@ namespace TescoWineShopSqlcore.Migrations
                 name: "LedgerAccount",
                 columns: table => new
                 {
-                    LedgerAccountId = table.Column<int>(type: "int", nullable: false)
+                    LedgerAccountId = table.Column<int>(nullable: false)
                         .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
-                    AccountName = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: true),
-                    Description = table.Column<string>(type: "text", nullable: true),
-                    AccountClassId = table.Column<int>(type: "int", nullable: false),
-                    CompanyId = table.Column<int>(type: "int", nullable: false),
-                    ParentLedgerAccountId = table.Column<int>(type: "int", nullable: true),
-                    IsSystemLedger = table.Column<bool>(type: "tinyint(1)", nullable: false),
-                    SortOrder = table.Column<int>(type: "int", nullable: false),
-                    ShowInChart = table.Column<bool>(type: "tinyint(1)", nullable: false),
-                    AccountGroupId = table.Column<int>(type: "int", nullable: true)
+                    AccountName = table.Column<string>(maxLength: 50, nullable: true),
+                    Description = table.Column<string>(nullable: true),
+                    AccountClassId = table.Column<int>(nullable: false),
+                    CompanyId = table.Column<int>(nullable: false),
+                    ParentLedgerAccountId = table.Column<int>(nullable: true),
+                    IsSystemLedger = table.Column<bool>(nullable: false),
+                    SortOrder = table.Column<int>(nullable: false),
+                    ShowInChart = table.Column<bool>(nullable: false),
+                    AccountGroupId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -385,21 +385,21 @@ namespace TescoWineShopSqlcore.Migrations
                 name: "Purchase",
                 columns: table => new
                 {
-                    PurchaseId = table.Column<int>(type: "int", nullable: false)
+                    PurchaseId = table.Column<int>(nullable: false)
                         .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
-                    BeverageId = table.Column<int>(type: "int", nullable: false),
-                    PurchaseDate = table.Column<DateTime>(type: "datetime", nullable: false),
-                    UnitPrice = table.Column<decimal>(type: "decimal(18, 2)", nullable: false),
-                    Rate = table.Column<decimal>(type: "decimal(18, 2)", nullable: false),
-                    LineTotalAmount = table.Column<decimal>(type: "decimal(18, 2)", nullable: false),
-                    Quantity = table.Column<int>(type: "int", nullable: false),
-                    MetricQuantity = table.Column<int>(type: "int", nullable: false),
-                    Discount = table.Column<decimal>(type: "decimal(18, 2)", nullable: true),
-                    Vat = table.Column<decimal>(type: "decimal(18, 2)", nullable: true),
-                    VatAmount = table.Column<decimal>(type: "decimal(18, 2)", nullable: true),
-                    InvoiceId = table.Column<int>(type: "int", nullable: false),
-                    Metric = table.Column<int>(type: "int", nullable: true),
-                    SupplierId = table.Column<int>(type: "int", nullable: true)
+                    BeverageId = table.Column<int>(nullable: false),
+                    PurchaseDate = table.Column<DateTime>(nullable: false),
+                    UnitPrice = table.Column<decimal>(nullable: false),
+                    Rate = table.Column<decimal>(nullable: false),
+                    LineTotalAmount = table.Column<decimal>(nullable: false),
+                    Quantity = table.Column<int>(nullable: false),
+                    MetricQuantity = table.Column<int>(nullable: false),
+                    Discount = table.Column<decimal>(nullable: true),
+                    Vat = table.Column<decimal>(nullable: true),
+                    VatAmount = table.Column<decimal>(nullable: true),
+                    InvoiceId = table.Column<int>(nullable: false),
+                    Metric = table.Column<int>(nullable: true),
+                    SupplierId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -428,13 +428,13 @@ namespace TescoWineShopSqlcore.Migrations
                 name: "LedgerTransaction",
                 columns: table => new
                 {
-                    LedgerTransactionId = table.Column<int>(type: "int", nullable: false)
+                    LedgerTransactionId = table.Column<int>(nullable: false)
                         .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
-                    VoucherNumber = table.Column<string>(type: "varchar(100)", maxLength: 100, nullable: true),
-                    Date = table.Column<DateTime>(type: "datetime", nullable: false),
-                    Description = table.Column<string>(type: "text", nullable: true),
-                    UserId = table.Column<int>(type: "int", nullable: true),
-                    FiscalYearId = table.Column<int>(type: "int", nullable: true)
+                    VoucherNumber = table.Column<string>(maxLength: 100, nullable: true),
+                    Date = table.Column<DateTime>(nullable: false),
+                    Description = table.Column<string>(nullable: true),
+                    UserId = table.Column<int>(nullable: true),
+                    FiscalYearId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -457,13 +457,13 @@ namespace TescoWineShopSqlcore.Migrations
                 name: "DuePay",
                 columns: table => new
                 {
-                    DuePayId = table.Column<int>(type: "int", nullable: false)
+                    DuePayId = table.Column<int>(nullable: false)
                         .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
-                    SaleOrderId = table.Column<int>(type: "int", nullable: false),
-                    Date = table.Column<DateTime>(type: "datetime", nullable: true),
-                    Amount = table.Column<decimal>(type: "decimal(18, 2)", nullable: false),
-                    CustomerId = table.Column<int>(type: "int", nullable: true),
-                    SaleId = table.Column<int>(type: "int", nullable: true)
+                    SaleOrderId = table.Column<int>(nullable: false),
+                    Date = table.Column<DateTime>(nullable: true),
+                    Amount = table.Column<decimal>(nullable: false),
+                    CustomerId = table.Column<int>(nullable: true),
+                    SaleId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -492,23 +492,23 @@ namespace TescoWineShopSqlcore.Migrations
                 name: "LedgerAccountBalance",
                 columns: table => new
                 {
-                    LedgerAccountBalanceId = table.Column<int>(type: "int", nullable: false)
+                    LedgerAccountBalanceId = table.Column<int>(nullable: false)
                         .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
-                    LedgerAccountId = table.Column<int>(type: "int", nullable: false),
-                    PeriodYear = table.Column<int>(type: "int", nullable: false),
-                    BeginingBalance = table.Column<decimal>(type: "decimal(18, 2)", nullable: false),
-                    Saldo1 = table.Column<decimal>(type: "decimal(18, 2)", nullable: false),
-                    Saldo2 = table.Column<decimal>(type: "decimal(18, 2)", nullable: false),
-                    Saldo3 = table.Column<decimal>(type: "decimal(18, 2)", nullable: false),
-                    Saldo4 = table.Column<decimal>(type: "decimal(18, 2)", nullable: false),
-                    Saldo5 = table.Column<decimal>(type: "decimal(18, 2)", nullable: false),
-                    Saldo6 = table.Column<decimal>(type: "decimal(18, 2)", nullable: false),
-                    Saldo7 = table.Column<decimal>(type: "decimal(18, 2)", nullable: false),
-                    Saldo8 = table.Column<decimal>(type: "decimal(18, 2)", nullable: false),
-                    Saldo9 = table.Column<decimal>(type: "decimal(18, 2)", nullable: false),
-                    Saldo10 = table.Column<decimal>(type: "decimal(18, 2)", nullable: false),
-                    Saldo11 = table.Column<decimal>(type: "decimal(18, 2)", nullable: false),
-                    Saldo12 = table.Column<decimal>(type: "decimal(18, 2)", nullable: false)
+                    LedgerAccountId = table.Column<int>(nullable: false),
+                    PeriodYear = table.Column<int>(nullable: false),
+                    BeginingBalance = table.Column<decimal>(nullable: false),
+                    Saldo1 = table.Column<decimal>(nullable: false),
+                    Saldo2 = table.Column<decimal>(nullable: false),
+                    Saldo3 = table.Column<decimal>(nullable: false),
+                    Saldo4 = table.Column<decimal>(nullable: false),
+                    Saldo5 = table.Column<decimal>(nullable: false),
+                    Saldo6 = table.Column<decimal>(nullable: false),
+                    Saldo7 = table.Column<decimal>(nullable: false),
+                    Saldo8 = table.Column<decimal>(nullable: false),
+                    Saldo9 = table.Column<decimal>(nullable: false),
+                    Saldo10 = table.Column<decimal>(nullable: false),
+                    Saldo11 = table.Column<decimal>(nullable: false),
+                    Saldo12 = table.Column<decimal>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -525,17 +525,17 @@ namespace TescoWineShopSqlcore.Migrations
                 name: "Ledgergenerals",
                 columns: table => new
                 {
-                    LedgergeneralId = table.Column<int>(type: "int", nullable: false)
+                    LedgergeneralId = table.Column<int>(nullable: false)
                         .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
-                    LedgerTransactionId = table.Column<int>(type: "int", nullable: false),
-                    JournalEntryDate = table.Column<DateTime>(type: "datetime", nullable: false),
-                    LedgerAccountId = table.Column<int>(type: "int", nullable: false),
-                    Debit = table.Column<decimal>(type: "decimal(18, 2)", nullable: false),
-                    Credit = table.Column<decimal>(type: "decimal(18, 2)", nullable: false),
-                    OpeningBalance = table.Column<decimal>(type: "decimal(18, 2)", nullable: false),
-                    ClosingBalance = table.Column<decimal>(type: "decimal(18, 2)", nullable: false),
-                    BankName = table.Column<string>(type: "text", nullable: true),
-                    ChequeNumber = table.Column<string>(type: "text", nullable: true)
+                    LedgerTransactionId = table.Column<int>(nullable: false),
+                    JournalEntryDate = table.Column<DateTime>(nullable: false),
+                    LedgerAccountId = table.Column<int>(nullable: false),
+                    Debit = table.Column<decimal>(nullable: false),
+                    Credit = table.Column<decimal>(nullable: false),
+                    OpeningBalance = table.Column<decimal>(nullable: false),
+                    ClosingBalance = table.Column<decimal>(nullable: false),
+                    BankName = table.Column<string>(nullable: true),
+                    ChequeNumber = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -558,12 +558,12 @@ namespace TescoWineShopSqlcore.Migrations
                 name: "LedgerTransactionDetail",
                 columns: table => new
                 {
-                    LedgerTransactionDetailId = table.Column<int>(type: "int", nullable: false)
+                    LedgerTransactionDetailId = table.Column<int>(nullable: false)
                         .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
-                    LedgerTransactionId = table.Column<int>(type: "int", nullable: false),
-                    LedgerAccountId = table.Column<int>(type: "int", nullable: false),
-                    Seq = table.Column<string>(type: "text", nullable: true),
-                    Amount = table.Column<decimal>(type: "decimal(18, 2)", nullable: false)
+                    LedgerTransactionId = table.Column<int>(nullable: false),
+                    LedgerAccountId = table.Column<int>(nullable: false),
+                    Seq = table.Column<string>(nullable: true),
+                    Amount = table.Column<decimal>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -682,10 +682,10 @@ namespace TescoWineShopSqlcore.Migrations
                 columns: new[] { "UserId", "Menus", "Password", "UserAddress", "UserCity", "UserCreatedOn", "UserEmail", "UserName", "UserPhone", "UserRoleId", "UserTole" },
                 values: new object[,]
                 {
-                    { 1, null, "dMRo3oqVLOs=", "Dathu Sadak", "Kathmandu", new DateTime(2021, 1, 23, 0, 0, 0, 0, DateTimeKind.Local), "dangolevan@gmail.com", "admin", "9849178036", 2, "Khusibu" },
-                    { 2, null, "R2LOIQb+UyM=", "Dathu Sadak", "Kathmandu", new DateTime(2021, 1, 23, 0, 0, 0, 0, DateTimeKind.Local), "ram@gmail.com", "a", "9849178036", 2, "Khusibu" },
-                    { 3, null, "R2LOIQb+UyM=", "Dathu Sadak", "Kathmandu", new DateTime(2021, 1, 23, 0, 0, 0, 0, DateTimeKind.Local), "dangolevan@gmail.com", "b", "9849178036", 3, "Khusibu" },
-                    { 4, null, "R2LOIQb+UyM=", "Dathu Sadak", "Kathmandu", new DateTime(2021, 1, 23, 0, 0, 0, 0, DateTimeKind.Local), "dangolevan@gmail.com", "c", "9849178036", 4, "Khusibu" }
+                    { 1, null, "dMRo3oqVLOs=", "Dathu Sadak", "Kathmandu", new DateTime(2021, 1, 27, 0, 0, 0, 0, DateTimeKind.Local), "dangolevan@gmail.com", "admin", "9849178036", 2, "Khusibu" },
+                    { 2, null, "R2LOIQb+UyM=", "Dathu Sadak", "Kathmandu", new DateTime(2021, 1, 27, 0, 0, 0, 0, DateTimeKind.Local), "ram@gmail.com", "a", "9849178036", 2, "Khusibu" },
+                    { 3, null, "R2LOIQb+UyM=", "Dathu Sadak", "Kathmandu", new DateTime(2021, 1, 27, 0, 0, 0, 0, DateTimeKind.Local), "dangolevan@gmail.com", "b", "9849178036", 3, "Khusibu" },
+                    { 4, null, "R2LOIQb+UyM=", "Dathu Sadak", "Kathmandu", new DateTime(2021, 1, 27, 0, 0, 0, 0, DateTimeKind.Local), "dangolevan@gmail.com", "c", "9849178036", 4, "Khusibu" }
                 });
 
             migrationBuilder.InsertData(

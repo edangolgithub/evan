@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Amazon.DynamoDBv2;
+using LiquorShopService.Implementations;
+using LiquorShopService.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -28,6 +30,7 @@ namespace EvanApi
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddTransient<IInterestsRepository, InterestsRepository>();
+            services.AddTransient<IUserService,UserService>();
             var awsOptions = Configuration.GetAWSOptions();
             services.AddDefaultAWSOptions(awsOptions);
             services.AddAWSService<IAmazonDynamoDB>();

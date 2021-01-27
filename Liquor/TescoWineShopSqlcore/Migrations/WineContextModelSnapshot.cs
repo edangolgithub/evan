@@ -14,8 +14,8 @@ namespace TescoWineShopSqlcore.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("Relational:MaxIdentifierLength", 64)
-                .HasAnnotation("ProductVersion", "5.0.2");
+                .HasAnnotation("ProductVersion", "3.1.11")
+                .HasAnnotation("Relational:MaxIdentifierLength", 64);
 
             modelBuilder.Entity("TescoWineShopSql.AccountClass", b =>
                 {
@@ -30,8 +30,8 @@ namespace TescoWineShopSqlcore.Migrations
                         .HasColumnType("tinyint(1)");
 
                     b.Property<string>("Name")
-                        .HasMaxLength(50)
-                        .HasColumnType("varchar(50)");
+                        .HasColumnType("varchar(50)")
+                        .HasMaxLength(50);
 
                     b.HasKey("AccountClassId");
 
@@ -290,8 +290,8 @@ namespace TescoWineShopSqlcore.Migrations
                         .HasColumnType("text");
 
                     b.Property<string>("CompanyName")
-                        .HasMaxLength(100)
-                        .HasColumnType("varchar(100)");
+                        .HasColumnType("varchar(100)")
+                        .HasMaxLength(100);
 
                     b.Property<string>("CompanyPanNumber")
                         .HasColumnType("text");
@@ -458,8 +458,8 @@ namespace TescoWineShopSqlcore.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("AccountName")
-                        .HasMaxLength(50)
-                        .HasColumnType("varchar(50)");
+                        .HasColumnType("varchar(50)")
+                        .HasMaxLength(50);
 
                     b.Property<int>("CompanyId")
                         .HasColumnType("int");
@@ -781,8 +781,8 @@ namespace TescoWineShopSqlcore.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("VoucherNumber")
-                        .HasMaxLength(100)
-                        .HasColumnType("varchar(100)");
+                        .HasColumnType("varchar(100)")
+                        .HasMaxLength(100);
 
                     b.HasKey("LedgerTransactionId");
 
@@ -1040,8 +1040,8 @@ namespace TescoWineShopSqlcore.Migrations
 
                     b.Property<string>("UserName")
                         .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("varchar(50)");
+                        .HasColumnType("varchar(50)")
+                        .HasMaxLength(50);
 
                     b.Property<string>("UserPhone")
                         .HasColumnType("text");
@@ -1065,7 +1065,7 @@ namespace TescoWineShopSqlcore.Migrations
                             Password = "dMRo3oqVLOs=",
                             UserAddress = "Dathu Sadak",
                             UserCity = "Kathmandu",
-                            UserCreatedOn = new DateTime(2021, 1, 23, 0, 0, 0, 0, DateTimeKind.Local),
+                            UserCreatedOn = new DateTime(2021, 1, 27, 0, 0, 0, 0, DateTimeKind.Local),
                             UserEmail = "dangolevan@gmail.com",
                             UserName = "admin",
                             UserPhone = "9849178036",
@@ -1078,7 +1078,7 @@ namespace TescoWineShopSqlcore.Migrations
                             Password = "R2LOIQb+UyM=",
                             UserAddress = "Dathu Sadak",
                             UserCity = "Kathmandu",
-                            UserCreatedOn = new DateTime(2021, 1, 23, 0, 0, 0, 0, DateTimeKind.Local),
+                            UserCreatedOn = new DateTime(2021, 1, 27, 0, 0, 0, 0, DateTimeKind.Local),
                             UserEmail = "ram@gmail.com",
                             UserName = "a",
                             UserPhone = "9849178036",
@@ -1091,7 +1091,7 @@ namespace TescoWineShopSqlcore.Migrations
                             Password = "R2LOIQb+UyM=",
                             UserAddress = "Dathu Sadak",
                             UserCity = "Kathmandu",
-                            UserCreatedOn = new DateTime(2021, 1, 23, 0, 0, 0, 0, DateTimeKind.Local),
+                            UserCreatedOn = new DateTime(2021, 1, 27, 0, 0, 0, 0, DateTimeKind.Local),
                             UserEmail = "dangolevan@gmail.com",
                             UserName = "b",
                             UserPhone = "9849178036",
@@ -1104,7 +1104,7 @@ namespace TescoWineShopSqlcore.Migrations
                             Password = "R2LOIQb+UyM=",
                             UserAddress = "Dathu Sadak",
                             UserCity = "Kathmandu",
-                            UserCreatedOn = new DateTime(2021, 1, 23, 0, 0, 0, 0, DateTimeKind.Local),
+                            UserCreatedOn = new DateTime(2021, 1, 27, 0, 0, 0, 0, DateTimeKind.Local),
                             UserEmail = "dangolevan@gmail.com",
                             UserName = "c",
                             UserPhone = "9849178036",
@@ -1207,8 +1207,6 @@ namespace TescoWineShopSqlcore.Migrations
                         .HasForeignKey("BeverageCategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("BeverageCategory");
                 });
 
             modelBuilder.Entity("TescoWineShopSql.Company", b =>
@@ -1216,8 +1214,6 @@ namespace TescoWineShopSqlcore.Migrations
                     b.HasOne("TescoWineShopSql.FiscalYear", "FiscalYear")
                         .WithMany()
                         .HasForeignKey("FiscalYearId");
-
-                    b.Navigation("FiscalYear");
                 });
 
             modelBuilder.Entity("TescoWineShopSql.DuePay", b =>
@@ -1235,8 +1231,6 @@ namespace TescoWineShopSqlcore.Migrations
                         .HasForeignKey("SaleOrderId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("SaleOrder");
                 });
 
             modelBuilder.Entity("TescoWineShopSql.Invoice", b =>
@@ -1246,8 +1240,6 @@ namespace TescoWineShopSqlcore.Migrations
                         .HasForeignKey("SupplierId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Supplier");
                 });
 
             modelBuilder.Entity("TescoWineShopSql.LedgerAccount", b =>
@@ -1271,12 +1263,6 @@ namespace TescoWineShopSqlcore.Migrations
                     b.HasOne("TescoWineShopSql.LedgerAccount", "parentLedgerAccount")
                         .WithMany()
                         .HasForeignKey("ParentLedgerAccountId");
-
-                    b.Navigation("AccountClass");
-
-                    b.Navigation("Company");
-
-                    b.Navigation("parentLedgerAccount");
                 });
 
             modelBuilder.Entity("TescoWineShopSql.LedgerAccountBalance", b =>
@@ -1286,8 +1272,6 @@ namespace TescoWineShopSqlcore.Migrations
                         .HasForeignKey("LedgerAccountId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("LedgerAccount");
                 });
 
             modelBuilder.Entity("TescoWineShopSql.LedgerGeneral", b =>
@@ -1303,10 +1287,6 @@ namespace TescoWineShopSqlcore.Migrations
                         .HasForeignKey("LedgerTransactionId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("LedgerAccount");
-
-                    b.Navigation("LedgerTransaction");
                 });
 
             modelBuilder.Entity("TescoWineShopSql.LedgerTransaction", b =>
@@ -1318,10 +1298,6 @@ namespace TescoWineShopSqlcore.Migrations
                     b.HasOne("TescoWineShopSql.User", "User")
                         .WithMany()
                         .HasForeignKey("UserId");
-
-                    b.Navigation("FiscalYear");
-
-                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("TescoWineShopSql.LedgerTransactionDetail", b =>
@@ -1337,10 +1313,6 @@ namespace TescoWineShopSqlcore.Migrations
                         .HasForeignKey("LedgerTransactionId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("LedgerAccount");
-
-                    b.Navigation("LedgerTransaction");
                 });
 
             modelBuilder.Entity("TescoWineShopSql.Purchase", b =>
@@ -1360,10 +1332,6 @@ namespace TescoWineShopSqlcore.Migrations
                     b.HasOne("TescoWineShopSql.Supplier", null)
                         .WithMany("Purchases")
                         .HasForeignKey("SupplierId");
-
-                    b.Navigation("Beverage");
-
-                    b.Navigation("Invoice");
                 });
 
             modelBuilder.Entity("TescoWineShopSql.Sale", b =>
@@ -1381,12 +1349,6 @@ namespace TescoWineShopSqlcore.Migrations
                     b.HasOne("TescoWineShopSql.SaleOrder", "SaleOrder")
                         .WithMany("Sales")
                         .HasForeignKey("SaleOrderId");
-
-                    b.Navigation("Beverage");
-
-                    b.Navigation("Customer");
-
-                    b.Navigation("SaleOrder");
                 });
 
             modelBuilder.Entity("TescoWineShopSql.SaleOrder", b =>
@@ -1394,8 +1356,6 @@ namespace TescoWineShopSqlcore.Migrations
                     b.HasOne("TescoWineShopSql.Customer", "Customer")
                         .WithMany("SaleOrders")
                         .HasForeignKey("CustomerId");
-
-                    b.Navigation("Customer");
                 });
 
             modelBuilder.Entity("TescoWineShopSql.SalesReturn", b =>
@@ -1403,8 +1363,6 @@ namespace TescoWineShopSqlcore.Migrations
                     b.HasOne("TescoWineShopSql.Beverage", "Beverage")
                         .WithMany()
                         .HasForeignKey("BeverageId");
-
-                    b.Navigation("Beverage");
                 });
 
             modelBuilder.Entity("TescoWineShopSql.User", b =>
@@ -1414,76 +1372,6 @@ namespace TescoWineShopSqlcore.Migrations
                         .HasForeignKey("UserRoleId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("UserRole");
-                });
-
-            modelBuilder.Entity("TescoWineShopSql.AccountClass", b =>
-                {
-                    b.Navigation("LedgerAccounts");
-                });
-
-            modelBuilder.Entity("TescoWineShopSql.AccountGroup", b =>
-                {
-                    b.Navigation("LedgerAccounts");
-                });
-
-            modelBuilder.Entity("TescoWineShopSql.Beverage", b =>
-                {
-                    b.Navigation("Purchases");
-
-                    b.Navigation("Sales");
-                });
-
-            modelBuilder.Entity("TescoWineShopSql.BeverageCategory", b =>
-                {
-                    b.Navigation("Beverages");
-                });
-
-            modelBuilder.Entity("TescoWineShopSql.Customer", b =>
-                {
-                    b.Navigation("Dues");
-
-                    b.Navigation("SaleOrders");
-
-                    b.Navigation("Sales");
-                });
-
-            modelBuilder.Entity("TescoWineShopSql.FiscalYear", b =>
-                {
-                    b.Navigation("LedgerTransactions");
-                });
-
-            modelBuilder.Entity("TescoWineShopSql.Invoice", b =>
-                {
-                    b.Navigation("Purchases");
-                });
-
-            modelBuilder.Entity("TescoWineShopSql.LedgerTransaction", b =>
-                {
-                    b.Navigation("LedgerGenerals");
-
-                    b.Navigation("LedgerTransactionDetails");
-                });
-
-            modelBuilder.Entity("TescoWineShopSql.Sale", b =>
-                {
-                    b.Navigation("DuePays");
-                });
-
-            modelBuilder.Entity("TescoWineShopSql.SaleOrder", b =>
-                {
-                    b.Navigation("Sales");
-                });
-
-            modelBuilder.Entity("TescoWineShopSql.Supplier", b =>
-                {
-                    b.Navigation("Purchases");
-                });
-
-            modelBuilder.Entity("TescoWineShopSql.UserRole", b =>
-                {
-                    b.Navigation("Users");
                 });
 #pragma warning restore 612, 618
         }

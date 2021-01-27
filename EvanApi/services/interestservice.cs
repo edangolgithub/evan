@@ -12,10 +12,10 @@ namespace EvanApi
 {
     public interface IInterestsRepository
     {
-        Task<IEnumerable<Accounttype>> Allaccounttype();
-        Task Addaccounttype(Accounttype entity);
+        Task<IEnumerable<AccountType>> Allaccounttype();
+        Task Addaccounttype(AccountType entity);
         Task Deleteaccounttype(string id);
-        Task Updateaccounttype(Accounttype entity);
+        Task Updateaccounttype(AccountType entity);
 
         
         Task<IEnumerable<Account>> AllAccounts();
@@ -42,38 +42,33 @@ namespace EvanApi
             _context = new DynamoDBContext(_client);
         }
 
-        public async Task Addaccounttype(Accounttype entity)
+        public async Task Addaccounttype(AccountType entity)
         {
             entity.id
              = Guid.NewGuid().ToString();
            
-            await _context.SaveAsync<Accounttype>(entity);
+            await _context.SaveAsync<AccountType>(entity);
         }
 
-        public async Task<IEnumerable<Accounttype>> Allaccounttype()
+        public async Task<IEnumerable<AccountType>> Allaccounttype()
         {
 
-            var table = _context.GetTargetTable<Accounttype>();
+            var table = _context.GetTargetTable<AccountType>();
             var scanConditions = new List<ScanCondition>() { new ScanCondition("id", ScanOperator.IsNotNull) };
-            var searchResults = _context.ScanAsync<Accounttype>(scanConditions, null);
-            return (IEnumerable<Accounttype>)await searchResults.GetNextSetAsync();
+            var searchResults = _context.ScanAsync<AccountType>(scanConditions, null);
+            return (IEnumerable<AccountType>)await searchResults.GetNextSetAsync();
         }
 
         public async Task Deleteaccounttype(string id)
         {
-            await _context.DeleteAsync<Accounttype>(id);
+            await _context.DeleteAsync<AccountType>(id);
         }
 
-        public async Task Updateaccounttype(Accounttype entity)
+        public async Task Updateaccounttype(AccountType entity)
         {
-            await _context.SaveAsync<Accounttype>(entity);
+            await _context.SaveAsync<AccountType>(entity);
         }
-
-
-
-
-
-
+        
            public async Task AddAccount(Account entity)
         {
             entity.id

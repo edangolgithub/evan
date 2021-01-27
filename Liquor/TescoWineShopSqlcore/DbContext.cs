@@ -11,7 +11,7 @@ namespace TescoWineShopSql
         }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseMySQL("server=liquor.cjiabok62vq8.us-east-1.rds.amazonaws.com,port=3306;database=liquor;user=liquoruser;password=liquorpassword");
+               optionsBuilder.UseMySQL("server=evandb.cjiabok62vq8.us-east-1.rds.amazonaws.com,port=3306;database=liquor;user=mysqluser;password=mysqlpassword");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
