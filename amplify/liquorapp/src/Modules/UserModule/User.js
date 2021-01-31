@@ -4,6 +4,7 @@ export class User extends Component {
     constructor(props) {
         super(props);
         this.GetUsers = this.GetUsers.bind(this)
+        this.GetUser=this.GetUser.bind(this)
     }
     state = { Users: [] }
     GetUsers() {
@@ -11,6 +12,11 @@ export class User extends Component {
         users.then(data => {
             this.setState({ Users: data });
         })
+    }
+    GetUser(event)
+    {
+           alert(event.target.value);
+           console.log(event)
     }
     render() {
         return (
@@ -36,7 +42,8 @@ export class User extends Component {
                             {
                                 this.state.Users &&
                                 this.state.Users.map((user, key) =>
-                                    <tr key={key}>
+                             
+                                    <tr key={key} onClick={this.GetUser}>
                                         <td>{user.userId}</td>
                                         <td>{user.userName}</td>
                                         <td>{user.password}</td>
@@ -48,6 +55,7 @@ export class User extends Component {
                                         <td>{user.userCreatedOn}</td>
                                         <td>{user.userRoleId}</td>
                                     </tr>
+                                    
                                 )
 
                             }
