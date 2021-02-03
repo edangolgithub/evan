@@ -1,0 +1,139 @@
+.slider
+{
+  
+}
+.slider img
+{
+    max-height: 400px;
+    object-fit: cover;
+    border-radius: 4px;;
+}
+
+.cardfooter {
+    background-color: #616161;
+    color: white;
+    margin-top: 50px;
+    border: none
+}
+
+.head1 {
+    font-weight: 900;
+    font-size: 30px
+}
+
+.bdr {
+    border-bottom: 1.5px solid #FFB74D;
+    width: 65px;
+    margin-right: auto;
+    margin-left: auto
+}
+
+.card-footer {
+    justify-content: space-between;
+    border: none;
+    background: none;
+    border-bottom: 0.5px solid #9E9E9E
+}
+
+.footer-right>i {
+    margin-left: 15px
+}
+
+.fa-hand-holding-usd {
+    color: #FFB74D
+}
+
+.fa-handshake {
+    color: #FFB74D
+}
+
+
+
+.footers a {color:#696969;}
+.footers p {color:#696969;}
+.footers ul {line-height:30px;}
+#social-fb:hover {
+     color: #3B5998;
+     transition:all .001s;
+ }
+ #social-tw:hover {
+     color: #4099FF;
+     transition:all .001s;
+ }
+ #social-gp:hover {
+     color: #d34836;
+     transition:all .001s;
+ }
+ #social-em:hover {
+     color: #f39c12;
+     transition:all .001s;
+ }
+
+.card-title {
+    margin-bottom: .75rem;
+    font-weight: 900;
+    font-size: 15px;
+    margin-top: 1.75rem
+}
+
+.learn-more {
+    color: #FFB74D
+}
+
+.fa-angle-right {
+    margin-left: 10px
+}
+
+.fa-3x {
+    color: #FFB74D
+}
+
+.card-content {
+    padding-right: 40px;
+    padding-left: 30px;
+    padding-bottom: 10px;
+    padding-top: 10px
+}
+
+.card-content>p {
+    color: #9E9E9E
+}
+
+.heading {
+    position: relative;
+    top: 75px
+}
+
+.follow-text {
+    color: #9E9E9E
+}
+.iconrow
+{
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.contentrow .side,.contentrow .main{
+padding-left: 7px;
+padding-right: 7px;
+}
+.contentrow p
+{
+    padding: 5px;
+}
+.iconrow .col{
+    padding: 5px;
+    box-shadow: 2px 2px 5px gray;
+    text-align: center;
+    margin:10px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+.iconrow .col:hover{
+   
+    box-shadow: 2px 2px 5px rgb(30, 202, 145);
+   
+}
+.iconrow span{
+    font-size:80px;
+    color:rgb(49, 178, 218);
+}

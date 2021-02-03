@@ -1,0 +1,64 @@
+{
+    "Users": [
+        {
+            "userId": 1,
+            "userName": "admin",
+            "password": "dMRo3oqVLOs=",
+            "menus": null,
+            "userEmail": "dangolevan@gmail.com",
+            "userPhone": "9849178036",
+            "userAddress": "Dathu Sadak",
+            "userTole": "Khusibu",
+            "userCity": "Kathmandu",
+            "userRoleId": 2,
+            "userRole": null,
+            "userCreatedOn": "2021-01-27",
+            "hasErrors": false
+        },
+        {
+            "userId": 2,
+            "userName": "Evan",
+            "password": "R2LOIQb+UyM=",
+            "menus": null,
+            "userEmail": "ram@gmail.com",
+            "userPhone": "9849178036",
+            "userAddress": "Dathu Sadak",
+            "userTole": "Khusibu",
+            "userCity": "Kathmandu",
+            "userRoleId": 2,
+            "userRole": null,
+            "userCreatedOn": "2021-01-27",
+            "hasErrors": false
+        },
+        {
+            "userId": 3,
+            "userName": "Ram",
+            "password": "R2LOIQb+UyM=",
+            "menus": null,
+            "userEmail": "dangolevan@gmail.com",
+            "userPhone": "9849178036",
+            "userAddress": "Dathu Sadak",
+            "userTole": "Khusibu",
+            "userCity": "Kathmandu",
+            "userRoleId": 3,
+            "userRole": null,
+            "userCreatedOn": "2021-01-27",
+            "hasErrors": false
+        },
+        {
+            "userId": 4,
+            "userName": "shyam",
+            "password": "R2LOIQb+UyM=",
+            "menus": null,
+            "userEmail": "dangolevan@gmail.com",
+            "userPhone": "9849178036",
+            "userAddress": "Dathu Sadak",
+            "userTole": "Khusibu",
+            "userCity": "Kathmandu",
+            "userRoleId": 4,
+            "userRole": null,
+            "userCreatedOn": "2021-01-27",
+            "hasErrors": false
+        }
+    ]
+}
