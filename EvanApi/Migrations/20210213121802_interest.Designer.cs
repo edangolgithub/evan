@@ -2,14 +2,16 @@
 using EvanApi.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace EvanApi.Migrations
 {
     [DbContext(typeof(CoopContext))]
-    partial class CoopContextModelSnapshot : ModelSnapshot
+    [Migration("20210213121802_interest")]
+    partial class interest
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -117,9 +119,6 @@ namespace EvanApi.Migrations
                     b.Property<double>("interest")
                         .HasColumnType("double");
 
-                    b.Property<bool>("islatest")
-                        .HasColumnType("tinyint(1)");
-
                     b.Property<string>("type")
                         .HasColumnType("text");
 
@@ -137,8 +136,7 @@ namespace EvanApi.Migrations
                             balance = 100.0,
                             created = "2021-01-01",
                             entry = "Debit",
-                            interest = 0.0,
-                            islatest = false
+                            interest = 0.0
                         },
                         new
                         {
@@ -149,8 +147,7 @@ namespace EvanApi.Migrations
                             balance = 100.0,
                             created = "2021-01-01",
                             entry = "Debit",
-                            interest = 0.0,
-                            islatest = false
+                            interest = 0.0
                         });
                 });
 #pragma warning restore 612, 618

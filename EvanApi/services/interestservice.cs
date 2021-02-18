@@ -12,16 +12,16 @@ namespace EvanApi
 {
     public interface IInterestsRepository
     {
-        Task<IEnumerable<AccountType>> Allaccounttype();
-        Task Addaccounttype(AccountType entity);
-        Task Deleteaccounttype(string id);
-        Task Updateaccounttype(AccountType entity);
+        // Task<IEnumerable<AccountType>> Allaccounttype();
+        // Task Addaccounttype(AccountType entity);
+        // Task Deleteaccounttype(string id);
+        // Task Updateaccounttype(AccountType entity);
 
         
-        Task<IEnumerable<Account>> AllAccounts();
-        Task AddAccount(Account entity);
-        Task DeleteAccount(string id);
-        Task UpdateAccount(Account entity);
+        // Task<IEnumerable<Account>> AllAccounts();
+        // Task AddAccount(Account entity);
+        // Task DeleteAccount(string id);
+        // Task UpdateAccount(Account entity);
 
         
         Task<IEnumerable<Transaction>> AllTransactions();
@@ -42,59 +42,7 @@ namespace EvanApi
             _context = new DynamoDBContext(_client);
         }
 
-        public async Task Addaccounttype(AccountType entity)
-        {
-            entity.id
-             = Guid.NewGuid().ToString();
-           
-            await _context.SaveAsync<AccountType>(entity);
-        }
 
-        public async Task<IEnumerable<AccountType>> Allaccounttype()
-        {
-
-            var table = _context.GetTargetTable<AccountType>();
-            var scanConditions = new List<ScanCondition>() { new ScanCondition("id", ScanOperator.IsNotNull) };
-            var searchResults = _context.ScanAsync<AccountType>(scanConditions, null);
-            return (IEnumerable<AccountType>)await searchResults.GetNextSetAsync();
-        }
-
-        public async Task Deleteaccounttype(string id)
-        {
-            await _context.DeleteAsync<AccountType>(id);
-        }
-
-        public async Task Updateaccounttype(AccountType entity)
-        {
-            await _context.SaveAsync<AccountType>(entity);
-        }
-        
-           public async Task AddAccount(Account entity)
-        {
-            entity.id
-             = Guid.NewGuid().ToString();
-           
-            await _context.SaveAsync<Account>(entity);
-        }
-
-        public async Task<IEnumerable<Account>> AllAccounts()
-        {
-
-            var table = _context.GetTargetTable<Account>();
-            var scanConditions = new List<ScanCondition>() { new ScanCondition("id", ScanOperator.IsNotNull) };
-            var searchResults = _context.ScanAsync<Account>(scanConditions, null);
-            return (IEnumerable<Account>)await searchResults.GetNextSetAsync();
-        }
-
-        public async Task DeleteAccount(string id)
-        {
-            await _context.DeleteAsync<Account>(id);
-        }
-
-        public async Task UpdateAccount(Account entity)
-        {
-            await _context.SaveAsync<Account>(entity);
-        }
 
 
         public async Task<IEnumerable<Transaction>> AllTransactions()
