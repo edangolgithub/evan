@@ -18,10 +18,10 @@ namespace EvanApi
         // Task Updateaccounttype(AccountType entity);
 
         
-        // Task<IEnumerable<Account>> AllAccounts();
-        // Task AddAccount(Account entity);
-        // Task DeleteAccount(string id);
-        // Task UpdateAccount(Account entity);
+        Task<IEnumerable<Account>> AllAccounts();
+        Task AddAccount(Account entity);
+        Task DeleteAccount(string id);
+        Task UpdateAccount(Account entity);
 
         
         Task<IEnumerable<Transaction>> AllTransactions();
@@ -41,9 +41,6 @@ namespace EvanApi
             _client = new AmazonDynamoDBClient();
             _context = new DynamoDBContext(_client);
         }
-
-
-
 
         public async Task<IEnumerable<Transaction>> AllTransactions()
         {
@@ -71,6 +68,26 @@ namespace EvanApi
              = Guid.NewGuid().ToString();
            
             await _context.SaveAsync<Transaction>(entity);
+        }
+
+        public Task<IEnumerable<Account>> AllAccounts()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task AddAccount(Account entity)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task DeleteAccount(string id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task UpdateAccount(Account entity)
+        {
+            throw new NotImplementedException();
         }
     }
 }

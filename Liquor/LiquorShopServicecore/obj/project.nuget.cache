@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "VX5eJNxW582zwVfkhiwCsoKe0lU5H8zzMV+r+eztZgxCm5Va6K37w9JwAjaqi+flmt4DpEOgfOxdYatPl8YnIA==",
+  "dgSpecHash": "CJjqUQkMWn/skqcTjFs1KO6pRGh9XdvP9VHc2ejqc+J5X/XQ+AVDLA0j3SCtt6pCvnZgxcrIZb/wT5HKTdiENg==",
   "success": true,
   "projectFilePath": "/home/ec2-user/evan/Liquor/LiquorShopServicecore/LiquorShopServicecore.csproj",
   "expectedPackageFiles": [

@@ -1,11 +1,19 @@
 ﻿using System;
 using System.Net;
 using System.Net.Mail;
+using System.Threading.Tasks;
 
 namespace console{
     class Program
     {
-        static void Main(string[] args)
+        public static void Main()
+        {
+            Console.WriteLine("hello");
+           //HighLevelQueryAndScan.RunAsync().Wait();
+          // DynoContext.RunAsync().Wait();
+            Dynamodb.RunAsync().Wait();
+        }
+        static void Email()
         {
             // Replace sender@example.com with your "From" address. 
             // This address must be verified with Amazon SES.
