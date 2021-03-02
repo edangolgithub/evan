@@ -11,7 +11,9 @@ namespace console{
             Console.WriteLine("hello");
            //HighLevelQueryAndScan.RunAsync().Wait();
           // DynoContext.RunAsync().Wait();
-            Dynamodb.RunAsync().Wait();
+          //  Dynamodb.RunAsync().Wait();
+         // CreateDynamodb.CreateTable().Wait();
+          loadjson.insertjsonasync().Wait();
         }
         static void Email()
         {

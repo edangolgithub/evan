@@ -42,9 +42,9 @@ namespace console
 
 
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-               throw ex;
+               throw ;
             }
         }
         public async static Task gettransactionq(DynamoDBContext context, string accountid = "123")
