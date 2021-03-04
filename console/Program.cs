@@ -13,7 +13,8 @@ namespace console{
           // DynoContext.RunAsync().Wait();
           //  Dynamodb.RunAsync().Wait();
          // CreateDynamodb.CreateTable().Wait();
-          loadjson.insertjsonasync().Wait();
+        //  loadjson.insertjsonasync().Wait();
+        EvanSms.RunAsync().Wait();
         }
         static void Email()
         {
