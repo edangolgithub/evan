@@ -13,7 +13,7 @@ async function querydynamodb() {
     let params = {
       TableName: table,
       KeyConditionExpression: 'evanid = :id ',
-      ExpressionAttributeValues: { ':id': '2016' },
+      ExpressionAttributeValues: { ':id': '2011' },
 
     }
   
