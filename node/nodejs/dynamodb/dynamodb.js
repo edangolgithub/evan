@@ -1,9 +1,5 @@
-const serverless = require('serverless-http');
-const bodyParser = require('body-parser');
-const express = require('express');
-const app = express();
 const AWS = require('aws-sdk');
-const uuid = require('node-uuid');
+
 
 
 AWS.config.update({

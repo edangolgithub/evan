@@ -9,5 +9,6 @@
 <body>
     @model.title
     @model.content
+    
 </body>
 </html>
