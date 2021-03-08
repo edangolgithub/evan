@@ -11,6 +11,9 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 
 from pathlib import Path
+import os
+
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -20,7 +23,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'x@=he_)o6p-8fq7f!(iec72-+&f0njxl-xqwl*o3$5387po0j5'
+SECRET_KEY = '6-6!%o%czr-62iqh^-wh&&p^$7=gn@mydbw9s(r&r#ul2-o$95'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -31,12 +34,14 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'polls.apps.PollsConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'evanapp'
 ]
 
 MIDDLEWARE = [
@@ -54,7 +59,7 @@ ROOT_URLCONF = 'mysite.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        "DIRS": ["mysite/templates/"],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -73,12 +78,26 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'OPTIONS': {
+#             'read_default_file': '/etc/my.cnf.d/mypassword.cnf',
+#         },
+#     }
+# }
+if 'RDS_HOSTNAME' in os.environ:
+ DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.mysql',
+            'NAME': os.environ['RDS_DB_NAME'],
+            'USER': os.environ['RDS_USERNAME'],
+            'PASSWORD': os.environ['RDS_PASSWORD'],
+            'HOST': os.environ['RDS_HOSTNAME'],
+            'PORT': os.environ['RDS_PORT'],
+        }
+ }
+
 
 
 # Password validation
