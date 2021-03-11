@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "7TThB/s18S2DtTmkD9j2cf6UTju6zJBjSwlTZxoMBzs00hxtno4cvV/oSymhP8FKAZghhygl+avvZfRCfvmFrw==",
+  "dgSpecHash": "kcHyPnM9M5uBkWp8vjJriQCGhV+7YBKrlQ3tQNjMVAVVt6wGQU6fjYtMf8Zb0DpyAQkZpsKfbNQUMHbCCKYgDw==",
   "success": true,
   "projectFilePath": "/home/ec2-user/evan/Liquor/TescoWineShopSqlcore/TescoWineShopSqlcore.csproj",
   "expectedPackageFiles": [
@@ -31,7 +31,7 @@
     "/home/ec2-user/.nuget/packages/microsoft.netcore.platforms/3.1.0/microsoft.netcore.platforms.3.1.0.nupkg.sha512",
     "/home/ec2-user/.nuget/packages/microsoft.win32.systemevents/4.7.0/microsoft.win32.systemevents.4.7.0.nupkg.sha512",
     "/home/ec2-user/.nuget/packages/mysql.data/8.0.23/mysql.data.8.0.23.nupkg.sha512",
-    "/home/ec2-user/.nuget/packages/mysql.entityframeworkcore/3.1.10-m8.0.23/mysql.entityframeworkcore.3.1.10-m8.0.23.nupkg.sha512",
+    "/home/ec2-user/.nuget/packages/mysql.entityframeworkcore/3.1.10/mysql.entityframeworkcore.3.1.10.nupkg.sha512",
     "/home/ec2-user/.nuget/packages/ssh.net/2020.0.0-beta1/ssh.net.2020.0.0-beta1.nupkg.sha512",
     "/home/ec2-user/.nuget/packages/sshnet.security.cryptography/1.3.0/sshnet.security.cryptography.1.3.0.nupkg.sha512",
     "/home/ec2-user/.nuget/packages/system.buffers/4.5.1/system.buffers.4.5.1.nupkg.sha512",

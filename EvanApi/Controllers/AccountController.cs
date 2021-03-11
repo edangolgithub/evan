@@ -16,29 +16,30 @@ namespace EvanApi.Controllers
         {
             _repository = repository;
         }
-        public async Task<IEnumerable<Transaction>> Get()
+        public async Task<IEnumerable<Account>> Get()
         {
-            return await _repository.AllTransactions();
+             var data= await _repository.AllAccounts();
+              return  data.OrderByDescending(a=>a.created);
         }
 
         [HttpPost]
-        public async Task Post([FromBody]Transaction model)
+        public async Task Post([FromBody]Account model)
         {
            if(model==null)
            {
                return;
            }
-            await _repository.AddTransaction(model);
+            await _repository.AddAccount(model);
         }
         [HttpPut]
-        public async Task PutAsync([FromBody] Transaction entity)
+        public async Task PutAsync([FromBody] Account entity)
         {
-             await _repository.UpdateTransaction(entity);
+             await _repository.UpdateAccount(entity);
         }
         [HttpDelete("{id}")]
         public async Task DeleteAsync(string id)
         {
-            await _repository.DeleteTransaction(id);
+            await _repository.DeleteAccount(id);
         }
 
 

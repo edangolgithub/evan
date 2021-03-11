@@ -4,8 +4,8 @@ let db = new sqlite3.Database('./chinook.db', sqlite3.OPEN_READWRITE, (err) => {
         console.error(err.message);
     }
     console.log('Connected to the chinook database.');
-   // createTable();
-    read();
+    //createTable();
+   // read();
 });
 const createTable = () => {
     console.log("create database table contacts");
@@ -29,3 +29,5 @@ db.close((err) => {
     }
     console.log('Close the database connection.');
 });
+createTable();
+//read();

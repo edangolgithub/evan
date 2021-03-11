@@ -26,7 +26,7 @@ namespace EvanApi.models
         public string id { get; set; }        
         public string created { get; set; }      
         public string isenabled { get; set; }
-     
+        public string accountnumber { get; set; }
 
     }
 

@@ -17,13 +17,13 @@ namespace EvanApi
         // Task Deleteaccounttype(string id);
         // Task Updateaccounttype(AccountType entity);
 
-        
+
         Task<IEnumerable<Account>> AllAccounts();
         Task AddAccount(Account entity);
         Task DeleteAccount(string id);
         Task UpdateAccount(Account entity);
 
-        
+
         Task<IEnumerable<Transaction>> AllTransactions();
         Task AddTransaction(Transaction entity);
         Task DeleteTransaction(string id);
@@ -66,28 +66,35 @@ namespace EvanApi
         {
             entity.id
              = Guid.NewGuid().ToString();
-           
+
             await _context.SaveAsync<Transaction>(entity);
         }
 
-        public Task<IEnumerable<Account>> AllAccounts()
+        public async Task<IEnumerable<Account>> AllAccounts()
         {
-            throw new NotImplementedException();
+            var table = _context.GetTargetTable<Account>();
+            var scanConditions = new List<ScanCondition>() { new ScanCondition("accountnumber", ScanOperator.IsNotNull) };
+            var searchResults = _context.ScanAsync<Account>(scanConditions, null);
+            return (IEnumerable<Account>)await searchResults.GetNextSetAsync();
         }
 
-        public Task AddAccount(Account entity)
+        public async Task AddAccount(Account entity)
         {
-            throw new NotImplementedException();
+            entity.id
+              = Guid.NewGuid().ToString();
+           
+           entity.accountnumber =  entity.id;
+            await _context.SaveAsync<Account>(entity);
         }
 
-        public Task DeleteAccount(string id)
+        public async Task DeleteAccount(string id)
         {
-            throw new NotImplementedException();
+            await _context.DeleteAsync<Account>(id);
         }
 
-        public Task UpdateAccount(Account entity)
+        public async Task UpdateAccount(Account entity)
         {
-            throw new NotImplementedException();
+            await _context.SaveAsync<Account>(entity);
         }
     }
 }

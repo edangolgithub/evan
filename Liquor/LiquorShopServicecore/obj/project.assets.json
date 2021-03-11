@@ -311,7 +311,7 @@
           "lib/netstandard2.1/Zstandard.Net.dll": {}
         }
       },
-      "MySql.EntityFrameworkCore/3.1.10-m8.0.23": {
+      "MySql.EntityFrameworkCore/3.1.10": {
         "type": "package",
         "dependencies": {
           "Microsoft.EntityFrameworkCore.Relational": "3.1.10",
@@ -532,7 +532,7 @@
         "framework": ".NETCoreApp,Version=v3.1",
         "dependencies": {
           "Microsoft.EntityFrameworkCore": "3.1.11",
-          "MySql.EntityFrameworkCore": "3.1.10-m8.0.23"
+          "MySql.EntityFrameworkCore": "3.1.10"
         },
         "compile": {
           "bin/placeholder/TescoWineShopSqlcore.dll": {}
@@ -846,7 +846,7 @@
           "lib/netstandard2.1/Zstandard.Net.dll": {}
         }
       },
-      "MySql.EntityFrameworkCore/3.1.10-m8.0.23": {
+      "MySql.EntityFrameworkCore/3.1.10": {
         "type": "package",
         "dependencies": {
           "Microsoft.EntityFrameworkCore.Relational": "3.1.10",
@@ -1023,7 +1023,7 @@
         "framework": ".NETCoreApp,Version=v3.1",
         "dependencies": {
           "Microsoft.EntityFrameworkCore": "3.1.11",
-          "MySql.EntityFrameworkCore": "3.1.10-m8.0.23"
+          "MySql.EntityFrameworkCore": "3.1.10"
         },
         "compile": {
           "bin/placeholder/TescoWineShopSqlcore.dll": {}
@@ -1499,10 +1499,10 @@
         "mysql.data.nuspec"
       ]
     },
-    "MySql.EntityFrameworkCore/3.1.10-m8.0.23": {
-      "sha512": "7Svl54p5vmeuJA/sjAKUBpXXJYGg5T+1CSjN1LEWmd/L9KpNOVl/gnq9HJvq1DJqnm/isr9zQgNNvlIEt59lDA==",
+    "MySql.EntityFrameworkCore/3.1.10": {
+      "sha512": "cPe15C6u6JfNbt86b2V+4EcaRKLnIPaMU1azDB+J0i09zNWYVGW1FNmhL2UXWF3XoxGhXge/aNGHfkXRid/rrQ==",
       "type": "package",
-      "path": "mysql.entityframeworkcore/3.1.10-m8.0.23",
+      "path": "mysql.entityframeworkcore/3.1.10",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -1510,7 +1510,7 @@
         "lib/netstandard2.0/MySql.EntityFrameworkCore.xml",
         "lib/netstandard2.1/MySql.EntityFrameworkCore.dll",
         "lib/netstandard2.1/MySql.EntityFrameworkCore.xml",
-        "mysql.entityframeworkcore.3.1.10-m8.0.23.nupkg.sha512",
+        "mysql.entityframeworkcore.3.1.10.nupkg.sha512",
         "mysql.entityframeworkcore.nuspec"
       ]
     },
@@ -2076,6 +2076,7 @@
   },
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v3.1": [
+      "Microsoft.EntityFrameworkCore >= 3.1.11",
       "TescoWineShopSqlcore >= 1.0.0"
     ]
   },
@@ -2119,6 +2120,12 @@
     "frameworks": {
       "netcoreapp3.1": {
         "targetAlias": "netcoreapp3.1",
+        "dependencies": {
+          "Microsoft.EntityFrameworkCore": {
+            "target": "Package",
+            "version": "[3.1.11, )"
+          }
+        },
         "imports": [
           "net461",
           "net462",
@@ -2134,7 +2141,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/5.0.103/RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/5.0.200/RuntimeIdentifierGraph.json"
       }
     },
     "runtimes": {
