@@ -13,8 +13,8 @@ namespace EvanApi.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("Relational:MaxIdentifierLength", 64)
-                .HasAnnotation("ProductVersion", "5.0.2");
+                .HasAnnotation("ProductVersion", "3.1.11")
+                .HasAnnotation("Relational:MaxIdentifierLength", 64);
 
             modelBuilder.Entity("EvanApi.models.Account", b =>
                 {
@@ -105,11 +105,20 @@ namespace EvanApi.Migrations
                     b.Property<string>("amount")
                         .HasColumnType("text");
 
-                    b.Property<string>("date")
+                    b.Property<double>("balance")
+                        .HasColumnType("double");
+
+                    b.Property<string>("created")
                         .HasColumnType("text");
 
                     b.Property<string>("entry")
                         .HasColumnType("text");
+
+                    b.Property<double>("interest")
+                        .HasColumnType("double");
+
+                    b.Property<bool>("islatest")
+                        .HasColumnType("tinyint(1)");
 
                     b.Property<string>("type")
                         .HasColumnType("text");
@@ -125,8 +134,11 @@ namespace EvanApi.Migrations
                             accountid = "1",
                             accounttypeid = "1",
                             amount = "100",
-                            date = "2021-01-01",
-                            entry = "Debit"
+                            balance = 100.0,
+                            created = "2021-01-01",
+                            entry = "Debit",
+                            interest = 0.0,
+                            islatest = false
                         },
                         new
                         {
@@ -134,8 +146,11 @@ namespace EvanApi.Migrations
                             accountid = "2",
                             accounttypeid = "2",
                             amount = "100",
-                            date = "2021-01-01",
-                            entry = "Debit"
+                            balance = 100.0,
+                            created = "2021-01-01",
+                            entry = "Debit",
+                            interest = 0.0,
+                            islatest = false
                         });
                 });
 #pragma warning restore 612, 618

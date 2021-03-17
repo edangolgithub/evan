@@ -10,10 +10,10 @@ namespace console
             
             Console.WriteLine("Getting Connection ...");
 
-            var datasource = @"DESKTOP-PC\SQLEXPRESS";//your server
-            var database = "Students"; //your database name
-            var username = "sa"; //username of server to connect
-            var password = "password"; //password
+           // var datasource = @"DESKTOP-PC\SQLEXPRESS";//your server
+          //  var database = "Students"; //your database name
+          //  var username = "sa"; //username of server to connect
+          //  var password = "password"; //password
 
             //your connection string 
             string connString = @"workstation id=wineshop.mssql.somee.com;packet size=4096;user id=edangol_SQLLogin_1;pwd=qpnpz5zqqj;data source=wineshop.mssql.somee.com;persist security info=False;initial catalog=wineshop";
