@@ -10,6 +10,11 @@
       "StackName": "amplify-liquorapp-dev-111503",
       "StackId": "arn:aws:cloudformation:us-east-1:984648741180:stack/amplify-liquorapp-dev-111503/408bd890-5d6c-11eb-9b18-0ab010a589c7",
       "AmplifyAppId": "dqxmu7nuy6meu"
+    },
+    "categories": {
+      "auth": {
+        "liquorappb435c36b": {}
+      }
     }
   }
 }

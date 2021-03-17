@@ -1,1 +1,16 @@
-{}
+{
+  "auth": {
+    "liquorappb435c36b": {
+      "service": "Cognito",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": [],
+      "customAuth": false
+    }
+  },
+  "storage": {
+    "s3316562a6": {
+      "service": "S3",
+      "providerPlugin": "awscloudformation"
+    }
+  }
+}
