@@ -1,19 +1,25 @@
 {
   "dev": {
     "awscloudformation": {
-      "AuthRoleName": "amplify-liquorapp-dev-111503-authRole",
-      "UnauthRoleArn": "arn:aws:iam::984648741180:role/amplify-liquorapp-dev-111503-unauthRole",
-      "AuthRoleArn": "arn:aws:iam::984648741180:role/amplify-liquorapp-dev-111503-authRole",
+      "AuthRoleName": "amplify-liquorapp-dev-101745-authRole",
+      "UnauthRoleArn": "arn:aws:iam::984648741180:role/amplify-liquorapp-dev-101745-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::984648741180:role/amplify-liquorapp-dev-101745-authRole",
       "Region": "us-east-1",
-      "DeploymentBucketName": "amplify-liquorapp-dev-111503-deployment",
-      "UnauthRoleName": "amplify-liquorapp-dev-111503-unauthRole",
-      "StackName": "amplify-liquorapp-dev-111503",
-      "StackId": "arn:aws:cloudformation:us-east-1:984648741180:stack/amplify-liquorapp-dev-111503/408bd890-5d6c-11eb-9b18-0ab010a589c7",
-      "AmplifyAppId": "dqxmu7nuy6meu"
+      "DeploymentBucketName": "amplify-liquorapp-dev-101745-deployment",
+      "UnauthRoleName": "amplify-liquorapp-dev-101745-unauthRole",
+      "StackName": "amplify-liquorapp-dev-101745",
+      "StackId": "arn:aws:cloudformation:us-east-1:984648741180:stack/amplify-liquorapp-dev-101745/04bd7540-870a-11eb-9e9e-0e9822115cf7",
+      "AmplifyAppId": "d1j0kh3mz4gwa8"
     },
     "categories": {
       "auth": {
         "liquorappb435c36b": {}
+      },
+      "function": {
+        "liquorappbf97754d": {
+          "deploymentBucketName": "amplify-liquorapp-dev-101745-deployment",
+          "s3Key": "amplify-builds/liquorappbf97754d-44395230616562434133-build.zip"
+        }
       }
     }
   }

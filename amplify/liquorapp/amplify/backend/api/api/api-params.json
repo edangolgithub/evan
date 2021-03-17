@@ -1,0 +1,35 @@
+{
+    "paths": [
+        {
+            "name": "/items",
+            "lambdaFunction": "liquorappbf97754d",
+            "privacy": {
+                "open": true
+            },
+            "policyResourceName": "/items"
+        }
+    ],
+    "resourceName": "api",
+    "apiName": "api",
+    "functionArns": [
+        {
+            "lambdaFunction": "liquorappbf97754d"
+        }
+    ],
+    "privacy": {
+        "auth": 0,
+        "unauth": 0,
+        "authRoleName": "amplify-liquorapp-dev-111503-authRole",
+        "unAuthRoleName": "amplify-liquorapp-dev-111503-unauthRole"
+    },
+    "dependsOn": [
+        {
+            "category": "function",
+            "resourceName": "liquorappbf97754d",
+            "attributes": [
+                "Name",
+                "Arn"
+            ]
+        }
+    ]
+}
