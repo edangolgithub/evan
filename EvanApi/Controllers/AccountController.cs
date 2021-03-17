@@ -18,7 +18,8 @@ namespace EvanApi.Controllers
         }
         public async Task<IEnumerable<Account>> Get()
         {
-            return await _repository.AllAccounts();
+             var data= await _repository.AllAccounts();
+              return  data.OrderByDescending(a=>a.created);
         }
 
         [HttpPost]

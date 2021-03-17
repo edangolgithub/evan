@@ -50,7 +50,7 @@
             },
             "MySql.EntityFrameworkCore": {
               "target": "Package",
-              "version": "[3.1.10-m8.0.23, )"
+              "version": "[3.1.10, )"
             }
           },
           "imports": [
@@ -68,7 +68,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/5.0.102/RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/5.0.200/RuntimeIdentifierGraph.json"
         }
       },
       "runtimes": {

@@ -67,3 +67,8 @@ Deploy application
     cd "interest/src/interest"
     dotnet lambda deploy-serverless
 ```
+
+```
+dotnet ef migrations add interest
+dotnet ef database update
+```

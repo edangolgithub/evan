@@ -18,7 +18,9 @@ namespace EvanApi.Controllers
         }
         public async Task<IEnumerable<Transaction>> Get()
         {
-            return await _repository.AllTransactions();
+            var data= await _repository.AllTransactions();
+              
+            return  data.OrderByDescending(a=>a.created);
         }
 
         [HttpPost]
