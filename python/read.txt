@@ -1,3 +1,10 @@
 sudo yum install MariaDB-shared
 
- curl http://172.31.18.230/latest/meta-data/public-ipv4
+curl http://172.31.18.230/latest/meta-data/public-ipv4
+ 
+sudo yum groupinstall "Development Tools"
+sudo wget https://www.python.org/ftp/python/3.9.2/Python-3.9.2.tgz
+sudo tar xzf Python-3.9.2.tgz 
+cd Python-3.9.2 
+sudo ./configure --enable-optimizations 
+sudo make altinstall 
