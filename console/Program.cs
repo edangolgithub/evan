@@ -14,7 +14,7 @@ namespace console{
           //  Dynamodb.RunAsync().Wait();
          // CreateDynamodb.CreateTable().Wait();
         //  loadjson.insertjsonasync().Wait();
-        EvanSms.RunAsync().Wait();
+       // EvanSms.RunAsync().Wait();
         }
         static void Email()
         {
