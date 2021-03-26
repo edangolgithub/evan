@@ -16,7 +16,16 @@
         "liquorappb435c36b": {}
       },
       "function": {
-        "liquorappbf97754d": {}
+        "liquorappbf97754d": {
+          "deploymentBucketName": "amplify-liquorapp-dev-104423-deployment",
+          "s3Key": "amplify-builds/liquorappbf97754d-44395230616562434133-build.zip"
+        }
+      },
+      "hosting": {
+        "amplifyhosting": {
+          "appId": "d3qw8jkwvrcnb4",
+          "type": "cicd"
+        }
       }
     }
   }
