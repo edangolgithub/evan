@@ -6,15 +6,10 @@ using System.Threading.Tasks;
 namespace console{
     class Program
     {
-        public static void Main()
+        public static async Task Main()
         {
             Console.WriteLine("hello");
-           //HighLevelQueryAndScan.RunAsync().Wait();
-          // DynoContext.RunAsync().Wait();
-          //  Dynamodb.RunAsync().Wait();
-         // CreateDynamodb.CreateTable().Wait();
-        //  loadjson.insertjsonasync().Wait();
-       // EvanSms.RunAsync().Wait();
+          await LambdaEntry.RunAsync();
         }
         static void Email()
         {
