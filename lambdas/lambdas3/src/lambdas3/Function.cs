@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Amazon.Lambda.Core;
 using Amazon.Lambda.S3Events;
 using Amazon.S3;
+using Amazon.S3.Model;
 using Amazon.S3.Util;
 
 // Assembly attribute to enable the Lambda function's JSON input to be converted into a .NET class.
@@ -43,7 +44,7 @@ namespace lambdas3
         /// <param name="evnt"></param>
         /// <param name="context"></param>
         /// <returns></returns>
-        public async Task<string> FunctionHandler(S3Event evnt, ILambdaContext context)
+        public async Task<GetObjectMetadataResponse> FunctionHandler(S3Event evnt, ILambdaContext context)
         {
             var s3Event = evnt.Records?[0].S3;
             if(s3Event == null)
@@ -54,7 +55,7 @@ namespace lambdas3
             try
             {
                 var response = await this.S3Client.GetObjectMetadataAsync(s3Event.Bucket.Name, s3Event.Object.Key);
-                return response.Headers.ContentType;
+                return response;
             }
             catch(Exception e)
             {

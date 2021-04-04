@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Net;
 using System.Net.Mail;
 using System.Threading.Tasks;
@@ -8,9 +10,11 @@ namespace console{
     {
         public static async Task Main()
         {
-            Console.WriteLine("hello");
-          await LambdaEntry.RunAsync();
-        }
+            foreach (DictionaryEntry item in Environment.GetEnvironmentVariables())
+            {
+                Console.WriteLine(item.Key+ "=="+item.Value);
+            }
+       }
         static void Email()
         {
             // Replace sender@example.com with your "From" address. 
