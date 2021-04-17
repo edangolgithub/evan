@@ -17,8 +17,8 @@
     </PackageReference>
     <PackageReference Include="MySql.EntityFrameworkCore" Version="3.1.10+MySQL8.0.23" />
   </ItemGroup>
-  <ItemGroup>
+  <!-- <ItemGroup>
     <ProjectReference Include="..\Liquor\LiquorShopServicecore\LiquorShopServicecore.csproj" />
     <ProjectReference Include="..\Liquor\TescoWineShopSqlcore\TescoWineShopSqlcore.csproj" />
-  </ItemGroup>
+  </ItemGroup> -->
 </Project>

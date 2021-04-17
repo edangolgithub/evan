@@ -1,0 +1,62 @@
+/usr/share/dotnet/sdk/5.0.200/Microsoft.Common.CurrentVersion.targets(2182,5): warning MSB3277: 
+Found conflicts between different versions of "Microsoft.EntityFrameworkCore.Relational" that 
+could not be resolved. [/home/ec2-user/evan/Liquor/LiquorShopServicecore/LiquorShopServicecore.csproj]
+
+ There was a conflict between "Microsoft.EntityFrameworkCore.Relational, Version=3.1.10.0,
+  Culture=neutral, PublicKeyToken=adb9793829ddae60" and 
+  "Microsoft.EntityFrameworkCore.Relational, Version=3.1.11.0, Culture=neutral, 
+  PublicKeyToken=adb9793829ddae60".
+   [/home/ec2-user/evan/Liquor/LiquorShopServicecore/LiquorShopServicecore.csproj]
+
+
+/usr/share/dotnet/sdk/5.0.200/Microsoft.Common.CurrentVersion.targets(2182,5): warning MSB3277:
+     "Microsoft.EntityFrameworkCore.Relational, Version=3.1.10.0, Culture=neutral,
+      PublicKeyToken=adb9793829ddae60" was chosen because it was primary and 
+      "Microsoft.EntityFrameworkCore.Relational, Version=3.1.11.0, Culture=neutral,
+       PublicKeyToken=adb9793829ddae60" was not. 
+       [/home/ec2-user/evan/Liquor/LiquorShopServicecore/LiquorShopServicecore.csproj]
+/usr/share/dotnet/sdk/5.0.200/Microsoft.Common.CurrentVersion.targets(2182,5): warning MSB3277: 
+    References which depend on "Microsoft.EntityFrameworkCore.Relational, Version=3.1.10.0,
+     Culture=neutral, PublicKeyToken=adb9793829ddae60"
+      [/home/ec2-user/.nuget/packages/microsoft.entityframeworkcore.relational/3.1.10/lib/
+      netstandard2.0/Microsoft.EntityFrameworkCore.Relational.dll]. 
+      [/home/ec2-user/evan/Liquor/LiquorShopServicecore/LiquorShopServicecore.csproj]
+/usr/share/dotnet/sdk/5.0.200/Microsoft.Common.CurrentVersion.targets(2182,5): warning MSB3277:
+         /home/ec2-user/.nuget/packages/microsoft.entityframeworkcore.relational/3.1.10/
+         lib/netstandard2.0/Microsoft.EntityFrameworkCore.Relational.dll 
+         [/home/ec2-user/evan/Liquor/LiquorShopServicecore/LiquorShopServicecore.csproj]
+/usr/share/dotnet/sdk/5.0.200/Microsoft.Common.CurrentVersion.targets(2182,5): warning MSB3277:
+           Project file item includes which caused reference 
+           "/home/ec2-user/.nuget/packages/microsoft.entityframeworkcore.relational
+           /3.1.10/lib/netstandard2.0/Microsoft.EntityFrameworkCore.Relational.dll".
+            [/home/ec2-user/evan/Liquor/LiquorShopServicecore/LiquorShopServicecore.csproj]
+/usr/share/dotnet/sdk/5.0.200/Microsoft.Common.CurrentVersion.targets(2182,5):
+ warning MSB3277:             /home/ec2-user/.nuget/packages/microsoft.entityframeworkcore.
+ relational/3.1.10/lib/netstandard2.0/Microsoft.EntityFrameworkCore.Relational.dll [/home/ec2-user/evan/Liquor/LiquorShopServicecore/LiquorShopServicecore.csproj]
+/usr/share/dotnet/sdk/5.0.200/Microsoft.Common.CurrentVersion.targets(2182,5):
+ warning MSB3277:     References which depend on "Microsoft.EntityFrameworkCore.Relational, Version=3.1.11.0, Culture=neutral, PublicKeyToken=adb9793829ddae60" []. [/home/ec2-user/evan/Liquor/LiquorShopServicecore/LiquorShopServicecore.csproj]
+/usr/share/dotnet/sdk/5.0.200/Microsoft.Common.CurrentVersion.targets(2182,5):
+ warning MSB3277:         /home/ec2-user/evan/Liquor/TescoWineShopSqlcore/bin/Debug/netcoreapp3
+ .1/TescoWineShopSqlcore.dll
+  [/home/ec2-user/evan/Liquor/LiquorShopServicecore/LiquorShopServicecore.csproj]
+/usr/share/dotnet/sdk/5.0.200/Microsoft.Common.CurrentVersion.targets(2182,5):
+ warning MSB3277:           Project file item includes which caused reference "/home/ec2-user/evan/Liquor/TescoWineShopSqlcore/bin/Debug/netcoreapp3.1/TescoWineShopSqlcore.dll". [/home/ec2-user/evan/Liquor/LiquorShopServicecore/LiquorShopServicecore.csproj]
+/usr/share/dotnet/sdk/5.0.200/Microsoft.Common.CurrentVersion.targets(2182,5):
+ warning MSB3277:             
+ /home/ec2-user/evan/Liquor/TescoWineShopSqlcore/bin/Debug/netcoreapp3.1/TescoWineShopSqlcore.dll [/home/ec2-user/evan/Liquor/LiquorShopServicecore/LiquorShopServicecore.csproj]
+  LiquorShopServicecore -> /home/ec2-user/evan/Liquor/LiquorShopServicecore/bin/Debug/netcoreapp3.1/LiquorShopServicecore.dll
+  EvanApi -> /home/ec2-user/evan/EvanApi/bin/Debug/netcoreapp3.1/EvanApi.dll
+
+Build succeeded.
+
+/usr/share/dotnet/sdk/5.0.200/Microsoft.Common.CurrentVersion.targets(2182,5): warning MSB3277: Found conflicts between different versions of "Microsoft.EntityFrameworkCore.Relational" that could not be resolved. [/home/ec2-user/evan/Liquor/LiquorShopServicecore/LiquorShopServicecore.csproj]
+/usr/share/dotnet/sdk/5.0.200/Microsoft.Common.CurrentVersion.targets(2182,5): warning MSB3277: There was a conflict between "Microsoft.EntityFrameworkCore.Relational, Version=3.1.10.0, Culture=neutral, PublicKeyToken=adb9793829ddae60" and "Microsoft.EntityFrameworkCore.Relational, Version=3.1.11.0, Culture=neutral, PublicKeyToken=adb9793829ddae60". [/home/ec2-user/evan/Liquor/LiquorShopServicecore/LiquorShopServicecore.csproj]
+/usr/share/dotnet/sdk/5.0.200/Microsoft.Common.CurrentVersion.targets(2182,5): warning MSB3277:     "Microsoft.EntityFrameworkCore.Relational, Version=3.1.10.0, Culture=neutral, PublicKeyToken=adb9793829ddae60" was chosen because it was primary and "Microsoft.EntityFrameworkCore.Relational, Version=3.1.11.0, Culture=neutral, PublicKeyToken=adb9793829ddae60" was not. [/home/ec2-user/evan/Liquor/LiquorShopServicecore/LiquorShopServicecore.csproj]
+/usr/share/dotnet/sdk/5.0.200/Microsoft.Common.CurrentVersion.targets(2182,5): warning MSB3277:     References which depend on "Microsoft.EntityFrameworkCore.Relational, Version=3.1.10.0, Culture=neutral, PublicKeyToken=adb9793829ddae60" [/home/ec2-user/.nuget/packages/microsoft.entityframeworkcore.relational/3.1.10/lib/netstandard2.0/Microsoft.EntityFrameworkCore.Relational.dll]. [/home/ec2-user/evan/Liquor/LiquorShopServicecore/LiquorShopServicecore.csproj]
+/usr/share/dotnet/sdk/5.0.200/Microsoft.Common.CurrentVersion.targets(2182,5): warning MSB3277:         /home/ec2-user/.nuget/packages/microsoft.entityframeworkcore.relational/3.1.10/lib/netstandard2.0/Microsoft.EntityFrameworkCore.Relational.dll [/home/ec2-user/evan/Liquor/LiquorShopServicecore/LiquorShopServicecore.csproj]
+/usr/share/dotnet/sdk/5.0.200/Microsoft.Common.CurrentVersion.targets(2182,5): warning MSB3277:           Project file item includes which caused reference "/home/ec2-user/.nuget/packages/microsoft.entityframeworkcore.relational/3.1.10/lib/netstandard2.0/Microsoft.EntityFrameworkCore.Relational.dll". [/home/ec2-user/evan/Liquor/LiquorShopServicecore/LiquorShopServicecore.csproj]
+/usr/share/dotnet/sdk/5.0.200/Microsoft.Common.CurrentVersion.targets(2182,5): warning MSB3277:             /home/ec2-user/.nuget/packages/microsoft.entityframeworkcore.relational/3.1.10/lib/netstandard2.0/Microsoft.EntityFrameworkCore.Relational.dll [/home/ec2-user/evan/Liquor/LiquorShopServicecore/LiquorShopServicecore.csproj]
+/usr/share/dotnet/sdk/5.0.200/Microsoft.Common.CurrentVersion.targets(2182,5): warning MSB3277:     References which depend on "Microsoft.EntityFrameworkCore.Relational, Version=3.1.11.0, Culture=neutral, PublicKeyToken=adb9793829ddae60" []. [/home/ec2-user/evan/Liquor/LiquorShopServicecore/LiquorShopServicecore.csproj]
+/usr/share/dotnet/sdk/5.0.200/Microsoft.Common.CurrentVersion.targets(2182,5): warning MSB3277:         /home/ec2-user/evan/Liquor/TescoWineShopSqlcore/bin/Debug/netcoreapp3.1/TescoWineShopSqlcore.dll [/home/ec2-user/evan/Liquor/LiquorShopServicecore/LiquorShopServicecore.csproj]
+/usr/share/dotnet/sdk/5.0.200/Microsoft.Common.CurrentVersion.targets(2182,5): warning MSB3277:           Project file item includes which caused reference "/home/ec2-user/evan/Liquor/TescoWineShopSqlcore/bin/Debug/netcoreapp3.1/TescoWineShopSqlcore.dll". [/home/ec2-user/evan/Liquor/LiquorShopServicecore/LiquorShopServicecore.csproj]
+/usr/share/dotnet/sdk/5.0.200/Microsoft.Common.CurrentVersion.targets(2182,5): warning MSB3277:             /home/ec2-user/evan/Liquor/TescoWineShopSqlcore/bin/Debug/netcoreapp3.1/TescoWineShopSqlcore.dll [/home/ec2-user/evan/Liquor/LiquorShopServicecore/LiquorShopServicecore.csproj]
